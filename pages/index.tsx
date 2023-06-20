@@ -1,7 +1,8 @@
 import Head from "next/head";
 import { Fragment } from "react";
 import { Inter } from "next/font/google";
-import TaskData from "../testData/taskData";
+import { Task } from "../types/TaskTypes";
+import taskData from "../testData/TaskData";
 import TaskList from "../components/tasks/TaskList";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -40,11 +41,11 @@ export async function getStaticProps() {
 
   // client.close();
 
-  const tasks = TaskData;
+  const tasks = taskData;
 
   return {
     props: {
-      tasks: tasks.map((task) => ({
+      tasks: tasks.map((task: Task) => ({
         title: task.title,
         id: task.id,
         completed: task.completed,
