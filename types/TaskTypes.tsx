@@ -3,7 +3,7 @@ export interface Task {
     title: string,
     tags: string[],
     description: string,
-    date: string,
+    date: number,
     completed: boolean
 }
 
