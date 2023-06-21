@@ -15,23 +15,40 @@ function TaskList(props: TaskProps) {
 
   return (
     <div className={"flex flex-col min-w-fit"}>
-      <div className={"flex flex-row justify-between"}>
+      <div className={"flex flex-row w-5/12 justify-between"}>
         <p className={"text-3xl mb-10"}>Today's Tasks</p>
-        <button onClick={addTaskHandler} className={"w-12 h-10 bg-stone-500 border-4 border-slate-600 rounded-md"}>
+        <button
+          onClick={addTaskHandler}
+          className={
+            "w-12 h-10 bg-gray-200 border-4 border-slate-600 rounded-md"
+          }
+        >
           <p className={"text-2xl"}>+</p>
         </button>
       </div>
-      <ul className={"list-none m-0 p-0 max-h-80 overflow-scroll overflow-x-hidden"}>
+      <ul
+        className={
+          "list-none w-5/12 m-0 p-0 max-h-80 overflow-scroll overflow-x-hidden"
+        }
+      >
         {props.tasks.map((task) => (
           <TaskItem
             key={task.id}
             id={task.id}
             title={task.title}
+            description={task.description}
+            tags={task.tags}
+            date={task.date}
             completed={task.completed}
           />
         ))}
       </ul>
-      <button onClick={allTasksHandler} className={"mt-10 bg-gray-400 h-24 border-4 border-slate-600 rounded-md"}>
+      <button
+        onClick={allTasksHandler}
+        className={
+          "w-5/12 mt-10 bg-gray-400 h-24 border-4 border-slate-600 rounded-md"
+        }
+      >
         <p className={"text-4xl"}>See All Tasks</p>
       </button>
     </div>

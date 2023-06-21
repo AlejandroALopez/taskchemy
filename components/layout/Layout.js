@@ -1,10 +1,10 @@
-import Navigation from './Navigation';
+import Navigation from "./Navigation";
 
 function Layout(props) {
   return (
-    <div className={"flex flex-row"}>
+    <div className={"flex flex-row w-screen"}>
       <Navigation />
-      <main>{props.children}</main>
+      <main className={"w-full"}>{props.children}</main>
     </div>
   );
 }
