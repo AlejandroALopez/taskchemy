@@ -2,7 +2,7 @@ import { MongoClient } from "mongodb";
 
 export async function getTasksHandler() {
   const client = await MongoClient.connect(
-    "mongodb+srv://alejandrolopez:jhPgrzfvAoYyBRrk@cluster0.u1ufu2p.mongodb.net/?retryWrites=true&w=majority"
+    process.env.MONGO_URL || ''
   );
 
   const db = client.db();

@@ -34,6 +34,7 @@ function RoutineList(props: RoutineProps) {
             title={routine.title}
             description={routine.description}
             frequency={routine.frequency}
+            daysFollowed={routine.daysFollowed}
           />
         ))}
       </ul>

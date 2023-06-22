@@ -33,6 +33,7 @@ export async function getStaticProps() {
         title: routine.title,
         description: routine.description,
         frequency: routine.frequency,
+        daysFollowed: routine.daysFollowed
       })),
     },
     revalidate: 1,
