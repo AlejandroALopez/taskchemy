@@ -16,7 +16,23 @@ function TaskCreate() {
     router.push("/"); // back to dashboard
   }
 
-  function addTaskHandler(event: any) {
+  // action for creating a task
+  async function createTaskHandler(enteredTaskData: any) {
+    const response = await fetch("/api/new-task", {
+      method: "POST",
+      body: JSON.stringify(enteredTaskData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data = await response.json();
+    console.log(data);
+
+    router.replace("/");
+  }
+
+  function submitHandler(event: any) {
     event.preventDefault();
 
     const taskData = {
@@ -24,11 +40,10 @@ function TaskCreate() {
       description: description,
       tags: tags,
       date: date.getTime(),
+      completed: false,
     };
 
-    console.log(taskData);
-    // props.onAddTask(taskData);
-    router.push("/");
+    createTaskHandler(taskData);
   }
 
   return (
@@ -114,7 +129,7 @@ function TaskCreate() {
               className={
                 "w-72 h-20 bg-gray-200 border-4 border-black rounded-2xl"
               }
-              onClick={addTaskHandler}
+              onClick={submitHandler}
             >
               <p className={"text-3xl"}>+ Add Task</p>
             </button>

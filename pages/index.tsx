@@ -2,6 +2,7 @@ import Head from "next/head";
 import { Fragment } from "react";
 import { Inter } from "next/font/google";
 import { Task } from "../types/TaskTypes";
+import { getTasksHandler } from "../actions/taskActions";
 import taskData from "../testData/TaskData";
 import TaskList from "../components/tasks/TaskList";
 
@@ -27,36 +28,19 @@ function Home(props: any) {
 }
 
 export async function getStaticProps() {
-  // // fetch data from an API
-  // const client = await MongoClient.connect(
-  //   "mongodb+srv://user1:user1password@cluster0.tudeixo.mongodb.net/?retryWrites=true&w=majority"
-  // );
-
-  // const db = client.db();
-  // const meetupsCollection = db.collection("meetups");
-
-  // const meetups = await meetupsCollection.find().toArray();
-
-  // client.close();
-
-  const tasks = taskData;
+  const tasks = await getTasksHandler();
 
   return {
     props: {
-      tasks: tasks.map((task: Task) => ({
+      tasks: tasks.map((task: any) => ({
+        id: task._id.toString(),
         title: task.title,
-        id: task.id,
+        description: task.description,
+        tags: task.tags,
+        date: task.date,
         completed: task.completed,
       })),
     },
-    // props: {
-    //   meetups: meetups.map((meetup) => ({
-    //     title: meetup.title,
-    //     address: meetup.address,
-    //     image: meetup.image,
-    //     id: meetup._id.toString(),
-    //   })),
-    // },
     revalidate: 1,
   };
 }
