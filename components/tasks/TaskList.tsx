@@ -26,23 +26,31 @@ function TaskList(props: TaskProps) {
           <p className={"text-2xl"}>+</p>
         </button>
       </div>
-      <ul
-        className={
-          "list-none w-5/12 m-0 p-0 max-h-80 overflow-scroll overflow-x-hidden"
-        }
-      >
-        {props.tasks.map((task) => (
-          <TaskItem
-            key={task.id}
-            id={task.id}
-            title={task.title}
-            description={task.description}
-            tags={task.tags}
-            date={task.date}
-            completed={task.completed}
-          />
-        ))}
-      </ul>
+      {props.tasks.length > 0 ? (
+        <ul
+          className={
+            "list-none w-5/12 m-0 p-0 max-h-80 overflow-scroll overflow-x-hidden"
+          }
+        >
+          {props.tasks.map((task) => (
+            <TaskItem
+              key={task.id}
+              id={task.id}
+              title={task.title}
+              description={task.description}
+              tags={task.tags}
+              date={task.date}
+              completed={task.completed}
+            />
+          ))}
+        </ul>
+      ) : (
+        <div>
+          <p className={"text-lg"}>
+            No active tasks today.
+          </p>
+        </div>
+      )}
       <button
         onClick={allTasksHandler}
         className={

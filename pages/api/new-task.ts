@@ -10,9 +10,7 @@ async function createTask(req: NextApiRequest, res: NextApiResponse<Data>) {
   if (req.method === "POST") {
     const data = req.body;
 
-    const client = await MongoClient.connect(
-      process.env.MONGO_URL || ''
-    );
+    const client = await MongoClient.connect(process.env.MONGO_URL || "");
 
     const db = client.db();
     const tasksCollection = db.collection("tasks");

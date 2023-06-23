@@ -1,0 +1,1 @@
+export const DAYS_OF_WEEK: string[] = ["S", "M", "T", "W", "T", "F", "S"];

@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { Fragment } from "react";
 import { Routine } from "../../types/RoutineTypes";
-import routineData from "../../testData/RoutineData";
+import { getRoutinesHandler } from "../../actions/routineActions";
 import RoutineList from "../../components/routines/RoutineList";
 
 function Routines(props: any) {
@@ -24,16 +24,16 @@ function Routines(props: any) {
 }
 
 export async function getStaticProps() {
-  const routines = routineData;
+  const routines = await getRoutinesHandler();
 
   return {
     props: {
-      routines: routines.map((routine: Routine) => ({
-        id: routine.id,
+      routines: routines.map((routine: any) => ({
+        id: routine._id.toString(),
         title: routine.title,
         description: routine.description,
         frequency: routine.frequency,
-        daysFollowed: routine.daysFollowed
+        daysFollowed: routine.daysFollowed,
       })),
     },
     revalidate: 1,

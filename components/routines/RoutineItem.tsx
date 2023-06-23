@@ -1,7 +1,8 @@
 import { Routine } from "../../types/RoutineTypes";
+import { DAYS_OF_WEEK } from '../../utils/constants';
 
 function RoutineItem(props: Routine) {
-  const days = ["S", "M", "T", "W", "T", "F", "S"];
+  const DAYS = ["S", "M", "T", "W", "T", "F", "S"];
 
   return (
     <li className={"flex flex-row w-10/12 mb-10"}>
@@ -21,7 +22,7 @@ function RoutineItem(props: Routine) {
                 }`}
               >
                 <p className={"text-lg text-center text-white"}>
-                  {days[index]}
+                  {DAYS_OF_WEEK[index]}
                 </p>
               </div>
             ))}

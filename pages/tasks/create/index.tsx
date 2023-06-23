@@ -27,7 +27,6 @@ function TaskCreate() {
     });
 
     const data = await response.json();
-    console.log(data);
 
     router.replace("/");
   }
@@ -56,7 +55,7 @@ function TaskCreate() {
         <div className={"flex flex-col w-10/12"}>
           <p className={"text-3xl mb-10"}>Create Task</p>
           <div className={"flex flex-row mb-6 justify-between"}>
-            <p className={"text-xl mr-12"}>Task</p>
+            <p className={"text-xl mr-12"}>Title</p>
             <input
               onChange={(event: any) => setTitle(event.target.value)}
               value={title}

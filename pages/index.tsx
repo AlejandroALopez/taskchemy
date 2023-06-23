@@ -3,7 +3,6 @@ import { Fragment } from "react";
 import { Inter } from "next/font/google";
 import { Task } from "../types/TaskTypes";
 import { getTasksHandler } from "../actions/taskActions";
-import taskData from "../testData/TaskData";
 import TaskList from "../components/tasks/TaskList";
 
 const inter = Inter({ subsets: ["latin"] });

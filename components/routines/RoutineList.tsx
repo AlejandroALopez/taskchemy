@@ -22,22 +22,30 @@ function RoutineList(props: RoutineProps) {
           <p className={"text-2xl"}>+</p>
         </button>
       </div>
-      <ul
-        className={
-          "list-none w-10/12 m-0 p-0 overflow-scroll overflow-x-hidden max-h-full"
-        }
-      >
-        {props.routines.map((routine) => (
-          <RoutineItem
-            key={routine.id}
-            id={routine.id}
-            title={routine.title}
-            description={routine.description}
-            frequency={routine.frequency}
-            daysFollowed={routine.daysFollowed}
-          />
-        ))}
-      </ul>
+      {props.routines.length > 0 ? (
+        <ul
+          className={
+            "list-none w-10/12 m-0 p-0 overflow-scroll overflow-x-hidden max-h-full"
+          }
+        >
+          {props.routines.map((routine) => (
+            <RoutineItem
+              key={routine.id}
+              id={routine.id}
+              title={routine.title}
+              description={routine.description}
+              frequency={routine.frequency}
+              daysFollowed={routine.daysFollowed}
+            />
+          ))}
+        </ul>
+      ) : (
+        <div>
+          <p className={"text-lg"}>
+            No routines on display. Press the button above to create a routine!
+          </p>
+        </div>
+      )}
     </div>
   );
 }
