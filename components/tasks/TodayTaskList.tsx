@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
 import { TaskProps } from "../../types/TaskTypes";
-import TaskItem from "./TaskItem";
+import TodayTaskItem from "./TodayTaskItem";
 
-function TaskList(props: TaskProps) {
+function TodayTaskList(props: TaskProps) {
   const router = useRouter();
 
   function addTaskHandler() {
@@ -15,12 +15,12 @@ function TaskList(props: TaskProps) {
 
   return (
     <div className={"flex flex-col min-w-fit"}>
-      <div className={"flex flex-row w-5/12 justify-between"}>
-        <p className={"text-3xl mb-10"}>Today's Tasks</p>
+      <div className={"flex flex-row w-5/12 items-center justify-between mb-10"}>
+        <p className={"text-3xl"}>Today's Tasks</p>
         <button
           onClick={addTaskHandler}
           className={
-            "w-12 h-10 bg-gray-200 border-4 border-slate-600 rounded-md"
+            "w-12 h-12 bg-gray-300 border-4 border-gray-500 rounded-md"
           }
         >
           <p className={"text-2xl"}>+</p>
@@ -33,7 +33,7 @@ function TaskList(props: TaskProps) {
           }
         >
           {props.tasks.map((task) => (
-            <TaskItem
+            <TodayTaskItem
               key={task.id}
               id={task.id}
               title={task.title}
@@ -63,4 +63,4 @@ function TaskList(props: TaskProps) {
   );
 }
 
-export default TaskList;
+export default TodayTaskList;

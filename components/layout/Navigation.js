@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Image from 'next/image'
+import Image from 'next/image';
 import homeIcon from '../../public/icons/nav/home.svg';
 import targetIcon from '../../public/icons/nav/target.svg';
 import chartIcon from '../../public/icons/nav/chart.svg';

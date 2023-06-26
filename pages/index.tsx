@@ -3,7 +3,7 @@ import { Fragment } from "react";
 import { Inter } from "next/font/google";
 import { Task } from "../types/TaskTypes";
 import { getTasksHandler } from "../actions/taskActions";
-import TaskList from "../components/tasks/TaskList";
+import TodayTaskList from "../components/tasks/TodayTaskList";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,7 +19,7 @@ function Home(props: any) {
           />
         </Head>
         <div>
-          <TaskList tasks={props.tasks} />
+          <TodayTaskList tasks={props.tasks} />
         </div>
       </Fragment>
     </main>

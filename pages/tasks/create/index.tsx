@@ -13,7 +13,7 @@ function TaskCreate() {
   const [tags, setTags] = useState([]);
 
   function cancelHandler() {
-    router.push("/"); // back to dashboard
+    router.back(); // back to dashboard
   }
 
   // action for creating a task
