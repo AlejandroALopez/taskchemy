@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useRouter } from 'next/router';
 import { useState } from "react";
 import { Task } from "../../types/TaskTypes";
 import DownArrow from "@/public/icons/arrows/down.svg";
@@ -7,6 +8,7 @@ import Edit from "@/public/icons/action/edit.svg";
 import Delete from "@/public/icons/action/delete.svg";
 
 function AllTaskItem(props: Task) {
+  const router = useRouter();
   const [expanded, setExpanded] = useState(false);
   const testTags = [
     "short",
@@ -21,6 +23,10 @@ function AllTaskItem(props: Task) {
 
   function expandTaskHandler() {
     setExpanded(!expanded);
+  }
+
+  function editTaskHandler() {
+    router.push('/tasks/edit/' + props.id);
   }
 
   return (
@@ -59,8 +65,14 @@ function AllTaskItem(props: Task) {
                 ))}
               </div>
               <div className={"flex flex-row justify-between"}>
-                <Image src={Edit} alt="edit" />
-                <Image src={Delete} alt="delete" />
+                <button
+                onClick={editTaskHandler}
+                >
+                  <Image src={Edit} alt="edit" />
+                </button>
+                <button>
+                  <Image src={Delete} alt="delete" />
+                </button>
               </div>
             </div>
           </div>
