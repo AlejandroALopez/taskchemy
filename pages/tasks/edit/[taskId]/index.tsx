@@ -1,8 +1,7 @@
 import Head from "next/head";
-import { FindOptions, MongoClient, ObjectId } from "mongodb";
 import { useState, Fragment } from "react";
 import { useRouter } from "next/router";
-import { Task } from "@/types/TaskTypes";
+import { getTasksHandler, getOneTaskHandler } from "@/actions/taskActions";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 
@@ -11,16 +10,16 @@ function TaskEdit(props: any) {
   const [title, setTitle] = useState(props.taskData.title);
   const [description, setDescription] = useState(props.taskData.description);
   const [date, setDate] = useState(new Date(props.taskData.date));
-  const [tags, setTags] = useState([]); // props.taskData.tags
+  const [tags, setTags] = useState(props.taskData.tags);
 
   function cancelHandler() {
     router.back(); // back to dashboard
   }
 
-  // action for creating a task
-  async function createTaskHandler(enteredTaskData: any) {
-    const response = await fetch("/api/new-task", {
-      method: "POST",
+  // action for updating a task
+  async function updateTaskHandler(enteredTaskData: any) {
+    const response = await fetch("/api/update-task", {
+      method: "PUT",
       body: JSON.stringify(enteredTaskData),
       headers: {
         "Content-Type": "application/json",
@@ -28,22 +27,24 @@ function TaskEdit(props: any) {
     });
 
     const data = await response.json();
-
-    router.replace("/");
+    router.replace("/tasks");
   }
 
   function submitHandler(event: any) {
     event.preventDefault();
 
-    const taskData = {
-      title: title,
-      description: description,
-      tags: tags,
-      date: date.getTime(),
-      completed: false,
+    const enteredData = {
+      taskId: props.taskData.id,
+      newData: {
+        title: title,
+        description: description,
+        tags: tags,
+        date: date.getTime(),
+        completed: props.taskData.completed,
+      },
     };
 
-    createTaskHandler(taskData);
+    updateTaskHandler(enteredData);
   }
 
   return (
@@ -88,7 +89,9 @@ function TaskEdit(props: any) {
             <Calendar
               onChange={(event: any) => setDate(event)}
               value={date}
-              minDate={date.getTime() <= new Date().getTime() ? date : new Date()}
+              minDate={
+                date.getTime() <= new Date().getTime() ? date : new Date()
+              }
             />
           </div>
           <div className={"flex flex-row justify-between mt-4"}>
@@ -116,20 +119,10 @@ function TaskEdit(props: any) {
 }
 
 export async function getStaticPaths() {
-  const client = await MongoClient.connect(
-    process.env.MONGO_URL || ''
-  );
-
-  const db = client.db();
-  const tasksCollection = db.collection("tasks");
-
-  // const options: FindOptions<Document> = { _id: 1 };
-  const tasks = await tasksCollection.find({}).toArray(); // filter, fields to extract
-
-  client.close();
+  const tasks = await getTasksHandler();
 
   return {
-    fallback: 'blocking', // false = all supported values in paths, true otherwise
+    fallback: "blocking", // false = all supported values in paths, true otherwise
     paths: tasks.map((task) => ({
       params: { taskId: task._id.toString() },
     })),
@@ -137,21 +130,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(context: any) {
-  // fetch data for a single meetup
-  const taskId = context.params.taskId;
-
-  const client = await MongoClient.connect(
-    process.env.MONGO_URL || ''
-  );
-
-  const db = client.db();
-  const tasksCollection = db.collection("tasks");
-
-  const selectedTask = await tasksCollection.findOne({
-    _id: new ObjectId(taskId),
-  });
-
-  client.close();
+  const selectedTask = await getOneTaskHandler(context.params.taskId);
 
   return {
     props: {
@@ -161,6 +140,7 @@ export async function getStaticProps(context: any) {
         description: selectedTask?.description,
         tags: selectedTask?.tags,
         date: selectedTask?.date,
+        completed: selectedTask?.completed,
       },
     },
   };

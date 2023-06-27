@@ -1,9 +1,7 @@
-import { MongoClient } from "mongodb";
+import { MongoClient, ObjectId } from "mongodb";
 
 export async function getTasksHandler() {
-  const client = await MongoClient.connect(
-    process.env.MONGO_URL || ''
-  );
+  const client = await MongoClient.connect(process.env.MONGO_URL || "");
 
   const db = client.db();
   const tasksCollection = db.collection("tasks");
@@ -12,4 +10,18 @@ export async function getTasksHandler() {
 
   client.close();
   return tasks;
+}
+
+export async function getOneTaskHandler(taskId: string) {
+  const client = await MongoClient.connect(process.env.MONGO_URL || "");
+
+  const db = client.db();
+  const tasksCollection = db.collection("tasks");
+
+  const selectedTask = await tasksCollection.findOne({
+    _id: new ObjectId(taskId),
+  });
+
+  client.close();
+  return selectedTask;
 }
