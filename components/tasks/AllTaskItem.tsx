@@ -2,6 +2,8 @@ import Image from "next/image";
 import { useRouter } from 'next/router';
 import { useState } from "react";
 import { Task } from "../../types/TaskTypes";
+import { Tag } from "@/types/TagTypes";
+
 import DownArrow from "@/public/icons/arrows/down.svg";
 import UpArrow from "@/public/icons/arrows/up.svg";
 import Edit from "@/public/icons/action/edit.svg";
@@ -10,16 +12,6 @@ import Delete from "@/public/icons/action/delete.svg";
 function AllTaskItem(props: Task) {
   const router = useRouter();
   const [expanded, setExpanded] = useState(false);
-  const testTags = [
-    "short",
-    "ab",
-    "long sentence",
-    "i dont know",
-    "i dont know",
-    "short",
-    "ab",
-    "long sentence",
-  ];
 
   function expandTaskHandler() {
     setExpanded(!expanded);
@@ -53,14 +45,14 @@ function AllTaskItem(props: Task) {
             <div className={"flex justify-between mt-2"}>
               <p className={"w-5/12 text-start"}>{props.description}</p>
               <div className={"flex flex-row flex-wrap w-5/12 h-14"}>
-                {testTags.map((tag, index) => (
+                {props.tags.map((tag: Tag, index: number) => (
                   <div
                     key={index}
                     className={
                       "flex items-center h-1/2 p-2 ml-4 mb-2 bg-gray-300 border-2 border-gray-400 rounded-xl"
                     }
                   >
-                    <p>{tag}</p>
+                    <p>{tag.name}</p>
                   </div>
                 ))}
               </div>

@@ -1,8 +1,10 @@
+import { Tag } from "./TagTypes"
+
 export interface Task {
     id: string,
     title: string,
     description: string,
-    tags: string[], // tag ids
+    tags: Tag[], // tag ids
     date: number, // in miliseconds
     completed: boolean // false upon creation
 }

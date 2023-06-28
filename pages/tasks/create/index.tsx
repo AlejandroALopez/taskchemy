@@ -3,43 +3,18 @@ import Image from "next/image";
 import { useState, Fragment } from "react";
 import { useRouter } from "next/router";
 import { Tag } from "@/types/TagTypes";
+import { getTagsHandler } from "@/actions/tagActions";
 import CheckIcon from "@/public/icons/others/check.svg";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 
-function TaskCreate() {
+function TaskCreate(props: any) {
   const router = useRouter();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [date, setDate] = useState(new Date());
-  const [tags, setTags] = useState<String[]>([]);
+  const [tags, setTags] = useState<Tag[]>([]);
   const [showTags, setShowTags] = useState(false);
-
-  // --------------------------
-  // TAG TEST
-
-  const TEST_TAGS: Tag[] = [
-    {
-      id: "a234567898765",
-      name: "Code",
-      color: "#ECECEC",
-    },
-    {
-      id: "a234567898765434563",
-      name: "Cooking",
-      color: "#ECECEC",
-    },
-    {
-      id: "a23456789876548",
-      name: "Skill improvement",
-      color: "#ECECEC",
-    },
-    {
-      id: "1234567890",
-      name: "Code improvement",
-      color: "#ECECEC",
-    },
-  ];
 
   // adapted from https://stackoverflow.com/questions/13964155/get-javascript-object-from-array-of-objects-by-value-of-property
   function findTagById(array: Array<any>, id: any): Tag | undefined {
@@ -50,8 +25,8 @@ function TaskCreate() {
     return result;
   }
 
-  function removeTagHandler(id: string) {
-    setTags(tags.filter((item) => item !== id));
+  function removeTagHandler(tag: Tag) {
+    setTags(tags.filter((item) => item.id !== tag.id));
   }
 
   // --------------------------
@@ -139,19 +114,19 @@ function TaskCreate() {
                   }
                 >
                   <div className={"h-4/6 overflow-scroll overflow-x-hidden"}>
-                    {TEST_TAGS.map((tag) => (
+                    {props.availableTags.map((tag: Tag) => (
                       <button
                         className={`flex justify-between items-center w-11/12 m-2 p-2 rounded-lg border-black border-2 ${
-                          tags.indexOf(tag.id) !== -1
+                          findTagById(tags, tag.id)
                             ? "bg-gray-400"
                             : "bg-gray-200"
                         }`}
                         key={tag.id}
                         onClick={() => {
-                          if (tags.indexOf(tag.id) === -1) {
-                            setTags((oldTags) => [...oldTags, tag.id]);
+                          if (findTagById(tags, tag.id)) {
+                            setTags(tags.filter((item) => item.id !== tag.id));
                           } else {
-                            setTags(tags.filter((item) => item !== tag.id));
+                            setTags((oldTags) => [...oldTags, tag]);
                           }
                         }}
                       >
@@ -161,7 +136,7 @@ function TaskCreate() {
                             "flex justify-center items-center w-6 h-6 bg-white"
                           }
                         >
-                          {tags.indexOf(tag.id) !== -1 && (
+                          {findTagById(tags, tag.id) && (
                             <Image src={CheckIcon} alt="check" />
                           )}
                         </div>
@@ -170,25 +145,20 @@ function TaskCreate() {
                   </div>
                 </div>
               ) : (
-                <div className={"w-full h-5/6 mt-2 overflow-scroll overflow-x-hidden"}>
-                  {tags.map((tagID) => {
-                    var tagObj: Tag | undefined = findTagById(TEST_TAGS, tagID);
-                    if (tagObj) {
-                      return (
-                        <button
-                          key={tagObj.id}
-                          onClick={() =>
-                            removeTagHandler(tagObj ? tagObj.id : "")
-                          }
-                          className={
-                            "bg-black rounded-2xl px-3 py-2 m-0.5"
-                          }
-                        >
-                          <p className={"text-white"}>{tagObj.name}</p>
-                        </button>
-                      );
-                    } else return null;
-                  })}
+                <div
+                  className={
+                    "w-full h-5/6 mt-2 overflow-scroll overflow-x-hidden"
+                  }
+                >
+                  {tags.map((tag) => (
+                    <button
+                      key={tag.id}
+                      onClick={() => removeTagHandler(tag)}
+                      className={"bg-black rounded-2xl px-3 py-2 m-0.5"}
+                    >
+                      <p className={"text-white"}>{tag.name}</p>
+                    </button>
+                  ))}
                 </div>
               )}
             </div>
@@ -224,6 +194,21 @@ function TaskCreate() {
       </Fragment>
     </main>
   );
+}
+
+export async function getStaticProps() {
+  const availableTags = await getTagsHandler();
+
+  return {
+    props: {
+      availableTags: availableTags.map((tag: any) => ({
+        id: tag._id.toString(),
+        name: tag.name,
+        color: tag.color,
+      })),
+    },
+    revalidate: 1,
+  };
 }
 
 export default TaskCreate;
