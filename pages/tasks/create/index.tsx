@@ -1,7 +1,9 @@
 import Head from "next/head";
+import Image from "next/image";
 import { useState, Fragment } from "react";
 import { useRouter } from "next/router";
 import { Tag } from "@/types/TagTypes";
+import CheckIcon from "@/public/icons/others/check.svg";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 
@@ -10,7 +12,7 @@ function TaskCreate() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [date, setDate] = useState(new Date());
-  const [tags, setTags] = useState([]);
+  const [tags, setTags] = useState<String[]>([]);
   const [showTags, setShowTags] = useState(false);
 
   // --------------------------
@@ -33,16 +35,29 @@ function TaskCreate() {
       color: "#ECECEC",
     },
     {
-      id: "a23456789876548",
+      id: "1234567890",
       name: "Code improvement",
       color: "#ECECEC",
     },
   ];
 
+  // adapted from https://stackoverflow.com/questions/13964155/get-javascript-object-from-array-of-objects-by-value-of-property
+  function findTagById(array: Array<any>, id: any): Tag | undefined {
+    var result = array.find((obj) => {
+      return obj.id === id;
+    });
+
+    return result;
+  }
+
+  function removeTagHandler(id: string) {
+    setTags(tags.filter((item) => item !== id));
+  }
+
   // --------------------------
 
   function cancelHandler() {
-    router.back(); // back to dashboard
+    router.back();
   }
 
   // action for creating a task
@@ -117,23 +132,63 @@ function TaskCreate() {
                   <p>+ Add tag</p>
                 </button>
               </div>
-              {showTags && (
+              {showTags ? (
                 <div
                   className={
-                    "relative top-2 h-5/6 w-5/6 bg-white border-2 border-black rounded-xl"
+                    "relative z-10 top-2 h-5/6 w-5/6 bg-white border-2 border-black rounded-xl"
                   }
                 >
                   <div className={"h-4/6 overflow-scroll overflow-x-hidden"}>
                     {TEST_TAGS.map((tag) => (
-                      <div
-                        className={"flex items-center w-11/12 m-2 p-2 bg-gray-400 rounded-lg border-black border-2"}
+                      <button
+                        className={`flex justify-between items-center w-11/12 m-2 p-2 rounded-lg border-black border-2 ${
+                          tags.indexOf(tag.id) !== -1
+                            ? "bg-gray-400"
+                            : "bg-gray-200"
+                        }`}
                         key={tag.id}
+                        onClick={() => {
+                          if (tags.indexOf(tag.id) === -1) {
+                            setTags((oldTags) => [...oldTags, tag.id]);
+                          } else {
+                            setTags(tags.filter((item) => item !== tag.id));
+                          }
+                        }}
                       >
                         <p>{tag.name}</p>
-                        <div className={"w-4 h-4"} />
-                      </div>
+                        <div
+                          className={
+                            "flex justify-center items-center w-6 h-6 bg-white"
+                          }
+                        >
+                          {tags.indexOf(tag.id) !== -1 && (
+                            <Image src={CheckIcon} alt="check" />
+                          )}
+                        </div>
+                      </button>
                     ))}
                   </div>
+                </div>
+              ) : (
+                <div className={"w-full h-5/6 mt-2 overflow-scroll overflow-x-hidden"}>
+                  {tags.map((tagID) => {
+                    var tagObj: Tag | undefined = findTagById(TEST_TAGS, tagID);
+                    if (tagObj) {
+                      return (
+                        <button
+                          key={tagObj.id}
+                          onClick={() =>
+                            removeTagHandler(tagObj ? tagObj.id : "")
+                          }
+                          className={
+                            "bg-black rounded-2xl px-3 py-2 m-0.5"
+                          }
+                        >
+                          <p className={"text-white"}>{tagObj.name}</p>
+                        </button>
+                      );
+                    } else return null;
+                  })}
                 </div>
               )}
             </div>
