@@ -5,6 +5,8 @@ import { useRouter } from "next/router";
 import { Tag } from "@/types/TagTypes";
 import { getTagsHandler } from "@/actions/tagActions";
 import CheckIcon from "@/public/icons/others/check.svg";
+import AddIcon from "@/public/icons/action/add.svg";
+import PenIcon from "@/public/icons/others/pen.svg";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 
@@ -15,6 +17,7 @@ function TaskCreate(props: any) {
   const [date, setDate] = useState(new Date());
   const [tags, setTags] = useState<Tag[]>([]);
   const [showTags, setShowTags] = useState(false);
+  const [newTagName, setNewTagName] = useState("");
 
   // adapted from https://stackoverflow.com/questions/13964155/get-javascript-object-from-array-of-objects-by-value-of-property
   function findTagById(array: Array<any>, id: any): Tag | undefined {
@@ -28,8 +31,6 @@ function TaskCreate(props: any) {
   function removeTagHandler(tag: Tag) {
     setTags(tags.filter((item) => item.id !== tag.id));
   }
-
-  // --------------------------
 
   function cancelHandler() {
     router.back();
@@ -50,6 +51,19 @@ function TaskCreate(props: any) {
     router.replace("/");
   }
 
+  // action for creating a tag
+  async function createTagHandler(enteredTagData: any) {
+    const response = await fetch("/api/new-tag", {
+      method: "POST",
+      body: JSON.stringify(enteredTagData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data = await response.json();
+  }
+
   function submitHandler(event: any) {
     event.preventDefault();
 
@@ -66,6 +80,18 @@ function TaskCreate(props: any) {
 
   function toggleShowTags() {
     setShowTags(!showTags);
+  }
+
+  function handleNewTag(event: any) {
+    event.preventDefault();
+
+    const newTagData = {
+      name: newTagName,
+      color: "#CECECE",
+    };
+
+    createTagHandler(newTagData);
+    setNewTagName("");
   }
 
   return (
@@ -142,6 +168,31 @@ function TaskCreate(props: any) {
                         </div>
                       </button>
                     ))}
+                  </div>
+                  <div className={"flex flex-col items-center justify-center"}>
+                    <div
+                      className={"h-0.5 w-11/12 m-4 rounded-lg bg-gray-300"}
+                    />
+                    <div
+                      className={
+                        "flex flex-row items-center justify-between w-11/12 h-12 p-2 bg-gray-200 border-2 border-black rounded-md"
+                      }
+                    >
+                      <Image src={PenIcon} alt="pen" />
+                      <input
+                        onChange={(event: any) =>
+                          setNewTagName(event.target.value)
+                        }
+                        value={newTagName}
+                        className={
+                          "bg-gray-200 border-2 border-gray-400 w-8/12 p-1 text-gray-500 rounded-lg"
+                        }
+                        placeholder="Create new tag"
+                      />
+                      <button onClick={handleNewTag}>
+                        <Image src={AddIcon} alt="add" />
+                      </button>
+                    </div>
                   </div>
                 </div>
               ) : (
