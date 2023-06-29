@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { Fragment } from "react";
 import { getTasksHandler } from "@/actions/taskActions";
+import { sortArrayOfTasksByDate } from "@/utils/dateFunctions";
 import AllTaskList from "@/components/tasks/AllTaskList";
 
 function Tasks(props: any) {
@@ -12,7 +13,7 @@ function Tasks(props: any) {
           <meta name="description" content="See all tasks!" />
         </Head>
         <div>
-          <AllTaskList tasks={props.tasks} />
+          <AllTaskList tasks={sortArrayOfTasksByDate(props.tasks)} />
         </div>
       </Fragment>
     </main>
@@ -24,7 +25,7 @@ export async function getStaticProps() {
   
     return {
       props: {
-        tasks: tasks.map((task: any) => ({
+        tasks: tasks.map((task: any) => ({ // sort from newest to oldest date
           id: task._id.toString(),
           title: task.title,
           description: task.description,
