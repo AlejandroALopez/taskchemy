@@ -1,7 +1,6 @@
 import Head from "next/head";
 import { Fragment } from "react";
 import { Inter } from "next/font/google";
-import { Task } from "../types/TaskTypes";
 import { getTasksHandler } from "../actions/taskActions";
 import TodayTaskList from "../components/tasks/TodayTaskList";
 
