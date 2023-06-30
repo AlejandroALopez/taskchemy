@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { RoutineProps } from "../../types/RoutineTypes";
+import { Routine, RoutineProps } from "../../types/RoutineTypes";
 import RoutineItem from "./RoutineItem";
 
 function RoutineList(props: RoutineProps) {
@@ -11,31 +11,28 @@ function RoutineList(props: RoutineProps) {
 
   return (
     <div className={"flex flex-col w-full"}>
-      <div className={"flex flex-row w-3/12 justify-between"}>
-        <p className={"text-3xl mb-10"}>My Routines</p>
+      <div className={"flex flex-row items-center justify-between w-3/12 mb-8"}>
+        <p className={"text-3xl"}>My Routines</p>
         <button
           onClick={addRoutineHandler}
           className={
-            "w-12 h-10 bg-gray-200 border-4 border-slate-600 rounded-md"
+            "w-12 h-12 bg-dark border-4 border-medium rounded-xl"
           }
         >
-          <p className={"text-2xl"}>+</p>
+          <p className={"text-2xl text-white"}>+</p>
         </button>
       </div>
       {props.routines.length > 0 ? (
         <ul
           className={
-            "list-none w-10/12 m-0 p-0 overflow-scroll overflow-x-hidden max-h-full"
+            "list-none w-10/12 m-0 p-0 overflow-scroll overflow-x-hidden max-h-[32rem]"
           }
         >
-          {props.routines.map((routine) => (
+          {props.routines.map((routine: Routine, index) => (
             <RoutineItem
               key={routine.id}
-              id={routine.id}
-              title={routine.title}
-              description={routine.description}
-              frequency={routine.frequency}
-              daysFollowed={routine.daysFollowed}
+              routineObj={routine}
+              index={index}
             />
           ))}
         </ul>

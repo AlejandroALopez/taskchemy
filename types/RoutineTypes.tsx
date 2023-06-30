@@ -9,3 +9,8 @@ export interface Routine {
 export interface RoutineProps {
     routines: Routine[]
 }
+
+export interface RoutineColorProps {
+    routineObj: Routine,
+    index: number, // for color variation purposes
+}

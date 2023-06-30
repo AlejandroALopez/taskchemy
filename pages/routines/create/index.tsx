@@ -61,14 +61,14 @@ function RoutineCreate() {
             <input
               onChange={(event: any) => setTitle(event.target.value)}
               value={title}
-              className={"w-9/12"}
+              className={"w-9/12 border-2 border-dark rounded-lg px-2"}
               placeholder="Routine title"
             />
           </div>
           <div className={"flex flex-row mb-6 justify-between"}>
             <p className={"text-xl mr-12"}>Description (optional)</p>
             <textarea
-              className={"w-9/12"}
+              className={"w-9/12 border-2 border-dark rounded-lg px-2"}
               placeholder="Routine description"
               rows={3}
               value={description}
@@ -82,7 +82,7 @@ function RoutineCreate() {
                 <button
                   key={index}
                   className={`flex items-center justify-center h-14 w-14 ml-4 rounded-full border-2 border-black ${
-                    frequency[index] ? "bg-black" : "bg-white"
+                    frequency[index] ? "bg-darkest" : "bg-white"
                   }`}
                   onClick={() => handleFrequencyChange(index)}
                 >
@@ -100,19 +100,19 @@ function RoutineCreate() {
           <div className={"flex flex-row justify-between mt-52"}>
             <button
               className={
-                "w-72 h-20 bg-gray-200 border-4 border-black rounded-2xl"
+                "w-72 h-20 bg-dark border-4 border-medium rounded-2xl"
               }
               onClick={cancelHandler}
             >
-              <p className={"text-3xl"}>Cancel</p>
+              <p className={"text-3xl text-white"}>Cancel</p>
             </button>
             <button
               className={
-                "w-72 h-20 bg-gray-200 border-4 border-black rounded-2xl"
+                "w-72 h-20 bg-dark border-4 border-medium rounded-2xl"
               }
               onClick={submitHandler}
             >
-              <p className={"text-3xl"}>+ Add Routine</p>
+              <p className={"text-3xl text-white"}>+ Add Routine</p>
             </button>
           </div>
         </div>
