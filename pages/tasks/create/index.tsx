@@ -205,7 +205,7 @@ function TaskCreate(props: any) {
                     <button
                       key={tag.id}
                       onClick={() => removeTagHandler(tag)}
-                      className={"bg-black rounded-2xl px-3 py-2 m-0.5"}
+                      className={"bg-dark rounded-2xl px-3 py-2 m-0.5"}
                     >
                       <p className={"text-white"}>{tag.name}</p>
                     </button>
