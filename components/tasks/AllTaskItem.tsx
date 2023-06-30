@@ -25,13 +25,13 @@ function AllTaskItem(props: Task) {
     <li className={`flex flex-row w-10/12 ${expanded ? "h-40" : "h-20"} mb-4`}>
       <div
         className={
-          "flex flex-col items-center justify-between px-4 w-full border-4 border-gray-400 rounded-3xl"
+          "flex flex-col items-center justify-between px-4 w-full bg-lightest border-4 border-dark rounded-3xl"
         }
       >
         <div className={"flex flex-row items-center justify-between w-full"}>
           <div className={"flex flex-row items-center"}>
             <div
-              className={"w-10 h-10 border-4 border-gray-400 rounded-full"}
+              className={"w-10 h-10 border-4 border-dark rounded-full"}
             />
             <p className={"text-xl m-4"}>{props.title}</p>
           </div>
@@ -41,7 +41,7 @@ function AllTaskItem(props: Task) {
         </div>
         {expanded && (
           <div className={"flex flex-col justify-start w-full pb-16"}>
-            <div className={"w-full h-0.5 bg-gray-500 rounded-md"} />
+            <div className={"w-full h-0.5 bg-regular rounded-md"} />
             <div className={"flex justify-between mt-2"}>
               <p className={"w-5/12 text-start"}>{props.description}</p>
               <div className={"flex flex-row flex-wrap w-5/12 h-14"}>
@@ -49,7 +49,7 @@ function AllTaskItem(props: Task) {
                   <div
                     key={index}
                     className={
-                      "flex items-center h-1/2 p-2 ml-4 mb-2 bg-gray-300 border-2 border-gray-400 rounded-xl"
+                      "flex items-center h-1/2 p-2 ml-4 mb-2 bg-light border-2 border-darkest rounded-lg"
                     }
                   >
                     <p>{tag.name}</p>
