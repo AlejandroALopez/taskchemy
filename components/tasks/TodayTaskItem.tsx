@@ -3,8 +3,8 @@ import { Task } from "../../types/TaskTypes";
 function TodayTaskItem(props: Task) {
   return (
     <li className={"flex flex-row w-96 h-16 mb-3"}>
-      <div className={"w-20 h-16 border-solid border-blue-400 border-4"} />
-      <div className={"flex items-center ml-10 w-full border-4 border-slate-600 rounded-md"}>
+      <div className={"h-16 w-20 bg-light border-solid border-regular border-4 rounded-full"} />
+      <div className={"flex items-center ml-10 w-full bg-lightest border-4 border-light rounded-2xl"}>
           <p className={"text-xl m-4"}>{props.title}</p>
       </div>
     </li>

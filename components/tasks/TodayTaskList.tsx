@@ -14,22 +14,24 @@ function TodayTaskList(props: TaskProps) {
   }
 
   return (
-    <div className={"flex flex-col min-w-fit"}>
-      <div className={"flex flex-row w-5/12 items-center justify-between mb-10"}>
+    <div className={"flex flex-col w-1/2"}>
+      <div
+        className={"flex flex-row w-10/12 items-center justify-between mb-10"}
+      >
         <p className={"text-3xl"}>Today's Tasks</p>
         <button
           onClick={addTaskHandler}
           className={
-            "w-12 h-12 bg-gray-300 border-4 border-gray-500 rounded-md"
+            "flex items-center justify-center w-12 h-12 bg-dark border-4 border-medium rounded-2xl"
           }
         >
-          <p className={"text-2xl"}>+</p>
+          <p className={"text-3xl text-white"}>+</p>
         </button>
       </div>
       {props.tasks.length > 0 ? (
         <ul
           className={
-            "list-none w-5/12 m-0 p-0 max-h-80 overflow-scroll overflow-x-hidden"
+            "list-none w-10/12 m-0 p-0 max-h-80 overflow-scroll overflow-x-hidden"
           }
         >
           {props.tasks.map((task) => (
@@ -46,19 +48,19 @@ function TodayTaskList(props: TaskProps) {
         </ul>
       ) : (
         <div>
-          <p className={"text-lg"}>
-            No active tasks today.
-          </p>
+          <p className={"text-lg"}>No active tasks today.</p>
         </div>
       )}
-      <button
-        onClick={allTasksHandler}
-        className={
-          "w-5/12 mt-10 bg-gray-400 h-24 border-4 border-slate-600 rounded-md"
-        }
-      >
-        <p className={"text-4xl"}>See All Tasks</p>
-      </button>
+      <div className={"flex justify-center w-10/12"}>
+        <button
+          onClick={allTasksHandler}
+          className={
+            "w-1/2 mt-10 bg-dark h-16 border-4 border-medium rounded-2xl"
+          }
+        >
+          <p className={"text-2xl text-white"}>See All Tasks</p>
+        </button>
+      </div>
     </div>
   );
 }
