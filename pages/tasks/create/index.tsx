@@ -108,35 +108,35 @@ function TaskCreate(props: any) {
             <input
               onChange={(event: any) => setTitle(event.target.value)}
               value={title}
-              className={"w-9/12"}
+              className={"w-9/12 border-2 border-dark rounded-lg px-2"}
               placeholder="Task title"
             />
           </div>
           <div className={"flex flex-row mb-6 justify-between"}>
             <p className={"text-xl mr-12"}>Description (optional)</p>
             <textarea
-              className={"w-9/12"}
+              className={"w-9/12 border-2 border-dark rounded-lg px-2"}
               placeholder="Task description"
               rows={3}
               value={description}
               onChange={(event: any) => setDescription(event.target.value)}
             />
           </div>
-          <div className={"flex flex-row my-6 justify-between"}>
+          <div className={"flex flex-row my-4 justify-between"}>
             <div className={"w-4/12 max-h-full"}>
               <div className={"flex flex-row items-center"}>
                 <p className={"text-xl mr-4"}>Tags</p>
                 <button
                   onClick={toggleShowTags}
-                  className={"border-2 border-black rounded-2xl px-3 py-2"}
+                  className={"border-2 bg-regular border-medium rounded-2xl px-3 py-2"}
                 >
-                  <p>+ Add tag</p>
+                  <p className={"text-white"}>+ Add tag</p>
                 </button>
               </div>
               {showTags ? (
                 <div
                   className={
-                    "relative z-10 top-2 h-5/6 w-5/6 bg-white border-2 border-black rounded-xl"
+                    "relative z-10 top-2 h-4/6 w-5/6 bg-darkest rounded-xl"
                   }
                 >
                   <div className={"h-4/6 overflow-scroll overflow-x-hidden"}>
@@ -144,8 +144,8 @@ function TaskCreate(props: any) {
                       <button
                         className={`flex justify-between items-center w-11/12 m-2 p-2 rounded-lg border-black border-2 ${
                           findTagById(tags, tag.id)
-                            ? "bg-gray-400"
-                            : "bg-gray-200"
+                            ? "bg-regular"
+                            : "bg-lightest"
                         }`}
                         key={tag.id}
                         onClick={() => {
@@ -159,7 +159,7 @@ function TaskCreate(props: any) {
                         <p>{tag.name}</p>
                         <div
                           className={
-                            "flex justify-center items-center w-6 h-6 bg-white"
+                            "flex justify-center items-center w-6 h-6 bg-white border-2 border-darkest"
                           }
                         >
                           {findTagById(tags, tag.id) && (
@@ -171,11 +171,11 @@ function TaskCreate(props: any) {
                   </div>
                   <div className={"flex flex-col items-center justify-center"}>
                     <div
-                      className={"h-0.5 w-11/12 m-4 rounded-lg bg-gray-300"}
+                      className={"h-0.5 w-11/12 m-4 rounded-lg bg-white"}
                     />
                     <div
                       className={
-                        "flex flex-row items-center justify-between w-11/12 h-12 p-2 bg-gray-200 border-2 border-black rounded-md"
+                        "flex flex-row items-center justify-between w-11/12 h-12 p-2 bg-lightest border-2 border-black rounded-md"
                       }
                     >
                       <Image src={PenIcon} alt="pen" />
@@ -185,7 +185,7 @@ function TaskCreate(props: any) {
                         }
                         value={newTagName}
                         className={
-                          "bg-gray-200 border-2 border-gray-400 w-8/12 p-1 text-gray-500 rounded-lg"
+                          "bg-lightest border-2 border-black w-8/12 p-1 text-gray-500 rounded-lg"
                         }
                         placeholder="Create new tag"
                       />
@@ -226,19 +226,19 @@ function TaskCreate(props: any) {
           <div className={"flex flex-row justify-between mt-6"}>
             <button
               className={
-                "w-72 h-20 bg-gray-200 border-4 border-black rounded-2xl"
+                "w-72 h-20 bg-dark border-4 border-medium rounded-2xl"
               }
               onClick={cancelHandler}
             >
-              <p className={"text-3xl"}>Cancel</p>
+              <p className={"text-3xl text-white"}>Cancel</p>
             </button>
             <button
               className={
-                "w-72 h-20 bg-gray-200 border-4 border-black rounded-2xl"
+                "w-72 h-20 bg-dark border-4 border-medium rounded-2xl"
               }
               onClick={submitHandler}
             >
-              <p className={"text-3xl"}>+ Add Task</p>
+              <p className={"text-3xl text-white"}>+ Add Task</p>
             </button>
           </div>
         </div>
