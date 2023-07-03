@@ -8,6 +8,7 @@ import DownArrow from "@/public/icons/arrows/down.svg";
 import UpArrow from "@/public/icons/arrows/up.svg";
 import Edit from "@/public/icons/action/edit.svg";
 import Delete from "@/public/icons/action/delete.svg";
+import BigCheck from "@/public/icons/others/bigCheck.svg";
 
 function AllTaskItem(props: Task) {
   const router = useRouter();
@@ -48,8 +49,12 @@ function AllTaskItem(props: Task) {
             >
               <div className={"flex flex-row items-center"}>
                 <div
-                  className={"w-10 h-10 border-4 border-dark rounded-full"}
-                />
+                  className={"flex items-center justify-center w-10 h-10 border-4 border-dark rounded-full"}
+                >
+                  {props.completed && (
+                    <Image src={BigCheck} alt="big check"/>
+                  )}
+                </div>
                 <p className={"text-xl m-4"}>{props.title}</p>
               </div>
               <button onClick={expandTaskHandler}>
