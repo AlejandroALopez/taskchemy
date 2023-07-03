@@ -38,7 +38,7 @@ function TaskCreate(props: any) {
 
   // action for creating a task
   async function createTaskHandler(enteredTaskData: any) {
-    const response = await fetch("/api/new-task", {
+    const response = await fetch("/api/tasks/new-task", {
       method: "POST",
       body: JSON.stringify(enteredTaskData),
       headers: {

@@ -19,7 +19,7 @@ function TodayTaskItem(props: Task) {
         },
       };
   
-      const response = await fetch("/api/update-task", {
+      const response = await fetch("/api/tasks/update-task", {
         method: "PUT",
         body: JSON.stringify(enteredData),
         headers: {

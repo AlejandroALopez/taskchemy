@@ -2,21 +2,25 @@ import Head from "next/head";
 import { useState, Fragment } from "react";
 import { useRouter } from "next/router";
 import { DAYS_OF_WEEK } from "@/utils/constants";
+import {
+  getRoutinesHandler,
+  getOneRoutineHandler,
+} from "@/actions/routineActions";
 
-function RoutineCreate() {
+function RoutineEdit(props: any) {
   const router = useRouter();
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [frequency, setFrequency] = useState(new Array(7).fill(true));
+  const [title, setTitle] = useState(props.routineData.title);
+  const [description, setDescription] = useState(props.routineData.description);
+  const [frequency, setFrequency] = useState(props.routineData.frequency);
 
   function cancelHandler() {
     router.push("/routines"); // back to routines page
   }
 
   // action for creating a routine
-  async function createRoutineHandler(enteredRoutineData: any) {
-    const response = await fetch("/api/routines/new-routine", {
-      method: "POST",
+  async function updateRoutineHandler(enteredRoutineData: any) {
+    const response = await fetch("/api/routines/update-routine", {
+      method: "PUT",
       body: JSON.stringify(enteredRoutineData),
       headers: {
         "Content-Type": "application/json",
@@ -24,7 +28,6 @@ function RoutineCreate() {
     });
 
     const data = await response.json();
-
     router.replace("/routines");
   }
 
@@ -32,13 +35,16 @@ function RoutineCreate() {
     event.preventDefault();
 
     const routineData = {
-      title: title,
-      description: description,
-      frequency: frequency,
-      daysFollowed: 0,
+      routineId: props.routineData.id,
+      newData: {
+        title: title,
+        description: description,
+        frequency: frequency,
+        daysFollowed: props.routineData.daysFollowed,
+      },
     };
 
-    createRoutineHandler(routineData);
+    updateRoutineHandler(routineData);
   }
 
   function handleFrequencyChange(index: number) {
@@ -99,20 +105,16 @@ function RoutineCreate() {
           </div>
           <div className={"flex flex-row justify-between mt-52"}>
             <button
-              className={
-                "w-72 h-20 bg-dark border-4 border-medium rounded-2xl"
-              }
+              className={"w-72 h-20 bg-dark border-4 border-medium rounded-2xl"}
               onClick={cancelHandler}
             >
               <p className={"text-3xl text-white"}>Cancel</p>
             </button>
             <button
-              className={
-                "w-72 h-20 bg-dark border-4 border-medium rounded-2xl"
-              }
+              className={"w-72 h-20 bg-dark border-4 border-medium rounded-2xl"}
               onClick={submitHandler}
             >
-              <p className={"text-3xl text-white"}>+ Add Routine</p>
+              <p className={"text-3xl text-white"}>Update Routine</p>
             </button>
           </div>
         </div>
@@ -121,4 +123,31 @@ function RoutineCreate() {
   );
 }
 
-export default RoutineCreate;
+export async function getStaticPaths() {
+  const routines = await getRoutinesHandler();
+
+  return {
+    fallback: "blocking", // false = all supported values in paths, true otherwise
+    paths: routines.map((routine) => ({
+      params: { routineId: routine._id.toString() },
+    })),
+  };
+}
+
+export async function getStaticProps(context: any) {
+  const selectedRoutine = await getOneRoutineHandler(context.params.routineId);
+
+  return {
+    props: {
+      routineData: {
+        id: selectedRoutine?._id.toString(),
+        title: selectedRoutine?.title,
+        description: selectedRoutine?.description,
+        frequency: selectedRoutine?.frequency,
+      },
+    },
+    revalidate: 1,
+  };
+}
+
+export default RoutineEdit;
