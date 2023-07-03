@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { Task } from "../../types/TaskTypes";
 import { Tag } from "@/types/TagTypes";
@@ -18,7 +18,11 @@ function AllTaskItem(props: Task) {
   }
 
   function editTaskHandler() {
-    router.push('/tasks/edit/' + props.id);
+    router.push("/tasks/edit/" + props.id);
+  }
+
+  function deleteTaskHandler() {
+    console.log("delete task with ID: ", props.id);
   }
 
   return (
@@ -30,9 +34,7 @@ function AllTaskItem(props: Task) {
       >
         <div className={"flex flex-row items-center justify-between w-full"}>
           <div className={"flex flex-row items-center"}>
-            <div
-              className={"w-10 h-10 border-4 border-dark rounded-full"}
-            />
+            <div className={"w-10 h-10 border-4 border-dark rounded-full"} />
             <p className={"text-xl m-4"}>{props.title}</p>
           </div>
           <button onClick={expandTaskHandler}>
@@ -57,12 +59,10 @@ function AllTaskItem(props: Task) {
                 ))}
               </div>
               <div className={"flex flex-row justify-between"}>
-                <button
-                onClick={editTaskHandler}
-                >
+                <button onClick={editTaskHandler}>
                   <Image src={Edit} alt="edit" />
                 </button>
-                <button>
+                <button onClick={deleteTaskHandler}>
                   <Image src={Delete} alt="delete" />
                 </button>
               </div>

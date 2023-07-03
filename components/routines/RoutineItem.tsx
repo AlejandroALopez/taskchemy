@@ -1,8 +1,9 @@
 import { RoutineColorProps } from "../../types/RoutineTypes";
-import { DAYS_OF_WEEK, ROUTINE_COLORS } from '../../utils/constants';
+import { DAYS_OF_WEEK } from '../../utils/constants';
 
 function RoutineItem(props: RoutineColorProps) {
   const DAYS: string[] = ["S", "M", "T", "W", "T", "F", "S"];
+  const ROUTINE_COLORS: string[] = ["bg-[#246b3f]", "bg-[#24386b]", "bg-[#6b2424]"]; // green, blue, red
   const routineColor: string = ROUTINE_COLORS[props.index % ROUTINE_COLORS.length];
 
   return (

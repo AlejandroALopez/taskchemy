@@ -54,7 +54,7 @@ function AllTaskList(props: TaskProps) {
             dateIter = formattedDate;
 
             return (
-              <>
+              <div key={task.id}>
                 {!sameDate && (
                   <div className={`${index === 0 ? '': 'mt-8'}`}>
                     <p className={"text-2xl text-dark"}>
@@ -64,7 +64,6 @@ function AllTaskList(props: TaskProps) {
                   </div>
                 )}
                 <AllTaskItem
-                  key={task.id}
                   id={task.id}
                   title={task.title}
                   description={task.description}
@@ -72,7 +71,7 @@ function AllTaskList(props: TaskProps) {
                   date={task.date}
                   completed={task.completed}
                 />
-              </>
+              </div>
             );
           })}
         </ul>
