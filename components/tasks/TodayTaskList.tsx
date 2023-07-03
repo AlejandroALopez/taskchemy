@@ -1,9 +1,11 @@
 import { useRouter } from "next/router";
 import { TaskProps } from "../../types/TaskTypes";
+import { formatDate } from "@/utils/dateFunctions";
 import TodayTaskItem from "./TodayTaskItem";
 
 function TodayTaskList(props: TaskProps) {
   const router = useRouter();
+  const today = formatDate(new Date());
 
   function addTaskHandler() {
     router.push("/tasks/create"); // move to task creation page
@@ -31,20 +33,24 @@ function TodayTaskList(props: TaskProps) {
       {props.tasks.length > 0 ? (
         <ul
           className={
-            "list-none w-10/12 m-0 p-0 max-h-80 overflow-scroll overflow-x-hidden"
+            "list-none w-10/12 m-0 p-0 h-80 max-h-80 overflow-scroll overflow-x-hidden"
           }
         >
-          {props.tasks.map((task) => (
-            <TodayTaskItem
-              key={task.id}
-              id={task.id}
-              title={task.title}
-              description={task.description}
-              tags={task.tags}
-              date={task.date}
-              completed={task.completed}
-            />
-          ))}
+          {props.tasks.map((task) => {
+            if (formatDate(new Date(task.date)) === today) {
+              return (
+                <TodayTaskItem
+                  key={task.id}
+                  id={task.id}
+                  title={task.title}
+                  description={task.description}
+                  tags={task.tags}
+                  date={task.date}
+                  completed={task.completed}
+                />
+              );
+            } else return null;
+          })}
         </ul>
       ) : (
         <div>
