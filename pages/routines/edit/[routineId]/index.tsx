@@ -57,8 +57,8 @@ function RoutineEdit(props: any) {
     <main className={"flex min-h-screen flex-col p-12"}>
       <Fragment>
         <Head>
-          <title>Create Routine</title>
-          <meta name="description" content="Create a new routine!" />
+          <title>Edit Routine</title>
+          <meta name="description" content="Edit an existing routine" />
         </Head>
         <div className={"flex flex-col w-10/12"}>
           <p className={"text-3xl mb-10"}>Create Routine</p>
