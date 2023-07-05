@@ -1,26 +1,12 @@
-import { signIn } from "next-auth/react";
 import Head from "next/head";
 import Link from "next/link";
+import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useState, Fragment } from "react";
 
 function Login() {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
-
-  // action for signing in
-  // async function signInHandler(enteredUserData: any) {
-  //   const response = await fetch("/api/auth/sign-in", {
-  //     method: "POST",
-  //     body: JSON.stringify(enteredUserData),
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //   });
-
-  //   const data = await response.json();
-  //   return data;
-  // }
 
   const handleSubmit = async (e: any) => {
     setError("");
@@ -60,12 +46,12 @@ function Login() {
         className={"flex flex-col items-center w-full"}
         onSubmit={handleSubmit}
       >
+        <p className={"text-3xl mb-8"}>Login</p>
         {error && (
           <span className={"p-4 mb-2 text-lg bg-red-500 text-white"}>
             {error}
           </span>
         )}
-        <p className={"text-3xl mb-8"}>Login</p>
         <div className={"py-8"}>
           <div className={"py-4"}>
             <p className={"text-2xl mb-2"}>Email</p>
@@ -90,7 +76,7 @@ function Login() {
         </div>
         <button
           className={
-            "w-56 h-20 mt-8 bg-dark border-4 border-medium rounded-2xl"
+            "p-6 mt-8 bg-dark border-4 border-medium rounded-2xl"
           }
           type="submit"
         >
