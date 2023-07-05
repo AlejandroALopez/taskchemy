@@ -1,3 +1,4 @@
+import { signIn } from "next-auth/react";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -8,20 +9,21 @@ function Login() {
   const [error, setError] = useState<string | null>(null);
 
   // action for signing in
-  async function signInHandler(enteredUserData: any) {
-    const response = await fetch("/api/auth/sign-in", {
-      method: "POST",
-      body: JSON.stringify(enteredUserData),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+  // async function signInHandler(enteredUserData: any) {
+  //   const response = await fetch("/api/auth/sign-in", {
+  //     method: "POST",
+  //     body: JSON.stringify(enteredUserData),
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   });
 
-    const data = await response.json();
-    return data;
-  }
+  //   const data = await response.json();
+  //   return data;
+  // }
 
   const handleSubmit = async (e: any) => {
+    setError("");
     e.preventDefault();
 
     const data = {
@@ -29,14 +31,16 @@ function Login() {
       password: e.target.password.value,
     }
 
-    console.log('data: ', data);
-    const signInResponse = await signInHandler(data);
+    const signInResponse = await signIn("credentials", {
+      email: data.email,
+      password: data.password,
+      redirect: false,
+    })
 
-    if (signInResponse.data) {
-      console.log('user: ', signInResponse.data);
+    if (signInResponse && !signInResponse.error) {
       router.push("/");
     } else {
-      console.log(signInResponse.message); // error
+      console.log("Error: ", signInResponse);
       setError("Your Email or Password is wrong!");
     }
   };
@@ -56,6 +60,11 @@ function Login() {
         className={"flex flex-col items-center w-full"}
         onSubmit={handleSubmit}
       >
+        {error && (
+          <span className={"p-4 mb-2 text-lg bg-red-500 text-white"}>
+            {error}
+          </span>
+        )}
         <p className={"text-3xl mb-8"}>Login</p>
         <div className={"py-8"}>
           <div className={"py-4"}>
