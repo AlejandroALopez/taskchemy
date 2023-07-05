@@ -252,17 +252,6 @@ function TaskEdit(props: any) {
   );
 }
 
-// export async function getStaticPaths() {
-//   const tasks = await getTasksHandler();
-
-//   return {
-//     fallback: "blocking", // false = all supported values in paths, true otherwise
-//     paths: tasks.map((task) => ({
-//       params: { taskId: task._id.toString() },
-//     })),
-//   };
-// }
-
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { taskId } = context.query;
   const session = await getSession(context);

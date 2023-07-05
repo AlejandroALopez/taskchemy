@@ -1,6 +1,8 @@
 import Head from "next/head";
 import { useState, Fragment } from "react";
 import { useRouter } from "next/router";
+import { GetServerSidePropsContext } from "next";
+import { getSession } from "next-auth/react";
 import { DAYS_OF_WEEK } from "@/utils/constants";
 import {
   getRoutinesHandler,
@@ -41,7 +43,7 @@ function RoutineEdit(props: any) {
         description: description,
         frequency: frequency,
         daysFollowed: props.routineData.daysFollowed,
-        userEmail: props.routineData.userEmail
+        userEmail: props.routineData.userEmail,
       },
     };
 
@@ -124,31 +126,35 @@ function RoutineEdit(props: any) {
   );
 }
 
-export async function getStaticPaths() {
-  const routines = await getRoutinesHandler();
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const { routineId } = context.query;
+  const session = await getSession(context);
 
-  return {
-    fallback: "blocking", // false = all supported values in paths, true otherwise
-    paths: routines.map((routine) => ({
-      params: { routineId: routine._id.toString() },
-    })),
-  };
-}
-
-export async function getStaticProps(context: any) {
-  const selectedRoutine = await getOneRoutineHandler(context.params.routineId);
-
-  return {
-    props: {
-      routineData: {
-        id: selectedRoutine?._id.toString(),
-        title: selectedRoutine?.title,
-        description: selectedRoutine?.description,
-        frequency: selectedRoutine?.frequency,
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
       },
-    },
-    revalidate: 1,
-  };
+    };
+  } else {
+    const user = session.user;
+    const selectedRoutine = await getOneRoutineHandler(
+      routineId as string,
+      user?.email as string
+    );
+
+    return {
+      props: {
+        routineData: {
+          id: selectedRoutine?._id.toString(),
+          title: selectedRoutine?.title,
+          description: selectedRoutine?.description,
+          frequency: selectedRoutine?.frequency,
+        },
+      },
+    };
+  }
 }
 
 export default RoutineEdit;

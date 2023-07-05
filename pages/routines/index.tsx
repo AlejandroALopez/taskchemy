@@ -37,6 +37,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   } else {
     const user = session.user;
     const routines = await getRoutinesHandler(user?.email as string);
+
     return {
       props: {
         routines: routines.map((routine: any) => ({

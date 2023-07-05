@@ -1,10 +1,12 @@
 import Head from "next/head";
 import { useState, Fragment } from "react";
 import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 import { DAYS_OF_WEEK } from "@/utils/constants";
 
 function RoutineCreate() {
   const router = useRouter();
+  const { data: session } = useSession();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [frequency, setFrequency] = useState(new Array(7).fill(true));
@@ -36,7 +38,7 @@ function RoutineCreate() {
       description: description,
       frequency: frequency,
       daysFollowed: 0,
-      // insert user id here
+      userEmail: session?.user?.email
     };
 
     createRoutineHandler(routineData);
