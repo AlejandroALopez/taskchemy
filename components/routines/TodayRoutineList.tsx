@@ -9,9 +9,9 @@ function TodayRoutineList(props: any) {
       <div className={"flex flex-row items-center justify-between"}>
         <p className={"text-xl"}>Routines Today</p>
       </div>
-      {props.routines.length > 0 ? (
+      {props.routines?.length > 0 ? (
         <ul className={"list-none m-0 p-0"}>
-          {props.routines.map((routine: Routine) => {
+          {props.routines?.map((routine: Routine) => {
             if (routine.frequency[dayNumber]) {
               return (
                 <TodayRoutineItem

@@ -1,5 +1,7 @@
 import Head from "next/head";
 import { Fragment } from "react";
+import { GetServerSidePropsContext } from "next";
+import { getSession } from "next-auth/react";
 import { getTasksHandler } from "@/actions/taskActions";
 import { sortArrayOfTasksByDate } from "@/utils/dateFunctions";
 import AllTaskList from "@/components/tasks/AllTaskList";
@@ -20,25 +22,34 @@ function Tasks(props: any) {
   );
 }
 
-export async function getStaticProps() {
-    const tasks = await getTasksHandler();
-  
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const session = await getSession(context);
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  } else {
+    const user = session.user;
+    const tasks = await getTasksHandler(user?.email as string);
+
     return {
       props: {
-        tasks: tasks.map((task: any) => ({ // sort from newest to oldest date
+        tasks: tasks.map((task: any) => ({
           id: task._id.toString(),
           title: task.title,
           description: task.description,
           tags: task.tags,
           date: task.date,
           completed: task.completed,
-          userEmail: task.userEmail
+          userEmail: task.userEmail,
         })),
       },
-      revalidate: 1,
     };
   }
-  
-  
+}
 
 export default Tasks;

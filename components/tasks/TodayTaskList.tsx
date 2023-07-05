@@ -2,14 +2,10 @@ import { useRouter } from "next/router";
 import { TaskProps } from "../../types/TaskTypes";
 import { formatDate } from "@/utils/dateFunctions";
 import TodayTaskItem from "./TodayTaskItem";
-import { useSession } from "next-auth/react";
 
 function TodayTaskList(props: TaskProps) {
-  const { data: session } = useSession();
   const router = useRouter();
   const today = formatDate(new Date());
-
-  console.log('user: ',session);
 
   function addTaskHandler() {
     router.push("/tasks/create"); // move to task creation page
@@ -35,13 +31,13 @@ function TodayTaskList(props: TaskProps) {
           <p className={"text-3xl text-white"}>+</p>
         </button>
       </div>
-      {props.tasks.length > 0 ? (
+      {props.tasks?.length > 0 ? (
         <ul
           className={
             "list-none w-10/12 m-0 p-0 h-80 max-h-80 overflow-scroll overflow-x-hidden"
           }
         >
-          {props.tasks.map((task) => {
+          {props.tasks?.map((task) => {
             if (formatDate(new Date(task.date)) === today) {
               return (
                 <TodayTaskItem

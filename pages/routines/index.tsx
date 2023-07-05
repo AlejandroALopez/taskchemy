@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { Fragment } from "react";
-import { Routine } from "../../types/RoutineTypes";
+import { GetServerSidePropsContext } from "next";
+import { getSession } from "next-auth/react";
 import { getRoutinesHandler } from "../../actions/routineActions";
 import RoutineList from "../../components/routines/RoutineList";
 
@@ -23,22 +24,32 @@ function Routines(props: any) {
   );
 }
 
-export async function getStaticProps() {
-  const routines = await getRoutinesHandler();
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const session = await getSession(context);
 
-  return {
-    props: {
-      routines: routines.map((routine: any) => ({
-        id: routine._id.toString(),
-        title: routine.title,
-        description: routine.description,
-        frequency: routine.frequency,
-        daysFollowed: routine.daysFollowed,
-        userEmail: routine.userEmail
-      })),
-    },
-    revalidate: 1,
-  };
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  } else {
+    const user = session.user;
+    const routines = await getRoutinesHandler(user?.email as string);
+    return {
+      props: {
+        routines: routines.map((routine: any) => ({
+          id: routine._id.toString(),
+          title: routine.title,
+          description: routine.description,
+          frequency: routine.frequency,
+          daysFollowed: routine.daysFollowed,
+          userEmail: routine.userEmail,
+        })),
+      },
+    };
+  }
 }
 
 export default Routines;
