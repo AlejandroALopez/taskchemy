@@ -7,6 +7,7 @@ import TodayTaskList from "../components/tasks/TodayTaskList";
 import TodayRoutines from "@/components/routines/TodayRoutineList";
 import { getRoutinesHandler } from "@/actions/routineActions";
 import { GetServerSidePropsContext } from "next";
+// import LoginButton from "@/components/auth/login_btn";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,6 +27,7 @@ function Home(props: any) {
         <div className={"flex flex-row"}>
           <TodayTaskList tasks={props.tasks} />
           <TodayRoutines routines={props.routines} />
+          {/* <LoginButton /> */}
         </div>
       </Fragment>
     </main>
