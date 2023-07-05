@@ -1,6 +1,6 @@
 import { MongoClient, ObjectId } from "mongodb";
 
-export async function getRoutinesHandler() {
+export async function getRoutinesHandler(userEmail: string) {
   const client = await MongoClient.connect(
     process.env.MONGO_URL || ''
   );
@@ -8,13 +8,15 @@ export async function getRoutinesHandler() {
   const db = client.db();
   const routinesCollection = db.collection("routines");
 
-  const routines = await routinesCollection.find().toArray();
+  const routines = await routinesCollection.find({
+    userEmail: userEmail,
+  }).toArray();
 
   client.close();
   return routines;
 }
 
-export async function getOneRoutineHandler(routineId: string) {
+export async function getOneRoutineHandler(routineId: string, userEmail: string) {
   const client = await MongoClient.connect(process.env.MONGO_URL || "");
 
   const db = client.db();
@@ -22,6 +24,7 @@ export async function getOneRoutineHandler(routineId: string) {
 
   const selectedRoutine = await routinesCollection.findOne({
     _id: new ObjectId(routineId),
+    userEmail: userEmail,
   });
 
   client.close();

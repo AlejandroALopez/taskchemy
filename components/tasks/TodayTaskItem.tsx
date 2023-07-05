@@ -15,7 +15,7 @@ function TodayTaskItem(props: Task) {
           description: props.description,
           tags: props.tags,
           date: props.date,
-          userId: props.userId,
+          userEmail: props.userEmail,
           completed: status,
         },
       };

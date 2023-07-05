@@ -7,7 +7,7 @@ export interface Task {
     tags: Tag[], // tag ids
     date: number, // in miliseconds
     completed: boolean, // false upon creation
-    userId: string
+    userEmail: string
 }
 
 export interface TaskProps {
