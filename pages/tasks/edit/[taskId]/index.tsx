@@ -2,9 +2,12 @@ import Head from "next/head";
 import Image from "next/image";
 import { useState, Fragment } from "react";
 import { useRouter } from "next/router";
+import { GetServerSidePropsContext } from "next";
+import { getSession } from "next-auth/react";
 import { getTagsHandler } from "@/actions/tagActions";
 import { getTasksHandler, getOneTaskHandler } from "@/actions/taskActions";
 import { Tag } from "@/types/TagTypes";
+
 import CheckIcon from "@/public/icons/others/check.svg";
 import AddIcon from "@/public/icons/action/add.svg";
 import PenIcon from "@/public/icons/others/pen.svg";
@@ -231,17 +234,13 @@ function TaskEdit(props: any) {
           </div>
           <div className={"flex flex-row justify-between mt-4"}>
             <button
-              className={
-                "w-72 h-20 bg-dark border-4 border-medium rounded-2xl"
-              }
+              className={"w-72 h-20 bg-dark border-4 border-medium rounded-2xl"}
               onClick={cancelHandler}
             >
               <p className={"text-3xl text-white"}>Cancel</p>
             </button>
             <button
-              className={
-                "w-72 h-20 bg-dark border-4 border-medium rounded-2xl"
-              }
+              className={"w-72 h-20 bg-dark border-4 border-medium rounded-2xl"}
               onClick={submitHandler}
             >
               <p className={"text-3xl text-white"}>Update Task</p>
@@ -253,39 +252,51 @@ function TaskEdit(props: any) {
   );
 }
 
-export async function getStaticPaths() {
-  const tasks = await getTasksHandler();
+// export async function getStaticPaths() {
+//   const tasks = await getTasksHandler();
 
-  return {
-    fallback: "blocking", // false = all supported values in paths, true otherwise
-    paths: tasks.map((task) => ({
-      params: { taskId: task._id.toString() },
-    })),
-  };
-}
+//   return {
+//     fallback: "blocking", // false = all supported values in paths, true otherwise
+//     paths: tasks.map((task) => ({
+//       params: { taskId: task._id.toString() },
+//     })),
+//   };
+// }
 
-export async function getStaticProps(context: any) {
-  const selectedTask = await getOneTaskHandler(context.params.taskId);
-  const availableTags = await getTagsHandler();
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const { taskId } = context.query;
+  const session = await getSession(context);
 
-  return {
-    props: {
-      taskData: {
-        id: selectedTask?._id.toString(),
-        title: selectedTask?.title,
-        description: selectedTask?.description,
-        tags: selectedTask?.tags,
-        date: selectedTask?.date,
-        completed: selectedTask?.completed,
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
       },
-      availableTags: availableTags.map((tag: any) => ({
-        id: tag._id.toString(),
-        name: tag.name,
-        color: tag.color,
-      })),
-    },
-    revalidate: 1,
-  };
+    };
+  } else {
+    const user = session.user;
+    const selectedTask = await getOneTaskHandler(taskId as string, user?.email as string);
+    const availableTags = await getTagsHandler(user?.email as string);
+
+    return {
+      props: {
+        taskData: {
+          id: selectedTask?._id.toString(),
+          title: selectedTask?.title,
+          description: selectedTask?.description,
+          tags: selectedTask?.tags,
+          date: selectedTask?.date,
+          completed: selectedTask?.completed,
+        },
+        availableTags: availableTags.map((tag: any) => ({
+          id: tag._id.toString(),
+          name: tag.name,
+          color: tag.color,
+        })),
+      },
+    };
+  }
 }
 
 export default TaskEdit;

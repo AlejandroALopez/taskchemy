@@ -1,6 +1,8 @@
 import Head from "next/head";
 import Image from "next/image";
 import { useState, Fragment } from "react";
+import { GetServerSidePropsContext } from "next";
+import { useSession, getSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { Tag } from "@/types/TagTypes";
 import { getTagsHandler } from "@/actions/tagActions";
@@ -12,6 +14,7 @@ import "react-calendar/dist/Calendar.css";
 
 function TaskCreate(props: any) {
   const router = useRouter();
+  const { data: session } = useSession();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [date, setDate] = useState(new Date());
@@ -73,7 +76,7 @@ function TaskCreate(props: any) {
       tags: tags,
       date: date.getTime(),
       completed: false,
-      // insert User ID here
+      userEmail: session?.user?.email
     };
 
     createTaskHandler(taskData);
@@ -129,7 +132,9 @@ function TaskCreate(props: any) {
                 <p className={"text-xl mr-4"}>Tags</p>
                 <button
                   onClick={toggleShowTags}
-                  className={"border-2 bg-regular border-medium rounded-2xl px-3 py-2"}
+                  className={
+                    "border-2 bg-regular border-medium rounded-2xl px-3 py-2"
+                  }
                 >
                   <p className={"text-white"}>+ Add tag</p>
                 </button>
@@ -171,9 +176,7 @@ function TaskCreate(props: any) {
                     ))}
                   </div>
                   <div className={"flex flex-col items-center justify-center"}>
-                    <div
-                      className={"h-0.5 w-11/12 m-4 rounded-lg bg-white"}
-                    />
+                    <div className={"h-0.5 w-11/12 m-4 rounded-lg bg-white"} />
                     <div
                       className={
                         "flex flex-row items-center justify-between w-11/12 h-12 p-2 bg-lightest border-2 border-black rounded-md"
@@ -226,17 +229,13 @@ function TaskCreate(props: any) {
           </div>
           <div className={"flex flex-row justify-between mt-6"}>
             <button
-              className={
-                "w-72 h-20 bg-dark border-4 border-medium rounded-2xl"
-              }
+              className={"w-72 h-20 bg-dark border-4 border-medium rounded-2xl"}
               onClick={cancelHandler}
             >
               <p className={"text-3xl text-white"}>Cancel</p>
             </button>
             <button
-              className={
-                "w-72 h-20 bg-dark border-4 border-medium rounded-2xl"
-              }
+              className={"w-72 h-20 bg-dark border-4 border-medium rounded-2xl"}
               onClick={submitHandler}
             >
               <p className={"text-3xl text-white"}>+ Add Task</p>
@@ -248,19 +247,31 @@ function TaskCreate(props: any) {
   );
 }
 
-export async function getStaticProps() {
-  const availableTags = await getTagsHandler();
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const session = await getSession(context);
 
-  return {
-    props: {
-      availableTags: availableTags.map((tag: any) => ({
-        id: tag._id.toString(),
-        name: tag.name,
-        color: tag.color,
-      })),
-    },
-    revalidate: 1,
-  };
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  } else {
+    const user = session.user;
+    const availableTags = await getTagsHandler(user?.email as string);
+
+    return {
+      props: {
+        availableTags: availableTags.map((tag: any) => ({
+          id: tag._id.toString(),
+          name: tag.name,
+          color: tag.color,
+          userEmail: tag.userEmail,
+        })),
+      },
+    };
+  }
 }
 
 export default TaskCreate;
