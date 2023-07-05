@@ -36,6 +36,7 @@ function RoutineCreate() {
       description: description,
       frequency: frequency,
       daysFollowed: 0,
+      // insert user id here
     };
 
     createRoutineHandler(routineData);

@@ -21,6 +21,7 @@ function TodayRoutineList(props: any) {
                   description={routine.description}
                   frequency={routine.frequency}
                   daysFollowed={routine.daysFollowed}
+                  userId={routine.userId}
                 />
               );
             } else return null;

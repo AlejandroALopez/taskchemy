@@ -3,7 +3,8 @@ export interface Routine {
     title: string,
     description: string,
     frequency: boolean[], // for days of the week 0 to 6
-    daysFollowed: number // days the routine was successfully followed
+    daysFollowed: number, // days the routine was successfully followed
+    userId: string
 }
 
 export interface RoutineProps {

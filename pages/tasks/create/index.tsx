@@ -73,6 +73,7 @@ function TaskCreate(props: any) {
       tags: tags,
       date: date.getTime(),
       completed: false,
+      // insert User ID here
     };
 
     createTaskHandler(taskData);

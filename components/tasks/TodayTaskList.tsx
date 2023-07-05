@@ -47,6 +47,7 @@ function TodayTaskList(props: TaskProps) {
                   tags={task.tags}
                   date={task.date}
                   completed={task.completed}
+                  userId={task.userId}
                 />
               );
             } else return null;

@@ -41,6 +41,7 @@ export async function getStaticProps() {
         tags: task.tags,
         date: task.date,
         completed: task.completed,
+        userId: task.userId,
       })),
       routines: routines.map((routine: any) => ({
         id: routine._id.toString(),

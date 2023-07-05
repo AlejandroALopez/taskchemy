@@ -1,5 +1,6 @@
 export interface Tag {
     id: string,
     name: string,
-    color: string // color code e.g. #FFFFFF
+    color: string, // color code e.g. #FFFFFF
+    userId: string
 }

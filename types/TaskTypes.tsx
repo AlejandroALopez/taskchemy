@@ -6,7 +6,8 @@ export interface Task {
     description: string,
     tags: Tag[], // tag ids
     date: number, // in miliseconds
-    completed: boolean // false upon creation
+    completed: boolean, // false upon creation
+    userId: string
 }
 
 export interface TaskProps {

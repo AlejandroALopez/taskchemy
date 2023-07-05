@@ -66,6 +66,7 @@ function TaskEdit(props: any) {
         tags: tags,
         date: date.getTime(),
         completed: props.taskData.completed,
+        userId: props.taskData.userId,
       },
     };
 

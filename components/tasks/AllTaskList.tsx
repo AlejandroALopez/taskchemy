@@ -70,6 +70,7 @@ function AllTaskList(props: TaskProps) {
                   tags={task.tags}
                   date={task.date}
                   completed={task.completed}
+                  userId={task.userId}
                 />
               </div>
             );
