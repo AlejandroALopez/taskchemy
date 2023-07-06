@@ -14,7 +14,7 @@ const inter = Inter({ subsets: ["latin"] });
 function Home(props: any) {
   return (
     <main
-      className={`flex min-h-screen flex-col mx-12 my-24 ${inter.className}`}
+      className={`flex flex-col mx-12 my-24 ${inter.className}`}
     >
       <Fragment>
         <Head>
