@@ -14,7 +14,7 @@ const inter = Inter({ subsets: ["latin"] });
 function Home(props: any) {
   return (
     <main
-      className={`flex flex-col mx-12 my-24 ${inter.className}`}
+      className={`flex h-screen flex-col ${inter.className}`}
     >
       <Fragment>
         <Head>
@@ -24,7 +24,7 @@ function Home(props: any) {
             content="A Next.js app to manage tasks with an alchemy theme!"
           />
         </Head>
-        <div className={"flex flex-row"}>
+        <div className={"flex flex-row mx-12 mt-24"}>
           <TodayTaskList tasks={props.tasks} />
           <TodayRoutines routines={props.routines} />
           {/* <LoginButton /> */}
