@@ -38,6 +38,7 @@ function RoutineCreate() {
       description: description,
       frequency: frequency,
       daysFollowed: 0,
+      lastCompleted: '',
       userEmail: session?.user?.email
     };
 

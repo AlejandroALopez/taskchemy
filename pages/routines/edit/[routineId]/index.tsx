@@ -43,6 +43,7 @@ function RoutineEdit(props: any) {
         description: description,
         frequency: frequency,
         daysFollowed: props.routineData.daysFollowed,
+        lastCompleted: props.routineData.lastCompleted,
         userEmail: props.routineData.userEmail,
       },
     };

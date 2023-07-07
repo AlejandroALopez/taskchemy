@@ -6,30 +6,30 @@ import BigCheckIcon from "@/public/icons/others/bigCheck.svg";
 function TodayTaskItem(props: Task) {
   const [completed, setCompleted] = useState(props.completed);
 
-    // action for updating a task completion on the backend
-    async function updateTaskCompletionHandler(status: boolean) {  
-      const enteredData = {
-        taskId: props.id,
-        newData: {
-          title: props.title,
-          description: props.description,
-          tags: props.tags,
-          date: props.date,
-          userEmail: props.userEmail,
-          completed: status,
-        },
-      };
-  
-      const response = await fetch("/api/tasks/update-task", {
-        method: "PUT",
-        body: JSON.stringify(enteredData),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+  // action for updating a task completion on the backend
+  async function updateTaskCompletionHandler(status: boolean) {
+    const enteredData = {
+      taskId: props.id,
+      newData: {
+        title: props.title,
+        description: props.description,
+        tags: props.tags,
+        date: props.date,
+        userEmail: props.userEmail,
+        completed: status,
+      },
+    };
 
-      const data = await response.json();
-    }
+    const response = await fetch("/api/tasks/update-task", {
+      method: "PUT",
+      body: JSON.stringify(enteredData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data = await response.json();
+  }
 
   function handleTaskComplete() {
     setCompleted(!completed);

@@ -66,6 +66,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
           description: routine.description,
           frequency: routine.frequency,
           daysFollowed: routine.daysFollowed,
+          lastCompleted: routine.lastCompleted,
           userEmail: routine.userEmail,
         })),
       },

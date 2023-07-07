@@ -4,6 +4,7 @@ export interface Routine {
     description: string,
     frequency: boolean[], // for days of the week 0 to 6
     daysFollowed: number, // days the routine was successfully followed
+    lastCompleted: string, // last day formatted, '' by default
     userEmail: string
 }
 
