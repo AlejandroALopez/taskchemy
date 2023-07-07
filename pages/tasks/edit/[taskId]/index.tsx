@@ -3,9 +3,9 @@ import Image from "next/image";
 import { useState, Fragment } from "react";
 import { useRouter } from "next/router";
 import { GetServerSidePropsContext } from "next";
-import { getSession } from "next-auth/react";
+import { useSession, getSession } from "next-auth/react";
 import { getTagsHandler } from "@/actions/tagActions";
-import { getTasksHandler, getOneTaskHandler } from "@/actions/taskActions";
+import { getOneTaskHandler } from "@/actions/taskActions";
 import { Tag } from "@/types/TagTypes";
 
 import CheckIcon from "@/public/icons/others/check.svg";
@@ -16,6 +16,7 @@ import "react-calendar/dist/Calendar.css";
 
 function TaskEdit(props: any) {
   const router = useRouter();
+  const { data: session } = useSession();
   const [title, setTitle] = useState(props.taskData.title);
   const [description, setDescription] = useState(props.taskData.description);
   const [date, setDate] = useState(new Date(props.taskData.date));
@@ -87,6 +88,7 @@ function TaskEdit(props: any) {
     });
 
     const data = await response.json();
+    router.replace(router.asPath);
   }
 
   function handleNewTag(event: any) {
@@ -95,6 +97,7 @@ function TaskEdit(props: any) {
     const newTagData = {
       name: newTagName,
       color: "#CECECE",
+      userEmail: session?.user?.email,
     };
 
     createTagHandler(newTagData);
@@ -228,7 +231,9 @@ function TaskEdit(props: any) {
               onChange={(event: any) => setDate(event)}
               value={date}
               minDate={
-                date.getTime() <= new Date().getTime() ? date : new Date()
+                new Date().getTime() < props.taskData.date
+                  ? new Date()
+                  : new Date(props.taskData.date)
               }
             />
           </div>
@@ -265,7 +270,10 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     };
   } else {
     const user = session.user;
-    const selectedTask = await getOneTaskHandler(taskId as string, user?.email as string);
+    const selectedTask = await getOneTaskHandler(
+      taskId as string,
+      user?.email as string
+    );
     const availableTags = await getTagsHandler(user?.email as string);
 
     return {
@@ -277,11 +285,13 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
           tags: selectedTask?.tags,
           date: selectedTask?.date,
           completed: selectedTask?.completed,
+          userEmail: selectedTask?.userEmail,
         },
         availableTags: availableTags.map((tag: any) => ({
           id: tag._id.toString(),
           name: tag.name,
           color: tag.color,
+          userEmail: tag.userEmail,
         })),
       },
     };

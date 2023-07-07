@@ -8,7 +8,7 @@ import targetIcon from '../../public/icons/nav/target.svg';
 
 export default function Navigation() {
   return (
-    <div className={"flex flex-col items-center bg-darkest h-screen w-48"}>
+    <div className={"flex flex-col items-center bg-darkest w-48"}>
         <p className={"text-xl mt-5 mb-5 text-white"}>Taskchemy</p>
         <nav className={"flex flex-col items-center justify-center h-5/6 min-w-full"}>
           <ul className={"flex flex-col items-center"}>

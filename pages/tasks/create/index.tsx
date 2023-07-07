@@ -92,6 +92,7 @@ function TaskCreate(props: any) {
     const newTagData = {
       name: newTagName,
       color: "#CECECE",
+      userEmail: session?.user?.email
     };
 
     createTagHandler(newTagData);
@@ -142,7 +143,7 @@ function TaskCreate(props: any) {
               {showTags ? (
                 <div
                   className={
-                    "relative z-10 top-2 h-4/6 w-5/6 bg-darkest rounded-xl"
+                    "relative z-10 top-2 min-h-fit max-h-4/6 w-5/6 bg-darkest rounded-xl"
                   }
                 >
                   <div className={"h-4/6 overflow-scroll overflow-x-hidden"}>
