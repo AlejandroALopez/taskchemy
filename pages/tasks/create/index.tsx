@@ -51,7 +51,7 @@ function TaskCreate(props: any) {
 
     const data = await response.json();
 
-    router.replace("/");
+    router.back();
   }
 
   // action for creating a tag

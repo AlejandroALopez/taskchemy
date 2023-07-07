@@ -14,6 +14,7 @@ function AllTaskItem(props: Task) {
   const router = useRouter();
   const [expanded, setExpanded] = useState(false);
   const [deleted, setDeleted] = useState(false);
+  const [deleteWarning, setDeleteWarning] = useState(false);
 
   // action for deleting this task
   async function deleteTaskHandler() {
@@ -31,6 +32,10 @@ function AllTaskItem(props: Task) {
 
   function editTaskHandler() {
     router.push("/tasks/edit/" + props.id);
+  }
+
+  function toggleWarning() {
+    setDeleteWarning(!deleteWarning);
   }
 
   return (
@@ -81,14 +86,40 @@ function AllTaskItem(props: Task) {
                       </div>
                     ))}
                   </div>
-                  <div className={"flex flex-row justify-between"}>
-                    <button onClick={editTaskHandler}>
-                      <Image src={Edit} alt="edit" />
-                    </button>
-                    <button onClick={deleteTaskHandler}>
-                      <Image src={Delete} alt="delete" />
-                    </button>
-                  </div>
+                  {deleteWarning ? (
+                    <div
+                      className={
+                        "flex flex-row items-center justify-evenly w-3/12"
+                      }
+                    >
+                      <p>Delete?</p>
+                      <button
+                        className={"bg-green-400 p-2 rounded-xl"}
+                        onClick={deleteTaskHandler}
+                      >
+                        Yes
+                      </button>
+                      <button
+                        className={"bg-red-400 p-2 rounded-xl"}
+                        onClick={toggleWarning}
+                      >
+                        No
+                      </button>
+                    </div>
+                  ) : (
+                    <div
+                      className={
+                        "flex flex-row-reverse items-center w-3/12"
+                      }
+                    >
+                      <button onClick={toggleWarning}>
+                        <Image src={Delete} alt="delete" />
+                      </button>
+                      <button onClick={editTaskHandler}>
+                        <Image src={Edit} alt="edit" />
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
             )}
