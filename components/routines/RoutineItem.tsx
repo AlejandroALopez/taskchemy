@@ -10,6 +10,7 @@ import DeleteIcon from "@/public/icons/action/deleteWhite.svg";
 function RoutineItem(props: RoutineColorProps) {
   const router = useRouter();
   const [deleted, setDeleted] = useState(false);
+  const [deleteWarning, setDeleteWarning] = useState(false);
   const DAYS: string[] = ["S", "M", "T", "W", "T", "F", "S"];
   const ROUTINE_COLORS: string[] = [
     "bg-[#246b3f]",
@@ -20,7 +21,7 @@ function RoutineItem(props: RoutineColorProps) {
     ROUTINE_COLORS[props.index % ROUTINE_COLORS.length];
 
   // action for deleting this routine
-  async function deleteTaskHandler() {
+  async function deleteRoutineHandler() {
     const response = await fetch(`/api/routines/${props.routineObj.id}`, {
       method: "DELETE",
     });
@@ -31,6 +32,10 @@ function RoutineItem(props: RoutineColorProps) {
 
   function editRoutineHandler() {
     router.push("/routines/edit/" + props.routineObj.id);
+  }
+
+  function toggleWarning() {
+    setDeleteWarning(!deleteWarning);
   }
 
   return (
@@ -70,14 +75,34 @@ function RoutineItem(props: RoutineColorProps) {
                 Streak: {props.routineObj.daysFollowed} days
               </p>
             </div>
-            <div className={"flex flex-row justify-between"}>
-              <button onClick={editRoutineHandler}>
-                <Image src={EditIcon} alt="edit" />
-              </button>
-              <button onClick={deleteTaskHandler}>
-                <Image src={DeleteIcon} alt="delete" />
-              </button>
-            </div>
+            {deleteWarning ? (
+              <div
+                className={"flex flex-row items-center justify-evenly w-3/12"}
+              >
+                <p className={"text-lg text-white"}>Delete?</p>
+                <button
+                  className={"bg-green-400 p-2 rounded-xl"}
+                  onClick={deleteRoutineHandler}
+                >
+                  Yes
+                </button>
+                <button
+                  className={"bg-red-400 p-2 rounded-xl"}
+                  onClick={toggleWarning}
+                >
+                  No
+                </button>
+              </div>
+            ) : (
+              <div className={"flex flex-row-reverse items-center w-3/12"}>
+                <button onClick={toggleWarning}>
+                  <Image src={DeleteIcon} alt="delete" />
+                </button>
+                <button onClick={editRoutineHandler}>
+                  <Image src={EditIcon} alt="edit" />
+                </button>
+              </div>
+            )}
           </div>
         </li>
       )}
