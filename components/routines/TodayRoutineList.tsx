@@ -5,7 +5,7 @@ function TodayRoutineList(props: any) {
   const dayNumber = new Date().getDay(); // only show routines on today's weekday (e.g. monday)
 
   return (
-    <div className={"flex flex-col w-3/12 bg-alternate rounded-2xl p-4"}>
+    <div className={"flex flex-col w-8/12 bg-alternate rounded-2xl p-4 m-8 lg:w-3/12 md:w-4/12"}>
       <div className={"flex flex-row items-center justify-between"}>
         <p className={"text-xl"}>Routines Today</p>
       </div>

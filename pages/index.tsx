@@ -1,20 +1,19 @@
 import Head from "next/head";
+import { GetServerSidePropsContext } from "next";
 import { Fragment } from "react";
 import { Inter } from "next/font/google";
 import { getSession } from "next-auth/react";
 import { getTasksHandler } from "../actions/taskActions";
+import { getRoutinesHandler } from "@/actions/routineActions";
 import TodayTaskList from "../components/tasks/TodayTaskList";
 import TodayRoutines from "@/components/routines/TodayRoutineList";
-import { getRoutinesHandler } from "@/actions/routineActions";
-import { GetServerSidePropsContext } from "next";
-// import LoginButton from "@/components/auth/login_btn";
 
 const inter = Inter({ subsets: ["latin"] });
 
 function Home(props: any) {
   return (
     <main
-      className={`flex h-screen flex-col ${inter.className}`}
+      className={`flex flex-col md:h-screen ${inter.className}`}
     >
       <Fragment>
         <Head>
@@ -24,10 +23,9 @@ function Home(props: any) {
             content="A Next.js app to manage tasks with an alchemy theme!"
           />
         </Head>
-        <div className={"flex flex-row mx-12 mt-24"}>
+        <div className={"flex flex-col items-center mt-12 md:items-start md:flex-row md:mx-12 md:mt-24"}>
           <TodayTaskList tasks={props.tasks} />
           <TodayRoutines routines={props.routines} />
-          {/* <LoginButton /> */}
         </div>
       </Fragment>
     </main>

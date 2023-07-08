@@ -1,5 +1,4 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
 import { TaskProps } from "../../types/TaskTypes";
 import { formatDate } from "@/utils/dateFunctions";
 import TodayTaskItem from "./TodayTaskItem";
@@ -17,16 +16,15 @@ function TodayTaskList(props: TaskProps) {
   }
 
   return (
-    <div className={"flex flex-col w-1/2"}>
+    <div className={"flex flex-col w-8/12 md:w-1/2"}>
       <div
-        className={"flex flex-row w-10/12 items-center justify-between mb-10"}
+        className={"flex flex-row items-center justify-between mb-10 md:w-10/12"}
       >
-        <p className={"text-3xl"}>Today's Tasks</p>
-        {/* <p>Email: {session?.user?.image}</p> */}
+        <p className={"text-3xl lg:text-3xl md:text-2xl"}>Today's Tasks</p>
         <button
           onClick={addTaskHandler}
           className={
-            "flex items-center justify-center w-12 h-12 bg-dark border-4 border-medium rounded-2xl"
+            "flex items-center justify-center px-2 bg-dark border-4 border-medium rounded-xl"
           }
         >
           <p className={"text-3xl text-white"}>+</p>
@@ -35,7 +33,7 @@ function TodayTaskList(props: TaskProps) {
       {props.tasks?.length > 0 ? (
         <ul
           className={
-            "list-none w-10/12 m-0 p-0 h-80 max-h-80 overflow-scroll overflow-x-hidden"
+            "list-none m-0 p-0 h-80 max-h-80 overflow-scroll overflow-x-hidden md:w-10/12"
           }
         >
           {props.tasks?.map((task) => {
@@ -60,11 +58,11 @@ function TodayTaskList(props: TaskProps) {
           <p className={"text-lg"}>No active tasks today.</p>
         </div>
       )}
-      <div className={"flex justify-center w-10/12"}>
+      <div className={"flex justify-center md:w-10/12"}>
         <button
           onClick={allTasksHandler}
           className={
-            "w-1/2 mt-10 bg-dark h-16 border-4 border-medium rounded-2xl"
+            "px-8 mt-10 bg-dark h-16 border-4 border-medium rounded-2xl"
           }
         >
           <p className={"text-2xl text-white"}>See All Tasks</p>
