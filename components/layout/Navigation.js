@@ -8,15 +8,15 @@ import targetIcon from '../../public/icons/nav/target.svg';
 
 export default function Navigation() {
   return (
-    <div className={"flex flex-col items-center bg-darkest w-48"}>
-        <p className={"text-xl mt-5 mb-5 text-white"}>Taskchemy</p>
-        <nav className={"flex flex-col items-center justify-center h-5/6 min-w-full"}>
-          <ul className={"flex flex-col items-center"}>
-            <Link href='/' className={"flex flex-col w-full items-center justify-center h-28 m-3"}>
+    <div className={"flex flex-row md:flex-col items-center justify-between bg-darkest md:w-48"}>
+        <p className={"text-xl m-5 text-white"}>Taskchemy</p>
+        <nav className={"flex flex-row md:flex-col items-center justify-center h-5/6"}>
+          <ul className={"flex flex-row md:flex-col items-center"}>
+            <Link href='/' className={"flex flex-col w-full items-center justify-center md:h-28 m-3"}>
               <Image src={homeIcon} alt="dashboard" />
               <p className={"text-white"}>Dashboard</p>
             </Link>
-            <Link href='/routines' className={"flex flex-col w-full items-center justify-center h-28 m-3"}>
+            <Link href='/routines' className={"flex flex-col w-full items-center justify-center md:h-28 m-3"}>
               <Image src={targetIcon} alt="routines" />
               <p className={"text-white"}>Routines</p>
             </Link>
@@ -30,7 +30,7 @@ export default function Navigation() {
             </Link> */}
           </ul>
         </nav>
-        <button className={"text-white"} onClick={() => signOut()}>Sign out</button>
+        <button className={"text-white m-5"} onClick={() => signOut()}>Sign out</button>
     </div>
   );
 }
