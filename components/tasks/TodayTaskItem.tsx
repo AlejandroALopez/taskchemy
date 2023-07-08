@@ -39,19 +39,25 @@ function TodayTaskItem(props: Task) {
   return (
     <div className={"flex flex-row items-center justify-between w-11/12 m-3"}>
       <button
-        className={
-          "flex items-center justify-center w-20 h-16 bg-light border-regular border-4 rounded-full"
-        }
+        className={`flex items-center justify-center ${
+          completed ? "p-1" : "p-6"
+        } bg-light border-regular border-4 rounded-full`}
         onClick={handleTaskComplete}
       >
-        {completed && <Image src={BigCheckIcon} alt="big check" />}
+        {completed && (
+          <div className={"relative w-[40px] h-[40px]"}>
+            <Image src={BigCheckIcon} alt="big check" />
+          </div>
+        )}
       </button>
       <div
         className={
           "flex w-11/12 ml-10 bg-lightest border-4 border-light rounded-2xl"
         }
       >
-        <p className={"break-words text-lg m-4 w-11/12 lg:text-xl"}>{props.title}</p>
+        <p className={"break-words text-lg m-4 w-11/12 lg:text-xl"}>
+          {props.title}
+        </p>
       </div>
     </div>
   );

@@ -42,7 +42,7 @@ function AllTaskItem(props: Task) {
     <>
       {!deleted && (
         <li
-          className={`flex flex-row w-10/12 ${expanded ? "h-40" : "h-20"} mb-4`}
+          className={`flex flex-row w-11/12 ${expanded ? "h-40" : "h-20"} mb-4`}
         >
           <div
             className={
@@ -54,19 +54,27 @@ function AllTaskItem(props: Task) {
             >
               <div className={"flex flex-row items-center"}>
                 <div
-                  className={
-                    "flex items-center justify-center w-10 h-10 border-4 border-dark rounded-full"
-                  }
+                  className={`flex items-center justify-center ${
+                    props.completed ? "" : "p-5"
+                  } border-4 border-dark rounded-full`}
                 >
-                  {props.completed && <Image src={BigCheck} alt="big check" />}
+                  {props.completed && (
+                    <div className={"relative w-[40px] h-[40px]"}>
+                      <Image src={BigCheck} alt="big check" />
+                    </div>
+                  )}
                 </div>
-                <p className={"text-xl m-4"}>{props.title}</p>
+                <p className={"max-w-8/12 text-xl m-4 line-clamp-1"}>
+                  {props.title}
+                </p>
               </div>
-              <button onClick={expandTaskHandler}>
-                <Image
-                  src={expanded ? UpArrow : DownArrow}
-                  alt="arrow down/up"
-                />
+              <button onClick={expandTaskHandler} className={"bg-blue-400"}>
+                <div className={"relative w-[60px] h-[60px]"}>
+                  <Image
+                    src={expanded ? UpArrow : DownArrow}
+                    alt="arrow down/up"
+                  />
+                </div>
               </button>
             </div>
             {expanded && (
@@ -108,9 +116,7 @@ function AllTaskItem(props: Task) {
                     </div>
                   ) : (
                     <div
-                      className={
-                        "flex flex-row-reverse items-center w-3/12"
-                      }
+                      className={"flex flex-row-reverse items-center w-3/12"}
                     >
                       <button onClick={toggleWarning}>
                         <Image src={Delete} alt="delete" />

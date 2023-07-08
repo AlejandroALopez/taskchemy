@@ -19,28 +19,32 @@ function AllTaskList(props: TaskProps) {
   return (
     <div className={"flex flex-col w-full"}>
       <div
-        className={"flex flex-row w-10/12 items-center justify-between mb-10"}
+        className={
+          "flex flex-col w-11/12 justify-between mb-10 md:flex-row md:items-center"
+        }
       >
-        <p className={"text-3xl"}>My Tasks</p>
-        <button
-          onClick={addTaskHandler}
-          className={
-            "w-12 h-12 bg-dark border-4 border-medium rounded-xl"
-          }
-        >
-          <p className={"text-2xl text-white"}>+</p>
-        </button>
-        <div className="flex items-center w-6/12 h-12 bg-lightest  border-4 border-darkest rounded-2xl">
-          <input className="m-4 w-full bg-lightest" placeholder="Search" />
+        <div className={"flex flex-row items-center m-2 md:w-3/12"}>
+          <p className={"text-3xl"}>My Tasks</p>
+          <button
+            onClick={addTaskHandler}
+            className={
+              "w-12 h-12 ml-8 bg-dark border-4 border-medium rounded-xl"
+            }
+          >
+            <p className={"text-2xl text-white"}>+</p>
+          </button>
         </div>
-        <button
-          onClick={sortTagHandler}
-          className={
-            "w-32 h-12 bg-dark border-4 border-medium rounded-md"
-          }
-        >
-          <p className={"text-md text-white"}>Sort by Tags</p>
-        </button>
+        <div className={"flex flex-row md:w-9/12 m-2 md:px-4 items-center justify-between"}>
+          <div className="flex items-center w-1/2 md:w-8/12 h-12 bg-lightest  border-4 border-darkest rounded-2xl">
+            <input className="m-4 w-full bg-lightest" placeholder="Search" />
+          </div>
+          <button
+            onClick={sortTagHandler}
+            className={"w-32 h-12 bg-dark border-4 border-medium rounded-md"}
+          >
+            <p className={"text-md text-white"}>Sort by Tags</p>
+          </button>
+        </div>
       </div>
       {props.tasks.length > 0 ? (
         <ul
@@ -56,11 +60,11 @@ function AllTaskList(props: TaskProps) {
             return (
               <div key={task.id}>
                 {!sameDate && (
-                  <div className={`${index === 0 ? '': 'mt-8'}`}>
+                  <div className={`${index === 0 ? "" : "mt-8"}`}>
                     <p className={"text-2xl text-dark"}>
-                      {formattedDate === today ? 'Today' : formattedDate}
+                      {formattedDate === today ? "Today" : formattedDate}
                     </p>
-                    <div className={"w-10/12 h-1 bg-dark mb-4 rounded-3xl"} />
+                    <div className={"w-11/12 h-1 bg-dark mb-4 rounded-3xl"} />
                   </div>
                 )}
                 <AllTaskItem
