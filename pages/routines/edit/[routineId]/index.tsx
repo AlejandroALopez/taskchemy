@@ -67,7 +67,7 @@ function RoutineEdit(props: any) {
         <div className={"flex flex-col w-10/12"}>
           <p className={"text-3xl mb-10"}>Create Routine</p>
           <div className={"flex flex-row mb-6 justify-between"}>
-            <p className={"text-xl mr-12"}>Title</p>
+            <p className={"text-xl w-4/12 mr-4"}>Title</p>
             <input
               onChange={(event: any) => setTitle(event.target.value)}
               value={title}
@@ -76,7 +76,7 @@ function RoutineEdit(props: any) {
             />
           </div>
           <div className={"flex flex-row mb-6 justify-between"}>
-            <p className={"text-xl mr-12"}>Description (optional)</p>
+            <p className={"text-xl w-4/12 mr-4"}>Description (optional)</p>
             <textarea
               className={"w-9/12 border-2 border-dark rounded-lg px-2"}
               placeholder="Routine description"
@@ -85,13 +85,15 @@ function RoutineEdit(props: any) {
               onChange={(event: any) => setDescription(event.target.value)}
             />
           </div>
-          <div className={"flex flex-row my-6 justify-between"}>
-            <p className={"text-xl mr-12"}>Frequency (everyday by default)</p>
-            <div className={"flex flex-row"}>
+          <div className={"flex flex-col lg:flex-row my-6 justify-between"}>
+            <p className={"text-xl lg:mr-12"}>
+              Frequency (everyday by default)
+            </p>
+            <div className={"flex flex-row flex-wrap mt-4 lg:mt-0"}>
               {[...Array(7)].map((value: undefined, index: number) => (
                 <button
                   key={index}
-                  className={`flex items-center justify-center h-14 w-14 ml-4 rounded-full border-2 border-black ${
+                  className={`flex items-center justify-center h-14 w-14 m-2 rounded-full border-2 border-black ${
                     frequency[index] ? "bg-darkest" : "bg-white"
                   }`}
                   onClick={() => handleFrequencyChange(index)}
@@ -107,18 +109,28 @@ function RoutineEdit(props: any) {
               ))}
             </div>
           </div>
-          <div className={"flex flex-row justify-between mt-52"}>
+          <div
+            className={"flex flex-row justify-between mt-6 md:mt-20 lg:mt-42"}
+          >
             <button
-              className={"w-72 h-20 bg-dark border-4 border-medium rounded-2xl"}
+              className={
+                "px-6 py-2 md:px-12 md:py-4 bg-dark border-4 border-medium rounded-2xl"
+              }
               onClick={cancelHandler}
             >
-              <p className={"text-3xl text-white"}>Cancel</p>
+              <p className={"text-xl md:text-2xl lg:text-3xl text-white"}>
+                Cancel
+              </p>
             </button>
             <button
-              className={"w-72 h-20 bg-dark border-4 border-medium rounded-2xl"}
+              className={
+                "px-6 py-2 md:px-12 md:py-4 bg-dark border-4 border-medium rounded-2xl"
+              }
               onClick={submitHandler}
             >
-              <p className={"text-3xl text-white"}>Update Routine</p>
+              <p className={"text-xl md:text-2xl lg:text-3xl text-white"}>
+                Update Routine
+              </p>
             </button>
           </div>
         </div>
