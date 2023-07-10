@@ -20,7 +20,7 @@ function AllTaskList(props: TaskProps) {
     <div className={"flex flex-col w-full"}>
       <div
         className={
-          "flex flex-col w-11/12 justify-between mb-10 md:flex-row md:items-center"
+          "flex flex-col w-full md:w-11/12 justify-between mb-10 md:flex-row md:items-center"
         }
       >
         <div className={"flex flex-row items-center m-2 md:w-3/12"}>
@@ -49,7 +49,7 @@ function AllTaskList(props: TaskProps) {
       {props.tasks.length > 0 ? (
         <ul
           className={
-            "list-none w-11/12 m-0 p-0 overflow-y-scroll max-h-[32rem] overflow-x-hidden"
+            "list-none w-full md:w-11/12 m-0 p-0 overflow-y-scroll max-h-[32rem] overflow-x-hidden"
           }
         >
           {props.tasks.map((task, index) => {

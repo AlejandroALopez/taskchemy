@@ -42,7 +42,7 @@ function AllTaskItem(props: Task) {
     <>
       {!deleted && (
         <li
-          className={`flex flex-row w-11/12 ${expanded ? "h-40" : "h-20"} mb-4`}
+          className={`flex flex-row w-11/12 ${expanded ? "h-64 md:h-40" : "h-20"} mb-4`}
         >
           <div
             className={
@@ -64,11 +64,11 @@ function AllTaskItem(props: Task) {
                     </div>
                   )}
                 </div>
-                <p className={"max-w-8/12 text-xl m-4 line-clamp-1"}>
+                <p className={"max-w-8/12 text-lg md:text-xl m-4 line-clamp-1"}>
                   {props.title}
                 </p>
               </div>
-              <button onClick={expandTaskHandler} className={"bg-blue-400"}>
+              <button onClick={expandTaskHandler}>
                 <div className={"relative w-[60px] h-[60px]"}>
                   <Image
                     src={expanded ? UpArrow : DownArrow}
@@ -78,10 +78,10 @@ function AllTaskItem(props: Task) {
               </button>
             </div>
             {expanded && (
-              <div className={"flex flex-col justify-start w-full pb-16"}>
+              <div className={"flex flex-col justify-start w-full pb-32 md:pb-16"}>
                 <div className={"w-full h-0.5 bg-regular rounded-md"} />
-                <div className={"flex justify-between mt-2"}>
-                  <p className={"w-5/12 text-start"}>{props.description}</p>
+                <div className={"flex flex-col md:flex-row justify-between mt-2"}>
+                  <p className={"w-full md:w-5/12 text-sm md:text-md h-16 text-start"}>{props.description}</p>
                   <div className={"flex flex-row flex-wrap w-5/12 h-14"}>
                     {props.tags.map((tag: Tag, index: number) => (
                       <div
@@ -116,7 +116,7 @@ function AllTaskItem(props: Task) {
                     </div>
                   ) : (
                     <div
-                      className={"flex flex-row-reverse items-center w-3/12"}
+                      className={"flex flex-row-reverse md:justify-start justify-evenly md:items-start w-full md:w-3/12"}
                     >
                       <button onClick={toggleWarning}>
                         <Image src={Delete} alt="delete" />
