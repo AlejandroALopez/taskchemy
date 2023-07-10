@@ -11,7 +11,7 @@ function RoutineList(props: RoutineProps) {
 
   return (
     <div className={"flex flex-col w-full"}>
-      <div className={"flex flex-row items-center justify-between w-3/12 mb-8"}>
+      <div className={"flex flex-row items-center justify-between lg:w-10/12 mb-8"}>
         <p className={"text-3xl"}>My Routines</p>
         <button
           onClick={addRoutineHandler}
@@ -25,7 +25,7 @@ function RoutineList(props: RoutineProps) {
       {props.routines.length > 0 ? (
         <ul
           className={
-            "list-none w-10/12 m-0 p-0 overflow-scroll overflow-x-hidden max-h-[32rem]"
+            "list-none lg:w-10/12 m-0 p-0 overflow-scroll overflow-x-hidden max-h-[32rem]"
           }
         >
           {props.routines.map((routine: Routine, index) => (
