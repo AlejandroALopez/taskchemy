@@ -76,7 +76,7 @@ function TaskCreate(props: any) {
       tags: tags,
       date: date.getTime(),
       completed: false,
-      userEmail: session?.user?.email
+      userEmail: session?.user?.email,
     };
 
     createTaskHandler(taskData);
@@ -92,7 +92,7 @@ function TaskCreate(props: any) {
     const newTagData = {
       name: newTagName,
       color: "#CECECE",
-      userEmail: session?.user?.email
+      userEmail: session?.user?.email,
     };
 
     createTagHandler(newTagData);
@@ -106,10 +106,10 @@ function TaskCreate(props: any) {
           <title>Create Task</title>
           <meta name="description" content="Create a new task!" />
         </Head>
-        <div className={"flex flex-col w-10/12"}>
+        <div className={"flex flex-col md:w-10/12"}>
           <p className={"text-3xl mb-10"}>Create Task</p>
           <div className={"flex flex-row mb-6 justify-between"}>
-            <p className={"text-xl mr-12"}>Title</p>
+            <p className={"text-xl w-4/12 mr-4"}>Title</p>
             <input
               onChange={(event: any) => setTitle(event.target.value)}
               value={title}
@@ -118,7 +118,7 @@ function TaskCreate(props: any) {
             />
           </div>
           <div className={"flex flex-row mb-6 justify-between"}>
-            <p className={"text-xl mr-12"}>Description (optional)</p>
+            <p className={"text-xl w-4/12 mr-4"}>Description (optional)</p>
             <textarea
               className={"w-9/12 border-2 border-dark rounded-lg px-2"}
               placeholder="Task description"
@@ -127,8 +127,8 @@ function TaskCreate(props: any) {
               onChange={(event: any) => setDescription(event.target.value)}
             />
           </div>
-          <div className={"flex flex-row my-4 justify-between"}>
-            <div className={"w-4/12 max-h-full"}>
+          <div className={"flex flex-col lg:flex-row justify-between my-4"}>
+            <div className={"md:w-5/12 lg:w-4/12 max-h-full mb-4"}>
               <div className={"flex flex-row items-center"}>
                 <p className={"text-xl mr-4"}>Tags</p>
                 <button
@@ -230,16 +230,24 @@ function TaskCreate(props: any) {
           </div>
           <div className={"flex flex-row justify-between mt-6"}>
             <button
-              className={"w-72 h-20 bg-dark border-4 border-medium rounded-2xl"}
+              className={
+                "px-6 py-2 md:px-12 md:py-4 bg-dark border-4 border-medium rounded-2xl"
+              }
               onClick={cancelHandler}
             >
-              <p className={"text-3xl text-white"}>Cancel</p>
+              <p className={"text-xl md:text-2xl lg:text-3xl text-white"}>
+                Cancel
+              </p>
             </button>
             <button
-              className={"w-72 h-20 bg-dark border-4 border-medium rounded-2xl"}
+              className={
+                "px-6 py-2 md:px-12 md:py-4 bg-dark border-4 border-medium rounded-2xl"
+              }
               onClick={submitHandler}
             >
-              <p className={"text-3xl text-white"}>+ Add Task</p>
+              <p className={"text-xl md:text-2xl lg:text-3xl text-white"}>
+                + Add Task
+              </p>
             </button>
           </div>
         </div>

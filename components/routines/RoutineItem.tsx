@@ -77,7 +77,9 @@ function RoutineItem(props: RoutineColorProps) {
             </div>
             {deleteWarning ? (
               <div
-                className={"flex flex-row items-center justify-center lg:justify-startlg:w-3/12"}
+                className={
+                  "flex flex-row items-center justify-center lg:justify-startlg:w-3/12"
+                }
               >
                 <p className={"text-lg text-white mr-2"}>Delete?</p>
                 <button
@@ -94,11 +96,21 @@ function RoutineItem(props: RoutineColorProps) {
                 </button>
               </div>
             ) : (
-              <div className={"flex flex-row-reverse items-center justify-center lg:justify-startlg:w-3/12"}>
-                <button className={"relative w-10 lg:w-[60px] h-10 lg:h-[60px]"} onClick={toggleWarning}>
+              <div
+                className={
+                  "flex flex-row-reverse items-center justify-center lg:justify-startlg:w-3/12"
+                }
+              >
+                <button
+                  className={"relative w-10 lg:w-[60px] h-10 lg:h-[60px]"}
+                  onClick={toggleWarning}
+                >
                   <Image src={DeleteIcon} alt="delete" />
                 </button>
-                <button className={"relative w-10 lg:w-[60px] h-10 lg:h-[60px]"} onClick={editRoutineHandler}>
+                <button
+                  className={"relative w-10 lg:w-[60px] h-10 lg:h-[60px]"}
+                  onClick={editRoutineHandler}
+                >
                   <Image src={EditIcon} alt="edit" />
                 </button>
               </div>

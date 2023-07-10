@@ -42,7 +42,9 @@ function AllTaskItem(props: Task) {
     <>
       {!deleted && (
         <li
-          className={`flex flex-row w-11/12 ${expanded ? "h-64 md:h-40" : "h-20"} mb-4`}
+          className={`flex flex-row w-11/12 ${
+            expanded ? "h-64 md:h-40" : "h-20"
+          } mb-4`}
         >
           <div
             className={
@@ -78,11 +80,21 @@ function AllTaskItem(props: Task) {
               </button>
             </div>
             {expanded && (
-              <div className={"flex flex-col justify-start w-full pb-32 md:pb-16"}>
+              <div
+                className={"flex flex-col justify-start w-full pb-32 md:pb-16"}
+              >
                 <div className={"w-full h-0.5 bg-regular rounded-md"} />
-                <div className={"flex flex-col md:flex-row justify-between mt-2"}>
-                  <p className={"w-full md:w-5/12 text-sm md:text-md h-16 text-start"}>{props.description}</p>
-                  <div className={"flex flex-row flex-wrap w-5/12 h-14"}>
+                <div
+                  className={"flex flex-col md:flex-row justify-between mt-2"}
+                >
+                  <p
+                    className={
+                      "w-full md:w-5/12 text-sm md:text-md h-16 text-start"
+                    }
+                  >
+                    {props.description}
+                  </p>
+                  <div className={"flex flex-row flex-wrap justify-center md:w-5/12"}>
                     {props.tags.map((tag: Tag, index: number) => (
                       <div
                         key={index}
@@ -97,18 +109,18 @@ function AllTaskItem(props: Task) {
                   {deleteWarning ? (
                     <div
                       className={
-                        "flex flex-row items-center justify-evenly w-3/12"
+                        "flex flex-row items-center justify-center lg:justify-startlg:w-3/12"
                       }
                     >
-                      <p>Delete?</p>
+                      <p className={"text-lg mr-2"}>Delete?</p>
                       <button
-                        className={"bg-green-400 p-2 rounded-xl"}
+                        className={"bg-green-400 p-2 rounded-xl mr-2"}
                         onClick={deleteTaskHandler}
                       >
                         Yes
                       </button>
                       <button
-                        className={"bg-red-400 p-2 rounded-xl"}
+                        className={"bg-red-400 p-2 rounded-xl mr-2"}
                         onClick={toggleWarning}
                       >
                         No
@@ -116,7 +128,9 @@ function AllTaskItem(props: Task) {
                     </div>
                   ) : (
                     <div
-                      className={"flex flex-row-reverse md:justify-start justify-evenly md:items-start w-full md:w-3/12"}
+                      className={
+                        "flex flex-row-reverse md:justify-start justify-evenly md:items-start w-full md:w-3/12"
+                      }
                     >
                       <button onClick={toggleWarning}>
                         <Image src={Delete} alt="delete" />
