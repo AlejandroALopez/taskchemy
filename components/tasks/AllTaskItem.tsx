@@ -43,12 +43,12 @@ function AllTaskItem(props: Task) {
       {!deleted && (
         <li
           className={`flex flex-row w-11/12 ${
-            expanded ? "h-64 md:h-40" : "h-20"
+            expanded ? "h-64 md:h-40" : "h-fit"
           } mb-4`}
         >
           <div
             className={
-              "flex flex-col items-center justify-between px-4 w-full bg-lightest border-4 border-dark rounded-3xl"
+              "flex flex-col items-center justify-between px-4 py-2 w-full bg-white rounded-3xl drop-shadow-md"
             }
           >
             <div
@@ -57,8 +57,8 @@ function AllTaskItem(props: Task) {
               <div className={"flex flex-row items-center"}>
                 <div
                   className={`flex items-center justify-center ${
-                    props.completed ? "" : "p-5"
-                  } border-4 border-dark rounded-full`}
+                    props.completed ? "border-regular" : "border-alternate p-5"
+                  } border-2 rounded-full`}
                 >
                   {props.completed && (
                     <div className={"relative w-[40px] h-[40px]"}>
@@ -99,37 +99,37 @@ function AllTaskItem(props: Task) {
                       <div
                         key={index}
                         className={
-                          "flex items-center h-1/2 p-2 ml-4 mb-2 bg-light border-2 border-darkest rounded-lg"
+                          "flex items-center h-1/2 p-2 ml-4 mb-2 bg-regular rounded-lg"
                         }
                       >
-                        <p>{tag.name}</p>
+                        <p className={"text-white"}>{tag.name}</p>
                       </div>
                     ))}
                   </div>
                   {deleteWarning ? (
                     <div
                       className={
-                        "flex flex-row items-center justify-center lg:justify-startlg:w-3/12"
+                        "flex flex-row items-center justify-center lg:justify-startlg:w-3/12 gap-2"
                       }
                     >
                       <p className={"text-lg mr-2"}>Delete?</p>
                       <button
-                        className={"bg-green-400 p-2 rounded-xl mr-2"}
+                        className={"bg-regular p-2 rounded-xl mr-2"}
                         onClick={deleteTaskHandler}
                       >
-                        Yes
+                        <p className={"text-white"}>Yes</p>
                       </button>
                       <button
-                        className={"bg-red-400 p-2 rounded-xl mr-2"}
+                        className={"bg-white border-2 border-alternate p-2 rounded-xl mr-2"}
                         onClick={toggleWarning}
                       >
-                        No
+                        <p className={"text-alternate"}>No</p>
                       </button>
                     </div>
                   ) : (
                     <div
                       className={
-                        "flex flex-row-reverse md:justify-start justify-evenly md:items-start w-full md:w-3/12"
+                        "flex flex-row-reverse md:justify-start justify-evenly md:items-start w-full md:w-3/12 gap-2"
                       }
                     >
                       <button onClick={toggleWarning}>

@@ -81,7 +81,7 @@ function SignUp() {
               name="email"
               placeholder="Email"
               required
-              className={"border-2 border-dark rounded-lg px-2"}
+              className={"border-2 border-regular rounded-lg px-2"}
             />
           </div>
           <div className={"py-4"}>
@@ -91,12 +91,12 @@ function SignUp() {
               name="password"
               placeholder="Password"
               required
-              className={"border-2 border-dark rounded-lg px-2"}
+              className={"border-2 border-regular rounded-lg px-2"}
             />
           </div>
         </div>
         <button
-          className={"p-6 mt-8 bg-dark border-4 border-medium rounded-2xl"}
+          className={"p-6 mt-8 bg-regular rounded-2xl drop-shadow-md"}
           type="submit"
         >
           <p className={"text-3xl text-white"}>Create Account</p>

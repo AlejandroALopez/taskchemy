@@ -65,20 +65,20 @@ function RoutineEdit(props: any) {
           <meta name="description" content="Edit an existing routine" />
         </Head>
         <div className={"flex flex-col w-10/12"}>
-          <p className={"text-3xl mb-10"}>Create Routine</p>
+          <p className={"text-3xl mb-10 font-medium"}>Create Routine</p>
           <div className={"flex flex-row mb-6 justify-between"}>
             <p className={"text-xl w-4/12 mr-4"}>Title</p>
             <input
               onChange={(event: any) => setTitle(event.target.value)}
               value={title}
-              className={"w-9/12 border-2 border-dark rounded-lg px-2"}
+              className={"w-9/12 border-2 border-regular rounded-lg px-2"}
               placeholder="Routine title"
             />
           </div>
           <div className={"flex flex-row mb-6 justify-between"}>
             <p className={"text-xl w-4/12 mr-4"}>Description (optional)</p>
             <textarea
-              className={"w-9/12 border-2 border-dark rounded-lg px-2"}
+              className={"w-9/12 border-2 border-regular rounded-lg px-2"}
               placeholder="Routine description"
               rows={3}
               value={description}
@@ -93,8 +93,8 @@ function RoutineEdit(props: any) {
               {[...Array(7)].map((value: undefined, index: number) => (
                 <button
                   key={index}
-                  className={`flex items-center justify-center h-14 w-14 m-2 rounded-full border-2 border-black ${
-                    frequency[index] ? "bg-darkest" : "bg-white"
+                  className={`flex items-center justify-center h-14 w-14 m-2 rounded-full drop-shadow-md ${
+                    frequency[index] ? "bg-regular" : "bg-white"
                   }`}
                   onClick={() => handleFrequencyChange(index)}
                 >
@@ -114,17 +114,17 @@ function RoutineEdit(props: any) {
           >
             <button
               className={
-                "px-6 py-2 md:px-12 md:py-4 bg-dark border-4 border-medium rounded-2xl"
+                "px-6 py-2 md:px-12 md:py-4 bg-white border-2 border-alternate rounded-2xl drop-shadow-md"
               }
               onClick={cancelHandler}
             >
-              <p className={"text-xl md:text-2xl lg:text-3xl text-white"}>
+              <p className={"text-xl md:text-2xl lg:text-3xl text-alternate"}>
                 Cancel
               </p>
             </button>
             <button
               className={
-                "px-6 py-2 md:px-12 md:py-4 bg-dark border-4 border-medium rounded-2xl"
+                "px-6 py-2 md:px-12 md:py-4 bg-regular rounded-2xl drop-shadow-md"
               }
               onClick={submitHandler}
             >

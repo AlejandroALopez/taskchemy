@@ -112,20 +112,20 @@ function TaskEdit(props: any) {
           <meta name="description" content="Edit an existing task!" />
         </Head>
         <div className={"flex flex-col md:w-10/12"}>
-          <p className={"text-3xl mb-10"}>Edit Task</p>
+          <p className={"text-3xl mb-10 font-medium"}>Edit Task</p>
           <div className={"flex flex-row mb-6 justify-between"}>
             <p className={"text-xl w-4/12 mr-4"}>Title</p>
             <input
               onChange={(event: any) => setTitle(event.target.value)}
               value={title}
-              className={"w-9/12 border-2 border-dark rounded-lg px-2"}
+              className={"w-9/12 border-2 border-regular rounded-lg px-2"}
               placeholder="Task title"
             />
           </div>
           <div className={"flex flex-row mb-6 justify-between"}>
             <p className={"text-xl w-4/12 mr-4"}>Description (optional)</p>
             <textarea
-              className={"w-9/12 border-2 border-dark rounded-lg px-2"}
+              className={"w-9/12 border-2 border-regular rounded-lg px-2"}
               placeholder="Task description"
               rows={3}
               value={description}
@@ -139,7 +139,7 @@ function TaskEdit(props: any) {
                 <button
                   onClick={toggleShowTags}
                   className={
-                    "border-2 bg-regular border-medium rounded-2xl px-3 py-2"
+                    "border-2 bg-regular rounded-2xl px-3 py-2 drop-shadow-md"
                   }
                 >
                   <p className={"text-white"}>+ Add tag</p>
@@ -148,16 +148,14 @@ function TaskEdit(props: any) {
               {showTags ? (
                 <div
                   className={
-                    "relative z-10 top-2 h-4/6 w-5/6 bg-white border-2 border-black rounded-xl"
+                    "relative z-10 top-2 min-h-fit max-h-4/6 w-5/6 bg-white rounded-xl drop-shadow-md"
                   }
                 >
                   <div className={"h-4/6 overflow-scroll overflow-x-hidden"}>
                     {props.availableTags.map((tag: Tag) => (
                       <button
-                        className={`flex justify-between items-center w-11/12 m-2 p-2 rounded-lg border-black border-2 ${
-                          findTagById(tags, tag.id)
-                            ? "bg-regular"
-                            : "bg-lightest"
+                        className={`flex justify-between items-center w-11/12 m-2 p-2 rounded-lg drop-shadow-md ${
+                          findTagById(tags, tag.id) ? "bg-dark" : "bg-light"
                         }`}
                         key={tag.id}
                         onClick={() => {
@@ -168,10 +166,18 @@ function TaskEdit(props: any) {
                           }
                         }}
                       >
-                        <p>{tag.name}</p>
+                        <p
+                          className={`${
+                            findTagById(tags, tag.id)
+                              ? "text-white"
+                              : "text-black"
+                          }`}
+                        >
+                          {tag.name}
+                        </p>
                         <div
                           className={
-                            "flex justify-center items-center w-6 h-6 bg-white border-2 border-darkest"
+                            "flex justify-center items-center w-6 h-6 bg-white"
                           }
                         >
                           {findTagById(tags, tag.id) && (
@@ -181,11 +187,11 @@ function TaskEdit(props: any) {
                       </button>
                     ))}
                   </div>
-                  <div className={"flex flex-col items-center justify-center"}>
+                  <div className={"flex flex-col items-center justify-center pb-2"}>
                     <div className={"h-0.5 w-11/12 m-4 rounded-lg bg-white"} />
                     <div
                       className={
-                        "flex flex-row items-center justify-between w-11/12 h-12 p-2 bg-lightest border-2 border-black rounded-md"
+                        "flex flex-row items-center justify-between w-11/12 h-12 p-2 border-2 border-alternate rounded-md"
                       }
                     >
                       <Image src={PenIcon} alt="pen" />
@@ -195,7 +201,7 @@ function TaskEdit(props: any) {
                         }
                         value={newTagName}
                         className={
-                          "bg-lightest border-2 border-black w-8/12 p-1 text-gray-500 rounded-lg"
+                          "border-2 border-alternate w-8/12 p-1 text-alternate rounded-lg"
                         }
                         placeholder="Create new tag"
                       />
@@ -240,17 +246,17 @@ function TaskEdit(props: any) {
           <div className={"flex flex-row justify-between mt-6"}>
             <button
               className={
-                "px-6 py-2 md:px-12 md:py-4 bg-dark border-4 border-medium rounded-2xl"
+                "px-6 py-2 md:px-12 md:py-4 bg-white border-2 border-alternate rounded-2xl drop-shadow-md"
               }
               onClick={cancelHandler}
             >
-              <p className={"text-xl md:text-2xl lg:text-3xl text-white"}>
+              <p className={"text-xl md:text-2xl lg:text-3xl text-alternate"}>
                 Cancel
               </p>
             </button>
             <button
               className={
-                "px-6 py-2 md:px-12 md:py-4 bg-dark border-4 border-medium rounded-2xl"
+                "px-6 py-2 md:px-12 md:py-4 bg-regular rounded-2xl drop-shadow-md"
               }
               onClick={submitHandler}
             >

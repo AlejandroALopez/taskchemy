@@ -52,7 +52,7 @@ function TodayRoutineItem(props: Routine) {
   return (
     <div
       className={
-        "flex flex-row items-center justify-between bg-dark my-4 px-4 py-2 rounded-lg"
+        "flex flex-row items-center justify-between bg-dark my-4 px-4 py-2 rounded-lg drop-shadow-md"
       }
     >
       <p className={"break-words w-8/12 text-lg text-white"}>{props.title}</p>

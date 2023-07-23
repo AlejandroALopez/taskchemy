@@ -11,15 +11,15 @@ function RoutineList(props: RoutineProps) {
 
   return (
     <div className={"flex flex-col w-full"}>
-      <div className={"flex flex-row items-center justify-between lg:w-10/12 mb-8"}>
-        <p className={"text-3xl"}>My Routines</p>
+      <div className={"flex flex-row items-center gap-6 lg:w-10/12 mb-8"}>
+        <p className={"text-3xl font-medium"}>My Routines</p>
         <button
           onClick={addRoutineHandler}
           className={
-            "w-12 h-12 bg-dark border-4 border-medium rounded-xl"
+            "w-12 h-12 bg-regular rounded-xl drop-shadow-md"
           }
         >
-          <p className={"text-2xl text-white"}>+</p>
+          <p className={"text-4xl text-white mb-1"}>+</p>
         </button>
       </div>
       {props.routines.length > 0 ? (

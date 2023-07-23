@@ -24,27 +24,27 @@ function AllTaskList(props: TaskProps) {
         }
       >
         <div className={"flex flex-row items-center m-2 md:w-3/12"}>
-          <p className={"text-3xl"}>My Tasks</p>
+          <p className={"text-3xl font-medium"}>My Tasks</p>
           <button
             onClick={addTaskHandler}
             className={
-              "w-12 h-12 ml-8 bg-dark border-4 border-medium rounded-xl"
+              "w-12 h-12 ml-8 bg-regular rounded-xl drop-shadow-md"
             }
           >
-            <p className={"text-2xl text-white"}>+</p>
+            <p className={"text-4xl text-white mb-1"}>+</p>
           </button>
         </div>
-        <div className={"flex flex-row md:w-9/12 m-2 md:px-4 items-center justify-between"}>
-          <div className="flex items-center w-1/2 md:w-8/12 h-12 bg-lightest  border-4 border-darkest rounded-2xl">
-            <input className="m-4 w-full bg-lightest" placeholder="Search" />
+        {/* <div className={"flex flex-row md:w-9/12 m-2 md:px-4 items-center justify-between"}>
+          <div className="flex items-center w-1/2 md:w-8/12 h-12 bg-white border-2 border-alternate rounded-2xl">
+            <input className="m-4 w-full bg-white" placeholder="Search" />
           </div>
           <button
             onClick={sortTagHandler}
-            className={"w-32 h-12 bg-dark border-4 border-medium rounded-md"}
+            className={"w-32 h-12 bg-regular rounded-xl drop-shadow-md"}
           >
             <p className={"text-md text-white"}>Sort by Tags</p>
           </button>
-        </div>
+        </div> */}
       </div>
       {props.tasks.length > 0 ? (
         <ul
@@ -61,10 +61,10 @@ function AllTaskList(props: TaskProps) {
               <div key={task.id}>
                 {!sameDate && (
                   <div className={`${index === 0 ? "" : "mt-8"}`}>
-                    <p className={"text-2xl text-dark"}>
+                    <p className={"text-2xl"}>
                       {formattedDate === today ? "Today" : formattedDate}
                     </p>
-                    <div className={"w-11/12 h-1 bg-dark mb-4 rounded-3xl"} />
+                    <div className={"w-11/12 h-1 bg-black mb-4 rounded-3xl"} />
                   </div>
                 )}
                 <AllTaskItem

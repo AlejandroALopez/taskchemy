@@ -43,7 +43,7 @@ function RoutineItem(props: RoutineColorProps) {
       {!deleted && (
         <li className={"flex flex-col lg:flex-row w-11/12 mb-10"}>
           <div
-            className={`flex flex-col lg:flex-row justify-between lg:items-center w-full p-4 ${routineColor} border-4 border-darkest rounded-3xl`}
+            className={`flex flex-col lg:flex-row justify-between lg:items-center w-full p-6 ${routineColor} rounded-3xl drop-shadow-md`}
           >
             <div className={"flex flex-col lg:w-6/12"}>
               <p className={"text-2xl m-4 text-white"}>
