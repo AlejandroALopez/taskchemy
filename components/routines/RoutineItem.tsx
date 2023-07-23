@@ -13,9 +13,9 @@ function RoutineItem(props: RoutineColorProps) {
   const [deleteWarning, setDeleteWarning] = useState(false);
   const DAYS: string[] = ["S", "M", "T", "W", "T", "F", "S"];
   const ROUTINE_COLORS: string[] = [
-    "bg-[#246b3f]",
-    "bg-[#24386b]",
-    "bg-[#6b2424]",
+    "bg-[#1B7E43]",
+    "bg-[#1B377E]",
+    "bg-[#7E1B1B]",
   ]; // green, blue, red
   const routineColor: string =
     ROUTINE_COLORS[props.index % ROUTINE_COLORS.length];

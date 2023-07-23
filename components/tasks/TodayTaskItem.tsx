@@ -40,8 +40,8 @@ function TodayTaskItem(props: Task) {
     <div className={"flex flex-row items-center justify-between w-11/12 m-3"}>
       <button
         className={`flex items-center justify-center ${
-          completed ? "p-1" : "p-6"
-        } bg-light border-regular border-4 rounded-full`}
+          completed ? "p-1 border-regular" : "p-6 border-alternate"
+        } border-2 rounded-full drop-shadow-md`}
         onClick={handleTaskComplete}
       >
         {completed && (
@@ -52,7 +52,7 @@ function TodayTaskItem(props: Task) {
       </button>
       <div
         className={
-          "flex w-11/12 ml-10 bg-lightest border-4 border-light rounded-2xl"
+          "flex w-11/12 ml-10 bg-white rounded-2xl drop-shadow-md"
         }
       >
         <p className={"break-words text-lg m-4 w-11/12 lg:text-xl"}>

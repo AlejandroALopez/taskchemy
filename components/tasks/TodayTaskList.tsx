@@ -20,14 +20,14 @@ function TodayTaskList(props: TaskProps) {
       <div
         className={"flex flex-row items-center justify-between mb-10 md:w-10/12"}
       >
-        <p className={"text-3xl lg:text-3xl md:text-2xl"}>Today's Tasks</p>
+        <p className={"text-3xl lg:text-3xl md:text-2xl font-medium"}>Today's Tasks</p>
         <button
           onClick={addTaskHandler}
           className={
-            "flex items-center justify-center px-2 bg-dark border-4 border-medium rounded-xl"
+            "flex items-center justify-center px-2 bg-regular rounded-xl drop-shadow-md"
           }
         >
-          <p className={"text-3xl text-white"}>+</p>
+          <p className={"text-5xl text-white mb-1"}>+</p>
         </button>
       </div>
       {props.tasks?.length > 0 ? (
@@ -62,7 +62,7 @@ function TodayTaskList(props: TaskProps) {
         <button
           onClick={allTasksHandler}
           className={
-            "px-8 mt-10 bg-dark h-16 border-4 border-medium rounded-2xl"
+            "px-8 py-4 mt-10 bg-regular h-16 rounded-2xl drop-shadow-md"
           }
         >
           <p className={"text-2xl text-white"}>See All Tasks</p>
