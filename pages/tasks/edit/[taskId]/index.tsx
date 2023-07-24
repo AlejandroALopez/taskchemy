@@ -6,7 +6,6 @@ import { GetServerSidePropsContext } from "next";
 import { useSession, getSession } from "next-auth/react";
 import { getTagsHandler } from "@/actions/tagActions";
 import { getOneTaskHandler } from "@/actions/taskActions";
-import { Tag } from "@/types/TagTypes";
 
 import CheckIcon from "@/public/icons/others/check.svg";
 import AddIcon from "@/public/icons/action/add.svg";
@@ -20,7 +19,8 @@ function TaskEdit(props: any) {
   const [title, setTitle] = useState(props.taskData.title);
   const [description, setDescription] = useState(props.taskData.description);
   const [date, setDate] = useState(new Date(props.taskData.date));
-  const [tags, setTags] = useState<Tag[]>(props.taskData.tags);
+  const [tags, setTags] = useState<string[]>(props.taskData.tags);
+  const [availableTags, setAvailableTags] = useState<string[]>(props.serverTags.map(({name} : any) => name));
   const [showTags, setShowTags] = useState(false);
   const [newTagName, setNewTagName] = useState("");
 
@@ -32,17 +32,12 @@ function TaskEdit(props: any) {
     setShowTags(!showTags);
   }
 
-  // adapted from https://stackoverflow.com/questions/13964155/get-javascript-object-from-array-of-objects-by-value-of-property
-  function findTagById(array: Array<any>, id: any): Tag | undefined {
-    var result = array.find((obj) => {
-      return obj.id === id;
-    });
-
-    return result;
+  function isTagActive(tag: string): boolean {
+    return tags.indexOf(tag) !== -1;
   }
 
-  function removeTagHandler(tag: Tag) {
-    setTags(tags.filter((item) => item.id !== tag.id));
+  function removeTagHandler(tag: string) {
+    setTags(tags.filter((item) => item !== tag));
   }
 
   // action for updating a task
@@ -101,6 +96,7 @@ function TaskEdit(props: any) {
     };
 
     createTagHandler(newTagData);
+    setAvailableTags((prevTags) => [...prevTags, newTagData.name])
     setNewTagName("");
   }
 
@@ -148,19 +144,19 @@ function TaskEdit(props: any) {
               {showTags ? (
                 <div
                   className={
-                    "relative z-10 top-2 min-h-fit max-h-4/6 w-5/6 bg-white rounded-xl drop-shadow-md"
+                    "relative z-10 top-2 h-fit w-5/6 bg-white rounded-xl drop-shadow-md"
                   }
                 >
-                  <div className={"h-4/6 overflow-scroll overflow-x-hidden"}>
-                    {props.availableTags.map((tag: Tag) => (
+                  <div className={"max-h-40 overflow-scroll overflow-x-hidden"}>
+                    {availableTags.map((tag: string, index: number) => (
                       <button
                         className={`flex justify-between items-center w-11/12 m-2 p-2 rounded-lg drop-shadow-md ${
-                          findTagById(tags, tag.id) ? "bg-dark" : "bg-light"
+                          isTagActive(tag) ? "bg-dark" : "bg-light"
                         }`}
-                        key={tag.id}
+                        key={index}
                         onClick={() => {
-                          if (findTagById(tags, tag.id)) {
-                            setTags(tags.filter((item) => item.id !== tag.id));
+                          if (isTagActive(tag)) {
+                            removeTagHandler(tag);
                           } else {
                             setTags((oldTags) => [...oldTags, tag]);
                           }
@@ -168,19 +164,19 @@ function TaskEdit(props: any) {
                       >
                         <p
                           className={`${
-                            findTagById(tags, tag.id)
+                            isTagActive(tag)
                               ? "text-white"
                               : "text-black"
                           }`}
                         >
-                          {tag.name}
+                          {tag}
                         </p>
                         <div
                           className={
                             "flex justify-center items-center w-6 h-6 bg-white"
                           }
                         >
-                          {findTagById(tags, tag.id) && (
+                          {isTagActive(tag) && (
                             <Image src={CheckIcon} alt="check" />
                           )}
                         </div>
@@ -217,13 +213,13 @@ function TaskEdit(props: any) {
                     "w-full h-5/6 mt-2 overflow-scroll overflow-x-hidden"
                   }
                 >
-                  {tags.map((tag) => (
+                  {tags.map((tag: string, i: number) => (
                     <button
-                      key={tag.id}
+                      key={i}
                       onClick={() => removeTagHandler(tag)}
                       className={"bg-dark rounded-2xl px-3 py-2 m-0.5"}
                     >
-                      <p className={"text-white"}>{tag.name}</p>
+                      <p className={"text-white"}>{tag}</p>
                     </button>
                   ))}
                 </div>
@@ -288,7 +284,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       taskId as string,
       user?.email as string
     );
-    const availableTags = await getTagsHandler(user?.email as string);
+    const serverTags = await getTagsHandler(user?.email as string);
 
     return {
       props: {
@@ -301,7 +297,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
           completed: selectedTask?.completed,
           userEmail: selectedTask?.userEmail,
         },
-        availableTags: availableTags.map((tag: any) => ({
+        serverTags: serverTags.map((tag: any) => ({
           id: tag._id.toString(),
           name: tag.name,
           color: tag.color,

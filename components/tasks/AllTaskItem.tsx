@@ -95,14 +95,14 @@ function AllTaskItem(props: Task) {
                     {props.description}
                   </p>
                   <div className={"flex flex-row flex-wrap justify-center md:w-5/12"}>
-                    {props.tags.map((tag: Tag, index: number) => (
+                    {props.tags.map((tag: string, index: number) => (
                       <div
                         key={index}
                         className={
                           "flex items-center h-1/2 p-2 ml-4 mb-2 bg-regular rounded-lg"
                         }
                       >
-                        <p className={"text-white"}>{tag.name}</p>
+                        <p className={"text-white"}>{tag}</p>
                       </div>
                     ))}
                   </div>
