@@ -9,8 +9,10 @@ function TodayRoutineItem(props: Routine) {
   const [completed, setCompleted] = useState(formatDate(new Date()) === props.lastCompleted); // replace with a props var
 
   function handleRoutineComplete() {
-    setCompleted(!completed);
-    updateRoutineCompletionHandler(!completed);
+    if(!completed) {
+      setCompleted(true);
+      updateRoutineCompletionHandler(true);
+    }
   }
 
   // action for updating a routine completion on the backend
