@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
-import { useState, Fragment, useEffect } from "react";
+import { useState, Fragment } from "react";
 import { GetServerSidePropsContext } from "next";
 import { useSession, getSession } from "next-auth/react";
 import { useRouter } from "next/router";
@@ -94,10 +94,6 @@ function TaskCreate(props: any) {
     setAvailableTags((prevTags) => [...prevTags, newTagData.name])
     setNewTagName("");
   }
-
-  useEffect(() => {
-    console.log('tags: ', availableTags);
-  }, []);
 
   return (
     <main className={"flex min-h-screen flex-col p-12"}>
