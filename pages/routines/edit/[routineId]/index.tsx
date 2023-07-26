@@ -65,20 +65,20 @@ function RoutineEdit(props: any) {
           <meta name="description" content="Edit an existing routine" />
         </Head>
         <div className={"flex flex-col w-10/12"}>
-          <p className={"text-3xl mb-10 font-medium"}>Create Routine</p>
+          <p className={"text-3xl mb-10 font-medium text-black"}>Create Routine</p>
           <div className={"flex flex-row mb-6 justify-between"}>
-            <p className={"text-xl w-4/12 mr-4"}>Title</p>
+            <p className={"text-xl w-4/12 mr-4 text-black"}>Title</p>
             <input
               onChange={(event: any) => setTitle(event.target.value)}
               value={title}
-              className={"w-9/12 border-2 border-regular rounded-lg px-2"}
+              className={"w-9/12 border-2 border-regular rounded-lg px-2 text-black"}
               placeholder="Routine title"
             />
           </div>
           <div className={"flex flex-row mb-6 justify-between"}>
-            <p className={"text-xl w-4/12 mr-4"}>Description (optional)</p>
+            <p className={"text-xl w-4/12 mr-4 text-black"}>Description (optional)</p>
             <textarea
-              className={"w-9/12 border-2 border-regular rounded-lg px-2"}
+              className={"w-9/12 border-2 border-regular rounded-lg px-2 text-black"}
               placeholder="Routine description"
               rows={3}
               value={description}
@@ -86,7 +86,7 @@ function RoutineEdit(props: any) {
             />
           </div>
           <div className={"flex flex-col lg:flex-row my-6 justify-between"}>
-            <p className={"text-xl lg:mr-12"}>
+            <p className={"text-xl lg:mr-12 text-black"}>
               Frequency (everyday by default)
             </p>
             <div className={"flex flex-row flex-wrap mt-4 lg:mt-0"}>

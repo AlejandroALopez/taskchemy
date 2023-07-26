@@ -55,7 +55,7 @@ function TodayTaskItem(props: Task) {
           "flex w-11/12 ml-10 bg-white rounded-2xl drop-shadow-md"
         }
       >
-        <p className={"break-words text-lg m-4 w-11/12 lg:text-xl"}>
+        <p className={"break-words text-lg m-4 w-11/12 lg:text-xl text-black"}>
           {props.title}
         </p>
       </div>

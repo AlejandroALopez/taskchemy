@@ -20,7 +20,7 @@ function TodayTaskList(props: TaskProps) {
       <div
         className={"flex flex-row items-center justify-between mb-10 md:w-10/12"}
       >
-        <p className={"text-3xl lg:text-3xl md:text-2xl font-medium"}>Today's Tasks</p>
+        <p className={"text-3xl lg:text-3xl md:text-2xl font-medium text-black"}>Today's Tasks</p>
         <button
           onClick={addTaskHandler}
           className={

@@ -66,7 +66,7 @@ function AllTaskItem(props: Task) {
                     </div>
                   )}
                 </div>
-                <p className={"max-w-8/12 text-lg md:text-xl m-4 line-clamp-1"}>
+                <p className={"max-w-8/12 text-lg md:text-xl m-4 line-clamp-1 text-black"}>
                   {props.title}
                 </p>
               </div>
@@ -89,7 +89,7 @@ function AllTaskItem(props: Task) {
                 >
                   <p
                     className={
-                      "w-full md:w-5/12 text-sm md:text-md h-16 text-start"
+                      "w-full md:w-5/12 text-sm md:text-md h-16 text-start text-black"
                     }
                   >
                     {props.description}

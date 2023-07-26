@@ -12,7 +12,7 @@ function RoutineList(props: RoutineProps) {
   return (
     <div className={"flex flex-col w-full"}>
       <div className={"flex flex-row items-center gap-6 lg:w-10/12 mb-8"}>
-        <p className={"text-3xl font-medium"}>My Routines</p>
+        <p className={"text-3xl font-medium text-black"}>My Routines</p>
         <button
           onClick={addRoutineHandler}
           className={

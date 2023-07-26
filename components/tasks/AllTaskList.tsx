@@ -24,7 +24,7 @@ function AllTaskList(props: TaskProps) {
         }
       >
         <div className={"flex flex-row items-center m-2 md:w-3/12"}>
-          <p className={"text-3xl font-medium"}>My Tasks</p>
+          <p className={"text-3xl font-medium text-black"}>My Tasks</p>
           <button
             onClick={addTaskHandler}
             className={
@@ -61,7 +61,7 @@ function AllTaskList(props: TaskProps) {
               <div key={task.id}>
                 {!sameDate && (
                   <div className={`${index === 0 ? "" : "mt-8"}`}>
-                    <p className={"text-2xl"}>
+                    <p className={"text-2xl text-black"}>
                       {formattedDate === today ? "Today" : formattedDate}
                     </p>
                     <div className={"w-11/12 h-1 bg-black mb-4 rounded-3xl"} />

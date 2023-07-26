@@ -81,7 +81,7 @@ function SignUp() {
               name="email"
               placeholder="Email"
               required
-              className={"border-2 border-regular rounded-lg px-2"}
+              className={"border-2 border-regular rounded-lg px-2 text-black"}
             />
           </div>
           <div className={"py-4"}>
@@ -91,7 +91,7 @@ function SignUp() {
               name="password"
               placeholder="Password"
               required
-              className={"border-2 border-regular rounded-lg px-2"}
+              className={"border-2 border-regular rounded-lg px-2 text-black"}
             />
           </div>
         </div>
