@@ -12,11 +12,11 @@ export default function Navigation() {
         <p className={"text-xl m-5 text-white font-medium"}>Taskchemy</p>
         <nav className={"flex flex-row items-center justify-center h-5/6 md:flex-col"}>
           <ul className={"flex flex-row items-center md:flex-col"}>
-            <Link href='/' className={"flex flex-col w-full items-center justify-center m-3 md:h-28"}>
+            <Link href='/' className={"flex flex-col w-full items-center justify-center m-3 md:h-28 transition hover:scale-110 duration-300"}>
               <Image src={homeIcon} alt="dashboard" />
               <p className={"text-white"}>Dashboard</p>
             </Link>
-            <Link href='/routines' className={"flex flex-col w-full items-center justify-center m-3 md:h-28"}>
+            <Link href='/routines' className={"flex flex-col w-full items-center justify-center m-3 md:h-28 transition hover:scale-110 duration-300"}>
               <Image src={targetIcon} alt="routines" />
               <p className={"text-white"}>Routines</p>
             </Link>
@@ -30,7 +30,7 @@ export default function Navigation() {
             </Link> */}
           </ul>
         </nav>
-        <button className={"text-white m-5"} onClick={() => signOut()}>Sign out</button>
+        <button className={"text-white m-5 transition hover:scale-110 duration-300"} onClick={() => signOut()}>Sign out</button>
     </div>
   );
 }

@@ -41,7 +41,7 @@ function TodayTaskItem(props: Task) {
       <button
         className={`flex items-center justify-center ${
           completed ? "p-1 border-regular" : "p-6 border-alternate"
-        } border-2 rounded-full drop-shadow-md`}
+        } border-2 rounded-full drop-shadow-md transition hover:scale-110 duration-300`}
         onClick={handleTaskComplete}
       >
         {completed && (
@@ -55,7 +55,7 @@ function TodayTaskItem(props: Task) {
           "flex w-11/12 ml-10 bg-white rounded-2xl drop-shadow-md"
         }
       >
-        <p className={"break-words text-lg m-4 w-11/12 lg:text-xl"}>
+        <p className={"break-words text-lg m-4 w-11/12 lg:text-xl text-black"}>
           {props.title}
         </p>
       </div>

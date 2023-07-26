@@ -20,7 +20,9 @@ function TaskEdit(props: any) {
   const [description, setDescription] = useState(props.taskData.description);
   const [date, setDate] = useState(new Date(props.taskData.date));
   const [tags, setTags] = useState<string[]>(props.taskData.tags);
-  const [availableTags, setAvailableTags] = useState<string[]>(props.serverTags.map(({name} : any) => name));
+  const [availableTags, setAvailableTags] = useState<string[]>(
+    props.serverTags.map(({ name }: any) => name)
+  );
   const [showTags, setShowTags] = useState(false);
   const [newTagName, setNewTagName] = useState("");
 
@@ -96,7 +98,7 @@ function TaskEdit(props: any) {
     };
 
     createTagHandler(newTagData);
-    setAvailableTags((prevTags) => [...prevTags, newTagData.name])
+    setAvailableTags((prevTags) => [...prevTags, newTagData.name]);
     setNewTagName("");
   }
 
@@ -108,20 +110,26 @@ function TaskEdit(props: any) {
           <meta name="description" content="Edit an existing task!" />
         </Head>
         <div className={"flex flex-col md:w-10/12"}>
-          <p className={"text-3xl mb-10 font-medium"}>Edit Task</p>
+          <p className={"text-3xl mb-10 font-medium text-black"}>Edit Task</p>
           <div className={"flex flex-row mb-6 justify-between"}>
-            <p className={"text-xl w-4/12 mr-4"}>Title</p>
+            <p className={"text-xl w-4/12 mr-4 text-black"}>Title</p>
             <input
               onChange={(event: any) => setTitle(event.target.value)}
               value={title}
-              className={"w-9/12 border-2 border-regular rounded-lg px-2"}
+              className={
+                "w-9/12 border-2 border-regular rounded-lg px-2 text-black"
+              }
               placeholder="Task title"
             />
           </div>
           <div className={"flex flex-row mb-6 justify-between"}>
-            <p className={"text-xl w-4/12 mr-4"}>Description (optional)</p>
+            <p className={"text-xl w-4/12 mr-4 text-black"}>
+              Description (optional)
+            </p>
             <textarea
-              className={"w-9/12 border-2 border-regular rounded-lg px-2"}
+              className={
+                "w-9/12 border-2 border-regular rounded-lg px-2 text-black"
+              }
               placeholder="Task description"
               rows={3}
               value={description}
@@ -131,11 +139,11 @@ function TaskEdit(props: any) {
           <div className={"flex flex-col lg:flex-row justify-between my-4"}>
             <div className={"md:w-5/12 lg:w-4/12 max-h-full mb-4"}>
               <div className={"flex flex-row items-center"}>
-                <p className={"text-xl mr-4"}>Tags</p>
+                <p className={"text-xl mr-4 text-black"}>Tags</p>
                 <button
                   onClick={toggleShowTags}
                   className={
-                    "border-2 bg-regular rounded-2xl px-3 py-2 drop-shadow-md"
+                    "border-2 bg-regular rounded-2xl px-3 py-2 drop-shadow-md transition hover:scale-110 duration-300"
                   }
                 >
                   <p className={"text-white"}>+ Add tag</p>
@@ -164,9 +172,7 @@ function TaskEdit(props: any) {
                       >
                         <p
                           className={`${
-                            isTagActive(tag)
-                              ? "text-white"
-                              : "text-black"
+                            isTagActive(tag) ? "text-white" : "text-black"
                           }`}
                         >
                           {tag}
@@ -183,7 +189,9 @@ function TaskEdit(props: any) {
                       </button>
                     ))}
                   </div>
-                  <div className={"flex flex-col items-center justify-center pb-2"}>
+                  <div
+                    className={"flex flex-col items-center justify-center pb-2"}
+                  >
                     <div className={"h-0.5 w-11/12 m-4 rounded-lg bg-white"} />
                     <div
                       className={
@@ -217,7 +225,7 @@ function TaskEdit(props: any) {
                     <button
                       key={i}
                       onClick={() => removeTagHandler(tag)}
-                      className={"bg-dark rounded-2xl px-3 py-2 m-0.5"}
+                      className={"bg-dark rounded-2xl px-3 py-2 m-0.5 transition hover:scale-110 duration-300"}
                     >
                       <p className={"text-white"}>{tag}</p>
                     </button>
@@ -226,10 +234,13 @@ function TaskEdit(props: any) {
               )}
             </div>
             <div>
-              <p className={"text-xl mb-4"}>Date to complete</p>
-              <p className={"text-xl mb-4"}>(Select date from calendar)</p>
+              <p className={"text-xl mb-4 text-black"}>Date to complete</p>
+              <p className={"text-xl mb-4 text-black"}>
+                (Select date from calendar)
+              </p>
             </div>
             <Calendar
+              className={"text-black"}
               onChange={(event: any) => setDate(event)}
               value={date}
               minDate={
@@ -242,7 +253,7 @@ function TaskEdit(props: any) {
           <div className={"flex flex-row justify-between mt-6"}>
             <button
               className={
-                "px-6 py-2 md:px-12 md:py-4 bg-white border-2 border-alternate rounded-2xl drop-shadow-md"
+                "px-6 py-2 md:px-12 md:py-4 bg-white border-2 border-alternate rounded-2xl drop-shadow-md transition hover:scale-110 duration-300"
               }
               onClick={cancelHandler}
             >
@@ -252,7 +263,7 @@ function TaskEdit(props: any) {
             </button>
             <button
               className={
-                "px-6 py-2 md:px-12 md:py-4 bg-regular rounded-2xl drop-shadow-md"
+                "px-6 py-2 md:px-12 md:py-4 bg-regular rounded-2xl drop-shadow-md transition hover:scale-110 duration-300"
               }
               onClick={submitHandler}
             >

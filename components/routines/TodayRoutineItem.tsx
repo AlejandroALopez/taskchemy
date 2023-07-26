@@ -60,7 +60,7 @@ function TodayRoutineItem(props: Routine) {
       <p className={"break-words w-8/12 text-lg text-white"}>{props.title}</p>
       <button
         className={
-          "flex justify-center items-center w-12 h-12 rounded-full bg-dark border-2 border-white"
+          "flex justify-center items-center w-12 h-12 rounded-full bg-dark border-2 border-white transition hover:scale-110 duration-300"
         }
         onClick={handleRoutineComplete}
       >

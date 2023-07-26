@@ -83,13 +83,13 @@ function RoutineItem(props: RoutineColorProps) {
               >
                 <p className={"text-lg text-white mr-2"}>Delete?</p>
                 <button
-                  className={"bg-green-400 p-2 rounded-xl mr-2"}
+                  className={"bg-green-400 p-2 rounded-xl mr-2 transition hover:scale-110 duration-300"}
                   onClick={deleteRoutineHandler}
                 >
                   Yes
                 </button>
                 <button
-                  className={"bg-red-400 p-2 rounded-xl mr-2"}
+                  className={"bg-red-400 p-2 rounded-xl mr-2 transition hover:scale-110 duration-300"}
                   onClick={toggleWarning}
                 >
                   No
@@ -102,13 +102,13 @@ function RoutineItem(props: RoutineColorProps) {
                 }
               >
                 <button
-                  className={"relative w-10 lg:w-[60px] h-10 lg:h-[60px]"}
+                  className={"relative w-10 lg:w-[60px] h-10 lg:h-[60px] transition hover:scale-110 duration-300"}
                   onClick={toggleWarning}
                 >
                   <Image src={DeleteIcon} alt="delete" />
                 </button>
                 <button
-                  className={"relative w-10 lg:w-[60px] h-10 lg:h-[60px]"}
+                  className={"relative w-10 lg:w-[60px] h-10 lg:h-[60px] transition hover:scale-110 duration-300"}
                   onClick={editRoutineHandler}
                 >
                   <Image src={EditIcon} alt="edit" />
