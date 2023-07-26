@@ -16,7 +16,7 @@ function RoutineList(props: RoutineProps) {
         <button
           onClick={addRoutineHandler}
           className={
-            "w-12 h-12 bg-regular rounded-xl drop-shadow-md"
+            "w-12 h-12 bg-regular rounded-xl drop-shadow-md transition hover:scale-110 duration-300"
           }
         >
           <p className={"text-4xl text-white mb-1"}>+</p>

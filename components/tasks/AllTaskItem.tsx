@@ -70,7 +70,7 @@ function AllTaskItem(props: Task) {
                   {props.title}
                 </p>
               </div>
-              <button onClick={expandTaskHandler}>
+              <button onClick={expandTaskHandler} className={"transition hover:scale-110 duration-300"}>
                 <div className={"relative w-[60px] h-[60px]"}>
                   <Image
                     src={expanded ? UpArrow : DownArrow}
@@ -114,13 +114,13 @@ function AllTaskItem(props: Task) {
                     >
                       <p className={"text-lg mr-2"}>Delete?</p>
                       <button
-                        className={"bg-regular p-2 rounded-xl mr-2"}
+                        className={"bg-regular p-2 rounded-xl mr-2 transition hover:scale-110 duration-300"}
                         onClick={deleteTaskHandler}
                       >
                         <p className={"text-white"}>Yes</p>
                       </button>
                       <button
-                        className={"bg-white border-2 border-alternate p-2 rounded-xl mr-2"}
+                        className={"bg-white border-2 border-alternate p-2 rounded-xl mr-2 transition hover:scale-110 duration-300"}
                         onClick={toggleWarning}
                       >
                         <p className={"text-alternate"}>No</p>
@@ -132,10 +132,10 @@ function AllTaskItem(props: Task) {
                         "flex flex-row-reverse md:justify-start justify-evenly md:items-start w-full md:w-3/12 gap-2"
                       }
                     >
-                      <button onClick={toggleWarning}>
+                      <button onClick={toggleWarning} className={"transition hover:scale-110 duration-300"}>
                         <Image src={Delete} alt="delete" />
                       </button>
-                      <button onClick={editTaskHandler}>
+                      <button onClick={editTaskHandler} className={"transition hover:scale-110 duration-300"}>
                         <Image src={Edit} alt="edit" />
                       </button>
                     </div>

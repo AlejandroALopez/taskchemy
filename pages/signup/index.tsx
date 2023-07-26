@@ -96,7 +96,7 @@ function SignUp() {
           </div>
         </div>
         <button
-          className={"p-6 mt-8 bg-regular rounded-2xl drop-shadow-md"}
+          className={"p-6 mt-8 bg-regular rounded-2xl drop-shadow-md transition hover:scale-110 duration-300"}
           type="submit"
         >
           <p className={"text-3xl text-white"}>Create Account</p>

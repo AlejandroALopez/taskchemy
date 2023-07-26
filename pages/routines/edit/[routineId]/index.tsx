@@ -65,20 +65,28 @@ function RoutineEdit(props: any) {
           <meta name="description" content="Edit an existing routine" />
         </Head>
         <div className={"flex flex-col w-10/12"}>
-          <p className={"text-3xl mb-10 font-medium text-black"}>Create Routine</p>
+          <p className={"text-3xl mb-10 font-medium text-black"}>
+            Create Routine
+          </p>
           <div className={"flex flex-row mb-6 justify-between"}>
             <p className={"text-xl w-4/12 mr-4 text-black"}>Title</p>
             <input
               onChange={(event: any) => setTitle(event.target.value)}
               value={title}
-              className={"w-9/12 border-2 border-regular rounded-lg px-2 text-black"}
+              className={
+                "w-9/12 border-2 border-regular rounded-lg px-2 text-black"
+              }
               placeholder="Routine title"
             />
           </div>
           <div className={"flex flex-row mb-6 justify-between"}>
-            <p className={"text-xl w-4/12 mr-4 text-black"}>Description (optional)</p>
+            <p className={"text-xl w-4/12 mr-4 text-black"}>
+              Description (optional)
+            </p>
             <textarea
-              className={"w-9/12 border-2 border-regular rounded-lg px-2 text-black"}
+              className={
+                "w-9/12 border-2 border-regular rounded-lg px-2 text-black"
+              }
               placeholder="Routine description"
               rows={3}
               value={description}
@@ -93,7 +101,7 @@ function RoutineEdit(props: any) {
               {[...Array(7)].map((value: undefined, index: number) => (
                 <button
                   key={index}
-                  className={`flex items-center justify-center h-14 w-14 m-2 rounded-full drop-shadow-md ${
+                  className={`flex items-center justify-center h-14 w-14 m-2 rounded-full drop-shadow-md transition hover:scale-110 duration-300 ${
                     frequency[index] ? "bg-regular" : "bg-white"
                   }`}
                   onClick={() => handleFrequencyChange(index)}
@@ -114,7 +122,7 @@ function RoutineEdit(props: any) {
           >
             <button
               className={
-                "px-6 py-2 md:px-12 md:py-4 bg-white border-2 border-alternate rounded-2xl drop-shadow-md"
+                "px-6 py-2 md:px-12 md:py-4 bg-white border-2 border-alternate rounded-2xl drop-shadow-md transition hover:scale-110 duration-300"
               }
               onClick={cancelHandler}
             >
@@ -124,7 +132,7 @@ function RoutineEdit(props: any) {
             </button>
             <button
               className={
-                "px-6 py-2 md:px-12 md:py-4 bg-regular rounded-2xl drop-shadow-md"
+                "px-6 py-2 md:px-12 md:py-4 bg-regular rounded-2xl drop-shadow-md transition hover:scale-110 duration-300"
               }
               onClick={submitHandler}
             >

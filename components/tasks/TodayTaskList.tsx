@@ -18,13 +18,19 @@ function TodayTaskList(props: TaskProps) {
   return (
     <div className={"flex flex-col w-8/12 md:w-1/2"}>
       <div
-        className={"flex flex-row items-center justify-between mb-10 md:w-10/12"}
+        className={
+          "flex flex-row items-center justify-between mb-10 md:w-10/12"
+        }
       >
-        <p className={"text-3xl lg:text-3xl md:text-2xl font-medium text-black"}>Today's Tasks</p>
+        <p
+          className={"text-3xl lg:text-3xl md:text-2xl font-medium text-black"}
+        >
+          Today's Tasks
+        </p>
         <button
           onClick={addTaskHandler}
           className={
-            "flex items-center justify-center px-2 bg-regular rounded-xl drop-shadow-md"
+            "flex items-center justify-center px-2 bg-regular rounded-xl drop-shadow-md transition hover:scale-110 duration-300"
           }
         >
           <p className={"text-5xl text-white mb-1"}>+</p>
@@ -62,7 +68,7 @@ function TodayTaskList(props: TaskProps) {
         <button
           onClick={allTasksHandler}
           className={
-            "px-8 py-4 mt-10 bg-regular h-16 rounded-2xl drop-shadow-md"
+            "px-8 py-4 mt-10 bg-regular h-16 rounded-2xl drop-shadow-md transition hover:scale-110 duration-300"
           }
         >
           <p className={"text-2xl text-white"}>See All Tasks</p>

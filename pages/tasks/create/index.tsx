@@ -138,7 +138,7 @@ function TaskCreate(props: any) {
                 <button
                   onClick={toggleShowTags}
                   className={
-                    "border-2 bg-regular rounded-2xl px-3 py-2 drop-shadow-md"
+                    "border-2 bg-regular rounded-2xl px-3 py-2 drop-shadow-md transition hover:scale-110 duration-300"
                   }
                 >
                   <p className={"text-white"}>+ Add tag</p>
@@ -204,7 +204,10 @@ function TaskCreate(props: any) {
                         }
                         placeholder="Create new tag"
                       />
-                      <button onClick={handleNewTag}>
+                      <button
+                        onClick={handleNewTag}
+                        className={"transition hover:scale-110 duration-300"}
+                      >
                         <Image src={AddIcon} alt="add" />
                       </button>
                     </div>
@@ -220,7 +223,9 @@ function TaskCreate(props: any) {
                     <button
                       key={i}
                       onClick={() => removeTagHandler(tag)}
-                      className={"bg-dark rounded-2xl px-3 py-2 m-0.5"}
+                      className={
+                        "bg-dark rounded-2xl px-3 py-2 m-0.5 transition hover:scale-110 duration-300"
+                      }
                     >
                       <p className={"text-white"}>{tag}</p>
                     </button>
@@ -244,7 +249,7 @@ function TaskCreate(props: any) {
           <div className={"flex flex-row justify-between mt-6"}>
             <button
               className={
-                "px-6 py-2 md:px-12 md:py-4 bg-white border-2 border-alternate rounded-2xl drop-shadow-md"
+                "px-6 py-2 md:px-12 md:py-4 bg-white border-2 border-alternate rounded-2xl drop-shadow-md transition hover:scale-110 duration-300"
               }
               onClick={cancelHandler}
             >
@@ -254,7 +259,7 @@ function TaskCreate(props: any) {
             </button>
             <button
               className={
-                "px-6 py-2 md:px-12 md:py-4 bg-regular rounded-2xl drop-shadow-md"
+                "px-6 py-2 md:px-12 md:py-4 bg-regular rounded-2xl drop-shadow-md transition hover:scale-110 duration-300"
               }
               onClick={submitHandler}
             >

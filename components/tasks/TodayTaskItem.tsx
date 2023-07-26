@@ -41,7 +41,7 @@ function TodayTaskItem(props: Task) {
       <button
         className={`flex items-center justify-center ${
           completed ? "p-1 border-regular" : "p-6 border-alternate"
-        } border-2 rounded-full drop-shadow-md`}
+        } border-2 rounded-full drop-shadow-md transition hover:scale-110 duration-300`}
         onClick={handleTaskComplete}
       >
         {completed && (
