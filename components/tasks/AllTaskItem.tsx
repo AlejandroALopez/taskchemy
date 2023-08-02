@@ -112,7 +112,7 @@ function AllTaskItem(props: Task) {
                         "flex flex-row items-center justify-center lg:justify-startlg:w-3/12 gap-2"
                       }
                     >
-                      <p className={"text-lg mr-2"}>Delete?</p>
+                      <p className={"text-black text-lg mr-2"}>Delete?</p>
                       <button
                         className={"bg-regular p-2 rounded-xl mr-2 transition hover:scale-110 duration-300"}
                         onClick={deleteTaskHandler}
