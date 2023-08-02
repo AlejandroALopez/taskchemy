@@ -89,7 +89,7 @@ function RoutineItem(props: RoutineColorProps) {
                   Yes
                 </button>
                 <button
-                  className={"bg-red-400 p-2 rounded-xl mr-2 transition hover:scale-110 duration-300"}
+                  className={"border-2 border-white p-2 rounded-xl mr-2 transition hover:scale-110 duration-300"}
                   onClick={toggleWarning}
                 >
                   No
