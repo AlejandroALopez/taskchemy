@@ -2,15 +2,13 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from 'next/link';
 import { Fragment } from "react";
-import { useRouter } from "next/router";
 import { PLANTS } from "@/utils/gardenConstants";
 import { Plant } from "@/types/AlchemyTypes";
 import StoreItem from "@/components/garden/StoreItem";
-import BackArrow from "@/public/icons/arrows/back.svg";
 import MoneyItem from "@/components/garden/MoneyItem";
+import BackArrow from "@/public/icons/arrows/back.svg";
 
 function PlantStore() {
-    const router = useRouter();
     const userStats = { // for testing
         id: "12312v2",
         userId: "c102dn02n2",

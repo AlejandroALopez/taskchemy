@@ -10,7 +10,7 @@ export interface Plant {
     name: string,
     cost: number,
     timeToGrow: number, // in days
-    imgShop: SVGElement, // small image for the shop
+    imgShop: any, // small image for the shop
     imgGarden: string, // image for finalized plant on garden (pass to Seed object created after purchase)
 }
 

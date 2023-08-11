@@ -19,13 +19,16 @@ function StoreItem(props: StorePlantProps) {
 
     return (
         <div className={"flex flex-row gap-4 md:w-10/12 bg-white rounded-2xl px-4 py-4 drop-shadow-md"}>
-            {/* <Image
-                src={imgShop}
-                alt="arrow down/up"
-                height={60}
-                width={60}
-            /> */}
-            <div className={"w-2/12 h-36 border-2 border-black rounded-xl bg-white"} />
+            <div className={"flex items-center justify-center h-[150px] w-[180px] border-2 border-black rounded-xl bg-white"}>
+                <div className={"relative w-[120px] h-[120px]"}>
+                    <Image
+                        src={imgShop}
+                        alt="arrow down/up"
+                        height={120}
+                        width={120}
+                    />
+                </div>
+            </div>
             <div className={"flex flex-col gap-2 w-full"}>
                 <p className={"text-2xl font-medium"}>{name}</p>
                 <div className={"w-full h-1 bg-black rounded-full"} />
