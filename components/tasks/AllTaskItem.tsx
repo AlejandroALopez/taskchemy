@@ -2,7 +2,6 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { Task } from "../../types/TaskTypes";
-import { Tag } from "@/types/TagTypes";
 
 import DownArrow from "@/public/icons/arrows/down.svg";
 import UpArrow from "@/public/icons/arrows/up.svg";

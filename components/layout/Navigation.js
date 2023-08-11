@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { signOut } from "next-auth/react";
 import homeIcon from '../../public/icons/nav/home.svg';
 import targetIcon from '../../public/icons/nav/target.svg';
-// import chartIcon from '../../public/icons/nav/chart.svg';
+import sunIcon from '../../public/icons/nav/sun.svg';
 // import potionIcon from '../../public/icons/nav/potion.svg';
 
 export default function Navigation() {
@@ -20,11 +20,11 @@ export default function Navigation() {
               <Image src={targetIcon} alt="routines" />
               <p className={"text-white"}>Routines</p>
             </Link>
-            {/* <Link href='/analytics' className={"flex flex-col w-full items-center justify-center h-28 m-3"}>
-              <Image src={chartIcon} alt="analytics" />
-              <p className={"text-white"}>Analytics</p>
+            <Link href='/garden' className={"flex flex-col w-full items-center justify-center m-3 md:h-28 transition hover:scale-110 duration-300"}>
+              <Image src={sunIcon} alt="garden" />
+              <p className={"text-white"}>Garden</p>
             </Link>
-            <Link href='/lab' className={"flex flex-col w-full items-center justify-center h-28 m-3"}>
+            {/* <Link href='/lab' className={"flex flex-col w-full items-center justify-center h-28 m-3"}>
               <Image src={potionIcon} alt="alchemy lab" />
               <p className={"text-white"}>Alchemy Lab</p>
             </Link> */}
