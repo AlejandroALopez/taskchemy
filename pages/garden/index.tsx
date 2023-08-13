@@ -3,12 +3,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { Fragment } from "react";
 import MoneyItem from "@/components/garden/MoneyItem";
+import { getReadyTime, getRemainingGrowthTime, SEEDS } from "@/utils/gardenConstants";
 
 import PlantGrowing from "@/public/icons/garden/plantGrowing.svg";
-import PlantWhite from "@/public/icons/garden/plantWhite.svg";
-import PlantBlue from "@/public/icons/garden/plantBlue.svg";
-import PlantRed from "@/public/icons/garden/plantRed.svg";
-
+import { Seed } from "@/types/AlchemyTypes";
 
 function Garden() {
     const userStats = { // for testing
@@ -33,58 +31,25 @@ function Garden() {
                         </Link>
                     </div>
                     <div className={"flex flex-row flex-wrap gap-16 mt-12"}>
-                        <div className={"flex flex-col gap-8"}>
-                            <div className={"relative w-[180px] h-[320px]"}>
-                                <Image
-                                    src={PlantGrowing}
-                                    alt={"plant1"}
-                                    width={180}
-                                    height={320}
-                                />
+                        {SEEDS.map((seed: Seed) => {
+                            const remainingGrowthTime = getRemainingGrowthTime(seed.readyOn);
+                            return (
+                            <div key={seed.id} className={"flex flex-col gap-8"}>
+                                <div className={"relative w-[180px] h-[320px]"}>
+                                    <Image
+                                        src={remainingGrowthTime === "Ready" ? seed.img : PlantGrowing}
+                                        alt={"plant1"}
+                                        width={180}
+                                        height={320}
+                                    />
+                                </div>
+                                <div className={"flex flex-col items-center px-4 py-8 bg-[#F5F5DC] border-[#88370F] border-4 rounded-xl"}>
+                                    <p className={"text-xl font-medium"}>{seed.name}</p>
+                                    <p>{remainingGrowthTime}</p>
+                                </div>
                             </div>
-                            <div className={"flex flex-col items-center px-4 py-8 bg-[#F5F5DC] border-[#88370F] border-4 rounded-xl"}>
-                                <p>Some plant</p>
-                            </div>
-                        </div>
-                        <div className={"flex flex-col gap-8"}>
-                            <div className={"relative w-[180px] h-[320px]"}>
-                                <Image
-                                    src={PlantWhite}
-                                    alt={"plant2"}
-                                    width={180}
-                                    height={320}
-                                />
-                            </div>
-                            <div className={"flex flex-col items-center px-4 py-8 bg-[#F5F5DC] border-[#88370F] border-4 rounded-xl"}>
-                                <p>Some plant</p>
-                            </div>
-                        </div>
-                        <div className={"flex flex-col gap-8"}>
-                            <div className={"relative w-[180px] h-[320px]"}>
-                                <Image
-                                    src={PlantBlue}
-                                    alt={"plant3"}
-                                    width={180}
-                                    height={320}
-                                />
-                            </div>
-                            <div className={"flex flex-col items-center px-4 py-8 bg-[#F5F5DC] border-[#88370F] border-4 rounded-xl"}>
-                                <p>Some plant</p>
-                            </div>
-                        </div>
-                        <div className={"flex flex-col gap-8"}>
-                            <div className={"relative w-[180px] h-[320px]"}>
-                                <Image
-                                    src={PlantRed}
-                                    alt={"plant4"}
-                                    width={180}
-                                    height={320}
-                                />
-                            </div>
-                            <div className={"flex flex-col items-center px-4 py-8 bg-[#F5F5DC] border-[#88370F] border-4 rounded-xl"}>
-                                <p>Some plant</p>
-                            </div>
-                        </div>
+                        )}
+                        )}
                     </div>
                 </div>
             </Fragment>

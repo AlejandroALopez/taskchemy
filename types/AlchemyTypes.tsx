@@ -23,7 +23,7 @@ export interface Seed {
     timeToGrow: number, // in days
     plantedOn: number, // timestamp, when seed was planted
     readyOn: number, // timestamp, when plant ready to collect
-    img: null,
+    img: any,
 }
 
 // Type for each potion recipe the user can access to
