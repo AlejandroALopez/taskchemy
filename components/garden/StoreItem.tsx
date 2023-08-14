@@ -15,9 +15,22 @@ function StoreItem(props: StorePlantProps) {
     const { name, alias, cost, timeToGrow, imgShop, imgIndex } = props.plant;
     const [isDisabled, setDisabled] = useState(coins < cost);
 
+    // action for updating stats
+    async function updateStatsHandler(statsData: any) {
+        const response = await fetch("/api/stats/update-stats", {
+            method: "PUT",
+            body: JSON.stringify(statsData),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+
+        const data = await response.json();
+    }
+
     function buyPlantHandler() {
         setDisabled(true);
-        const seedData = {
+        const seedData = { // new seed for the garden
             name: name,
             alias: alias,
             timeToGrow: timeToGrow,
@@ -26,7 +39,15 @@ function StoreItem(props: StorePlantProps) {
             imgIndex: imgIndex,
             userEmail: userEmail,
         };
+        const statsData = { // stats with coins - cost
+            statsId: id,
+            newData: {
+              userEmail: userEmail,
+              coins: coins - cost,
+            },
+          };
 
+        updateStatsHandler(statsData);
         props.createSeedHandler(seedData);
     }
 

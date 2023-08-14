@@ -7,14 +7,9 @@ import { getUserSeeds } from "@/actions/gardenActions";
 import { Seed } from "@/types/AlchemyTypes";
 import MoneyItem from "@/components/garden/MoneyItem";
 import SeedItem from "@/components/garden/SeedItem";
+import { getUserStats } from "@/actions/alchemyActions";
 
 function Garden(props: any) {
-    const userStats = { // for testing
-        id: "12312v2",
-        userEmail: "alex@hotmail.com",
-        coins: 5,
-    }
-
     return (
         <main className={"flex min-h-screen flex-col p-12"}>
             <Fragment>
@@ -25,12 +20,12 @@ function Garden(props: any) {
                 <div>
                     <div className={"flex flex-row gap-2 md:gap-8 items-center"}>
                         <p className={"text-3xl font-medium"}>Garden</p>
-                        <MoneyItem coins={userStats.coins} />
-                        <Link href='/garden/store' className={"px-8 py-4 bg-regular h-16 rounded-2xl drop-shadow-md transition hover:scale-110 duration-300"}>
-                            <p className={"text-2xl text-white"}>Buy Plants</p>
+                        <MoneyItem coins={props.stats.coins} />
+                        <Link href='/garden/store' className={"flex justify-center items-center px-8 py-4 bg-regular h-16 rounded-2xl drop-shadow-md transition hover:scale-110 duration-300"}>
+                            <p className={"text-xl md:text-2xl text-white"}>Buy Plants</p>
                         </Link>
                     </div>
-                    <div className={"flex flex-row overflow-scroll overflow-y-hidden gap-28 mt-6 max-w-6xl"}>
+                    <div className={"flex flex-row overflow-scroll overflow-y-hidden gap-14 md:gap-28 mt-6 max-w-6xl"}>
                         {props.seeds.map((seed: Seed) => <SeedItem seed={seed}/>
                         )}
                     </div>
@@ -54,9 +49,15 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     } else {
         const user = session.user;
         const seeds = await getUserSeeds(user?.email as string);
+        const stats = await getUserStats(user?.email as string);
 
         return {
             props: {
+                stats: {
+                    id: stats?._id.toString(),
+                    userEmail: stats?.userEmail,
+                    coins: stats?.coins,
+                },
                 seeds: seeds.map((seed: any) => ({
                     id: seed._id.toString(),
                     userEmail: seed.userEmail,

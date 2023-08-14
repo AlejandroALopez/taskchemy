@@ -7,12 +7,12 @@ export async function getUserSeeds(userEmail: string) {
   const db = client.db();
   const seedsCollection = db.collection("seeds");
 
-  const tasks = await seedsCollection
+  const seeds = await seedsCollection
     .find({
       userEmail: userEmail,
     })
     .toArray();
 
   client.close();
-  return tasks;
+  return seeds;
 }
