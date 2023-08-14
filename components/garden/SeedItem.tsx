@@ -13,13 +13,13 @@ function SeedItem(props: SeedProps) {
 
     // Handler for clicking on a fully grown plant, adding it to our plant collection
     async function collectPlant(seed: Seed) {
+        setDeleted(true);
         // Update user's inventory
         const response = await fetch(`/api/seeds/${seed.id}`, {
             method: "DELETE",
         });
 
         const data = await response.json();
-        setDeleted(true);
     }
 
     return (

@@ -1,11 +1,9 @@
 import Head from "next/head";
 import Link from "next/link";
-import Image from "next/image";
 import { Fragment } from "react";
 import { GetServerSidePropsContext } from "next";
 import { getSession } from "next-auth/react";
 import { getUserSeeds } from "@/actions/gardenActions";
-import { getReadyTime, getRemainingGrowthTime, seedImages } from "@/utils/gardenConstants";
 import { Seed } from "@/types/AlchemyTypes";
 import MoneyItem from "@/components/garden/MoneyItem";
 import SeedItem from "@/components/garden/SeedItem";
