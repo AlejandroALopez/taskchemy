@@ -10,8 +10,8 @@ interface StorePlantProps {
 
 function StoreItem(props: StorePlantProps) {
     const router = useRouter();
-    const { id, userId, coins } = props.userStats;
-    const { name, cost, timeToGrow, imgShop, imgGarden } = props.plant;
+    const { id, userEmail, coins } = props.userStats;
+    const { name, cost, timeToGrow, imgShop, imgIndex } = props.plant;
 
     function buyPlantHandler() {
         router.push("/garden");

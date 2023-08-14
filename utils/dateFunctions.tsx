@@ -21,5 +21,5 @@ export function sortArrayOfTasksByDate(tasks: Task[]): Task[] {
     return 0;
   });
 
-  return tasks;
+  return tasks.reverse();
 }

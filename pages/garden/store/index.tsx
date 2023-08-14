@@ -11,7 +11,7 @@ import BackArrow from "@/public/icons/arrows/back.svg";
 function PlantStore() {
     const userStats = { // for testing
         id: "12312v2",
-        userId: "c102dn02n2",
+        userEmail: "alex@hotmail.com",
         coins: 3,
     }
 
