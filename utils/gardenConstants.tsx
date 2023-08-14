@@ -65,6 +65,7 @@ export const SEEDS: Seed[] = [
 export const PLANTS: Plant[] = [
     {
         name: "White calm",
+        alias: "whiteCalm",
         cost: 1,
         timeToGrow: 1,
         imgShop: WhiteCalm,
@@ -72,6 +73,7 @@ export const PLANTS: Plant[] = [
     },
     {
         name: "Blue order",
+        alias: "blueOrder",
         cost: 3,
         timeToGrow: 2,
         imgShop: BlueOrder,
@@ -79,6 +81,7 @@ export const PLANTS: Plant[] = [
     },
     {
         name: "Red spin",
+        alias: "redSpin",
         cost: 5,
         timeToGrow: 3,
         imgShop: RedSpin,
@@ -110,7 +113,7 @@ export function getRemainingGrowthTime(readyDate: number): string {
     const minutes = Math.floor((difference % hoursInMiliseconds) / minutesInMiliseconds);
 
     if (days > 0) {
-        return `${days} ${days === 1 ? "day" : "days"} left`;
+        return `>${days} ${days === 1 ? "day" : "days"} left`;
     } else if (hours > 0) {
         return `${hours} ${hours === 1 ? "hour" : "hours"} left`;
     } else {

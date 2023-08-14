@@ -1,20 +1,33 @@
 import Image from "next/image";
-import { useRouter } from "next/router";
+import { useState } from "react";
 import { UserStats, Plant } from "@/types/AlchemyTypes";
+import { getReadyTime } from "@/utils/gardenConstants";
 import MoneyItem from "./MoneyItem";
 
 interface StorePlantProps {
     userStats: UserStats,
     plant: Plant,
+    createSeedHandler: Function,
 }
 
 function StoreItem(props: StorePlantProps) {
-    const router = useRouter();
     const { id, userEmail, coins } = props.userStats;
-    const { name, cost, timeToGrow, imgShop, imgIndex } = props.plant;
+    const { name, alias, cost, timeToGrow, imgShop, imgIndex } = props.plant;
+    const [isDisabled, setDisabled] = useState(coins < cost);
 
     function buyPlantHandler() {
-        router.push("/garden");
+        setDisabled(true);
+        const seedData = {
+            name: name,
+            alias: alias,
+            timeToGrow: timeToGrow,
+            plantedOn: new Date().getTime(),
+            readyOn: getReadyTime(timeToGrow),
+            imgIndex: imgIndex,
+            userEmail: userEmail,
+        };
+
+        props.createSeedHandler(seedData);
     }
 
     return (
@@ -34,9 +47,9 @@ function StoreItem(props: StorePlantProps) {
                 <div className={"w-full h-1 bg-black rounded-full"} />
                 <p className={"text-xl"}>Time to collect: {timeToGrow} {timeToGrow === 1 ? "day" : "days"}</p>
                 <div className={"flex flex-row-reverse gap-4"}>
-                    <button onClick={buyPlantHandler} disabled={coins < cost}
+                    <button onClick={buyPlantHandler} disabled={isDisabled}
                         className={
-                            `px-8 py-4 bg-regular h-16 rounded-2xl drop-shadow-md ${coins < cost ? "opacity-50" : "transition hover:scale-110 duration-300"}`
+                            `px-8 py-4 bg-regular h-16 rounded-2xl drop-shadow-md ${isDisabled ? "opacity-50" : "transition hover:scale-110 duration-300"}`
                         }>
                         <p className={"text-2xl text-white"}>Buy</p>
                     </button>

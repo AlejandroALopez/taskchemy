@@ -8,6 +8,7 @@ export interface UserStats {
 // Type for the plants on the store
 export interface Plant {
     name: string,
+    alias: string,
     cost: number,
     timeToGrow: number, // in days
     imgShop: any, // small image for the shop
@@ -33,16 +34,16 @@ export interface PotionRecipe {
     thumbnail: null, // small image for the recipe selector
     completed: boolean, // if it was prepared at least once
     ingredients: {
-        [key: string]: number, // Name of plant and how many we need. E.g. "plantA": 2
+        [key: string]: number, // Alias of plant and how many we need. E.g. "plantA": 2
     }
 }
 
 // Type for the lab each user gets, with a collection of available recipes, plants collected, and potions made
 export interface Lab {
     userEmail: string,
-    recipes: PotionRecipe[], // make 
+    recipes: PotionRecipe[], 
     plants: {
-        [key: string]: number, // Name of plant and how many we have. E.g. "plantB": 3
+        [key: string]: number, // Alias of plant and how many we have. E.g. "plantB": 3
     }
 }
 

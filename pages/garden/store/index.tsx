@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from 'next/link';
+import { useRouter } from "next/router";
 import { Fragment } from "react";
 import { PLANTS } from "@/utils/gardenConstants";
 import { Plant } from "@/types/AlchemyTypes";
@@ -9,10 +10,25 @@ import MoneyItem from "@/components/garden/MoneyItem";
 import BackArrow from "@/public/icons/arrows/back.svg";
 
 function PlantStore() {
+    const router = useRouter();
     const userStats = { // for testing
         id: "12312v2",
         userEmail: "alex@hotmail.com",
-        coins: 3,
+        coins: 5,
+    }
+
+    // action for creating a seed
+    async function createSeedHandler(seedData: any) {
+        const response = await fetch("/api/seeds/new-seed", {
+            method: "POST",
+            body: JSON.stringify(seedData),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+
+        const data = await response.json();
+        router.push("/garden");
     }
 
     return (
@@ -42,6 +58,7 @@ function PlantStore() {
                                 key={index}
                                 userStats={userStats}
                                 plant={plant}
+                                createSeedHandler={createSeedHandler}
                             />
                         ))}
                     </div>

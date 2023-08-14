@@ -8,19 +8,13 @@ import { getUserSeeds } from "@/actions/gardenActions";
 import { getReadyTime, getRemainingGrowthTime, seedImages } from "@/utils/gardenConstants";
 import { Seed } from "@/types/AlchemyTypes";
 import MoneyItem from "@/components/garden/MoneyItem";
+import SeedItem from "@/components/garden/SeedItem";
 
 function Garden(props: any) {
     const userStats = { // for testing
         id: "12312v2",
         userEmail: "alex@hotmail.com",
-        coins: 3,
-    }
-
-    // Handler for clicking on a fully grown plant, adding it to our plant collection
-    function collectPlant(seed: Seed) {
-        // Update user's inventory
-        // Delete seed from client and database
-        console.log("TODO");
+        coins: 5,
     }
 
     return (
@@ -38,27 +32,8 @@ function Garden(props: any) {
                             <p className={"text-2xl text-white"}>Buy Plants</p>
                         </Link>
                     </div>
-                    <div className={"flex flex-row flex-wrap gap-16 mt-12"}>
-                        {props.seeds.map((seed: Seed) => {
-                            const remainingGrowthTime = getRemainingGrowthTime(seed.readyOn);
-                            return (
-                                <div key={seed.id} className={"flex flex-col gap-8"}>
-                                    <button onClick={() => collectPlant(seed)} disabled={remainingGrowthTime !== "Ready"} className={`relative w-[180px] h-[320px] ${remainingGrowthTime === "Ready" && "transition hover:scale-110 duration-300"}`}>
-                                        <Image
-                                            src={remainingGrowthTime === "Ready" ? seedImages[seed.imgIndex] : seedImages[0]}
-                                            alt={"plant1"}
-                                            width={180}
-                                            height={320}
-                                        />
-                                    </button>
-                                    <div className={"flex flex-col items-center px-4 py-8 bg-[#F5F5DC] border-[#88370F] border-4 rounded-xl"}>
-                                        <p className={"text-xl font-medium"}>{seed.name}</p>
-                                        <p>{remainingGrowthTime}</p>
-                                        <p>{remainingGrowthTime === "Ready" ? "Click plant to collect!" : "Come back later"}</p>
-                                    </div>
-                                </div>
-                            )
-                        }
+                    <div className={"flex flex-row overflow-scroll overflow-y-hidden gap-28 mt-6 max-w-6xl"}>
+                        {props.seeds.map((seed: Seed) => <SeedItem seed={seed}/>
                         )}
                     </div>
                 </div>
