@@ -1,10 +1,34 @@
 import Image from "next/image";
 import { useState } from "react";
+import { useCoinsContext } from "@/pages";
 import { Task } from "../../types/TaskTypes";
 import BigCheckIcon from "@/public/icons/others/bigCheck.svg";
 
-function TodayTaskItem(props: Task) {
+function TodayTaskItem(props: any) {
+  const { stats } = props;
+  const { currentCoins, setCurrentCoins } = useCoinsContext();
   const [completed, setCompleted] = useState(props.completed);
+
+  // action for updating coins
+  async function updateCoins() {
+    const statsData = { // stats with coins - cost
+      statsId: stats.id,
+      newData: {
+        userEmail: stats.userEmail,
+        coins: stats.coins + 1,
+      },
+    };
+
+    const response = await fetch("/api/stats/update-stats", {
+      method: "PUT",
+      body: JSON.stringify(statsData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    setCurrentCoins((prevCoins) => prevCoins + 1);
+  };
 
   // action for updating a task completion on the backend
   async function updateTaskCompletionHandler(status: boolean) {
@@ -29,6 +53,7 @@ function TodayTaskItem(props: Task) {
     });
 
     const data = await response.json();
+    updateCoins();
   }
 
   function handleTaskComplete() {
@@ -39,10 +64,11 @@ function TodayTaskItem(props: Task) {
   return (
     <div className={"flex flex-row items-center justify-between w-11/12 m-3"}>
       <button
-        className={`flex items-center justify-center ${
-          completed ? "p-1 border-regular" : "p-6 border-alternate"
-        } border-2 rounded-full drop-shadow-md transition hover:scale-110 duration-300`}
+        className={`flex items-center justify-center border-2 rounded-full drop-shadow-md
+          ${completed ? "p-1 border-regular" : "p-6 border-alternate transition hover:scale-110 duration-300"
+          }`}
         onClick={handleTaskComplete}
+        disabled={completed}
       >
         {completed && (
           <div className={"relative w-[40px] h-[40px]"}>

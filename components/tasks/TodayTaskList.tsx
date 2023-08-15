@@ -1,9 +1,10 @@
 import { useRouter } from "next/router";
-import { TaskProps } from "../../types/TaskTypes";
+import { Task } from "../../types/TaskTypes";
 import { formatDate } from "@/utils/dateFunctions";
 import TodayTaskItem from "./TodayTaskItem";
 
-function TodayTaskList(props: TaskProps) {
+function TodayTaskList(props: any) {
+  const { stats } = props;
   const router = useRouter();
   const today = formatDate(new Date());
 
@@ -42,7 +43,7 @@ function TodayTaskList(props: TaskProps) {
             "list-none m-0 p-0 h-80 max-h-80 overflow-scroll overflow-x-hidden md:w-10/12"
           }
         >
-          {props.tasks?.map((task) => {
+          {props.tasks?.map((task: Task) => {
             if (formatDate(new Date(task.date)) === today) {
               return (
                 <TodayTaskItem
@@ -54,6 +55,7 @@ function TodayTaskList(props: TaskProps) {
                   date={task.date}
                   completed={task.completed}
                   userEmail={task.userEmail}
+                  stats={stats}
                 />
               );
             } else return null;
