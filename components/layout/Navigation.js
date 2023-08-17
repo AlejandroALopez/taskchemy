@@ -4,7 +4,7 @@ import { signOut } from "next-auth/react";
 import homeIcon from '../../public/icons/nav/home.svg';
 import targetIcon from '../../public/icons/nav/target.svg';
 import sunIcon from '../../public/icons/nav/sun.svg';
-// import potionIcon from '../../public/icons/nav/potion.svg';
+import potionIcon from '../../public/icons/nav/potion.svg';
 
 export default function Navigation() {
   return (
@@ -24,10 +24,10 @@ export default function Navigation() {
               <Image src={sunIcon} alt="garden" />
               <p className={"text-white"}>Garden</p>
             </Link>
-            {/* <Link href='/lab' className={"flex flex-col w-full items-center justify-center h-28 m-3"}>
+            <Link href='/lab' className={"flex flex-col w-full items-center justify-center h-28 m-3"}>
               <Image src={potionIcon} alt="alchemy lab" />
               <p className={"text-white"}>Alchemy Lab</p>
-            </Link> */}
+            </Link>
           </ul>
         </nav>
         <button className={"text-white m-5 transition hover:scale-110 duration-300"} onClick={() => signOut()}>Sign out</button>

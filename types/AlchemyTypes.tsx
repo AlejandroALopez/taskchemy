@@ -47,4 +47,14 @@ export interface Lab {
     }
 }
 
+// type for object linking plant alias with SVG image
+export interface AliasToImages {
+    [key: string]: any
+}
+
+// type for object linking plant alias with actual name
+export interface AliasToNames {
+    [key: string]: string
+}
+
 
