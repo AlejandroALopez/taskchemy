@@ -1,25 +1,56 @@
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getRemainingGrowthTime, seedImages } from "@/utils/gardenConstants";
-import { Seed } from "@/types/AlchemyTypes";
+import { Lab, Seed } from "@/types/AlchemyTypes";
 
 interface SeedProps {
     seed: Seed,
+    lab: Lab,
 }
 
 function SeedItem(props: SeedProps) {
     const [deleted, setDeleted] = useState(false);
     const remainingGrowthTime = getRemainingGrowthTime(props.seed.readyOn);
 
+    useEffect(() => {
+        const abc = {...props.lab.plants};
+        console.log('Lab: ', abc);
+    }, []);
+
     // Handler for clicking on a fully grown plant, adding it to our plant collection
     async function collectPlant(seed: Seed) {
         setDeleted(true);
-        // Update user's inventory
-        const response = await fetch(`/api/seeds/${seed.id}`, {
+
+        // Increase count of plant or add new plant to collection
+        let updatedPlants = {...props.lab.plants};
+        if (updatedPlants.hasOwnProperty(seed.alias)) {
+            updatedPlants[seed.alias] = updatedPlants[seed.alias] + 1
+        } else {
+            updatedPlants[seed.alias] = 1
+        }
+
+        const newLabData = {
+            labId: props.lab.id,
+            newData: {
+                userEmail: props.lab.userEmail,
+                recipes: props.lab.recipes,
+                plants: updatedPlants
+            }
+        }
+
+        // Update user's inventory (lab)
+        const response = await fetch("/api/labs/update-lab", {
+            method: "PUT",
+            body: JSON.stringify(newLabData),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+
+        // Delete seed from garden
+        const response2 = await fetch(`/api/seeds/${seed.id}`, {
             method: "DELETE",
         });
-
-        const data = await response.json();
     }
 
     return (

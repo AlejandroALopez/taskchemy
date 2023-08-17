@@ -7,7 +7,7 @@ import { getUserSeeds } from "@/actions/gardenActions";
 import { Seed } from "@/types/AlchemyTypes";
 import MoneyItem from "@/components/garden/MoneyItem";
 import SeedItem from "@/components/garden/SeedItem";
-import { getUserStats } from "@/actions/alchemyActions";
+import { getUserLab, getUserStats } from "@/actions/alchemyActions";
 
 function Garden(props: any) {
     return (
@@ -26,7 +26,7 @@ function Garden(props: any) {
                         </Link>
                     </div>
                     <div className={"flex flex-row overflow-scroll overflow-y-hidden gap-14 md:gap-28 mt-6 max-w-6xl"}>
-                        {props.seeds.map((seed: Seed) => <SeedItem seed={seed}/>
+                        {props.seeds.map((seed: Seed) => <SeedItem key={seed.id} seed={seed} lab={props.lab}/>
                         )}
                     </div>
                 </div>
@@ -50,6 +50,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
         const user = session.user;
         const seeds = await getUserSeeds(user?.email as string);
         const stats = await getUserStats(user?.email as string);
+        const lab = await getUserLab(user?.email as string);
 
         return {
             props: {
@@ -57,6 +58,12 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
                     id: stats?._id.toString(),
                     userEmail: stats?.userEmail,
                     coins: stats?.coins,
+                },
+                lab: {
+                    id: lab?._id.toString(),
+                    userEmail: lab?.userEmail,
+                    recipes: lab?.recipes,
+                    plants: lab?.plants
                 },
                 seeds: seeds.map((seed: any) => ({
                     id: seed._id.toString(),

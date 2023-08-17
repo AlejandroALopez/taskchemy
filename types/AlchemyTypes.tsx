@@ -27,12 +27,11 @@ export interface Seed {
     imgIndex: number, // index for array with svg items
 }
 
-// Type for each potion recipe the user can access to
+// Type for each potion recipe the user discovers
+// Intended to exist already, so the user tries to unlock them by experimenting at the lab
 export interface PotionRecipe {
     name: string,
-    img: null, // img for main display on lab
-    thumbnail: null, // small image for the recipe selector
-    completed: boolean, // if it was prepared at least once
+    imgIndex: number, // img index for main display on lab and thumbnail
     ingredients: {
         [key: string]: number, // Alias of plant and how many we need. E.g. "plantA": 2
     }
@@ -40,8 +39,9 @@ export interface PotionRecipe {
 
 // Type for the lab each user gets, with a collection of available recipes, plants collected, and potions made
 export interface Lab {
+    id: string,
     userEmail: string,
-    recipes: PotionRecipe[], 
+    recipes: PotionRecipe[], // List of potion recipes discovered so far
     plants: {
         [key: string]: number, // Alias of plant and how many we have. E.g. "plantB": 3
     }

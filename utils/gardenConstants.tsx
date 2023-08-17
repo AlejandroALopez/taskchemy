@@ -17,49 +17,49 @@ const minutesInMiliseconds = 1000 * 60;
 // Array of SVG elements for the plants in the garden, so the seeds store index values instead of whole SVG elements
 export const seedImages :any[] = [PlantGrowing, PlantWhite, PlantBlue, PlantRed]
 
-// For testing the garden
-export const SEEDS: Seed[] = [
-    {
-        id: "as88h8h4f",
-        userEmail: "alex@hotmail.com",
-        name: "Plant Z",
-        alias: "plantZ",
-        timeToGrow: 1,
-        plantedOn: 1691962933460, // timestamp, when seed was planted
-        readyOn: 1692049333460, // timestamp, when plant ready to collect
-        imgIndex: 1,
-    },
-    {
-        id: "123443",
-        userEmail: "alex@hotmail.com",
-        name: "Plant A",
-        alias: "plantA",
-        timeToGrow: 1,
-        plantedOn: 1691962933460, // timestamp, when seed was planted
-        readyOn: 1691962933460, // timestamp, when plant ready to collect
-        imgIndex: 1,
-    },
-    {
-        id: "48237874",
-        userEmail: "alex@hotmail.com",
-        name: "Plant B",
-        alias: "plantB",
-        timeToGrow: 1,
-        plantedOn: 1691962933460, // timestamp, when seed was planted
-        readyOn: 1691962933460, // timestamp, when plant ready to collect
-        imgIndex: 2,
-    },
-    {
-        id: "482378744444",
-        userEmail: "alex@hotmail.com",
-        name: "Plant C",
-        alias: "plantC",
-        timeToGrow: 1,
-        plantedOn: 1691962933460, // timestamp, when seed was planted
-        readyOn: 1691962933460, // timestamp, when plant ready to collect
-        imgIndex: 3,
-    },
-]
+// // For testing the garden
+// export const SEEDS: Seed[] = [
+//     {
+//         id: "as88h8h4f",
+//         userEmail: "alex@hotmail.com",
+//         name: "Plant Z",
+//         alias: "plantZ",
+//         timeToGrow: 1,
+//         plantedOn: 1691962933460, // timestamp, when seed was planted
+//         readyOn: 1692049333460, // timestamp, when plant ready to collect
+//         imgIndex: 1,
+//     },
+//     {
+//         id: "123443",
+//         userEmail: "alex@hotmail.com",
+//         name: "Plant A",
+//         alias: "plantA",
+//         timeToGrow: 1,
+//         plantedOn: 1691962933460, // timestamp, when seed was planted
+//         readyOn: 1691962933460, // timestamp, when plant ready to collect
+//         imgIndex: 1,
+//     },
+//     {
+//         id: "48237874",
+//         userEmail: "alex@hotmail.com",
+//         name: "Plant B",
+//         alias: "plantB",
+//         timeToGrow: 1,
+//         plantedOn: 1691962933460, // timestamp, when seed was planted
+//         readyOn: 1691962933460, // timestamp, when plant ready to collect
+//         imgIndex: 2,
+//     },
+//     {
+//         id: "482378744444",
+//         userEmail: "alex@hotmail.com",
+//         name: "Plant C",
+//         alias: "plantC",
+//         timeToGrow: 1,
+//         plantedOn: 1691962933460, // timestamp, when seed was planted
+//         readyOn: 1691962933460, // timestamp, when plant ready to collect
+//         imgIndex: 3,
+//     },
+// ]
 
 // Established plants for the store
 export const PLANTS: Plant[] = [
